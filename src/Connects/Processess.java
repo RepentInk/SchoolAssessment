@@ -11,7 +11,7 @@ import Classes.Student;
 import Classes.Subject;
 import Classes.Term;
 import Classes.Year;
-import Designs.AssessmentR;
+import Designs.AssessmentForm;
 import java.util.List;
 
 public interface Processess {
@@ -19,7 +19,7 @@ public interface Processess {
     //========Student Method Starts here=========================
     public void saveStudent(Student student);
 
-    public List<Student> findAllStudent();
+    public List<Student> findAllStudent(int id);
 
     public void updateStudent(Student stu, int id, String stuid);
 

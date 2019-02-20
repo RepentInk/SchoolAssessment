@@ -12,6 +12,7 @@ public class Student {
     private String surname;
     private String contact;
     private String hTown;
+    private int deleted_at;
 
     public Student() {
     }
@@ -45,8 +46,16 @@ public class Student {
         this.contact = contact;
         this.hTown = hTown;
     }
-    
-    
+
+    public Student(int completeID, String fName, String mName, String surname, String contact, String hTown, int deleted_at) {
+        this.completeID = completeID;
+        this.fName = fName;
+        this.mName = mName;
+        this.surname = surname;
+        this.contact = contact;
+        this.hTown = hTown;
+        this.deleted_at = deleted_at;
+    }
 
     public int getId() {
         return id;
@@ -110,6 +119,14 @@ public class Student {
 
     public void sethTown(String hTown) {
         this.hTown = hTown;
+    }
+
+    public int getDeleted_at() {
+        return deleted_at;
+    }
+
+    public void setDeleted_at(int deleted_at) {
+        this.deleted_at = deleted_at;
     }
 
 }

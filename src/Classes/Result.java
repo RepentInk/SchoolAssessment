@@ -58,6 +58,14 @@ public class Result {
         this.remarks = remarks;
     }
 
+    public Result(double exams, double assessment, double totalResult, String grade, int remarks) {
+        this.exams = exams;
+        this.assessment = assessment;
+        this.totalResult = totalResult;
+        this.grade = grade;
+        this.remarks = remarks;
+    }
+
     public int getRid() {
         return rid;
     }

@@ -337,7 +337,7 @@ public class ExcelExportReport extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_AssessmentActionPerformed
 
     private void lbl_backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_backMouseClicked
-        Decide dec = new Decide();
+        Desktop dec = new Desktop();
         dec.setVisible(true);
         dispose();
     }//GEN-LAST:event_lbl_backMouseClicked

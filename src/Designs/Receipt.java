@@ -87,6 +87,7 @@ public class Receipt extends javax.swing.JFrame {
 
         int count = 1, pos = 0;
         double total, tot = 0;
+        String contact = "";
 
         List<School> school = pro.findAllSchoolDetails();
 
@@ -95,6 +96,7 @@ public class Receipt extends javax.swing.JFrame {
             address = res.getSchoolAddress();
             schoolLocation = res.getSchoolLocation();
             imagedata = res.getSchoolLogo();
+            contact = res.getSchoolContact();
         }
 
         try {
@@ -103,9 +105,10 @@ public class Receipt extends javax.swing.JFrame {
             File doc = new File(root, "newhtml.html");
             // create htm file contents for testing
             FileWriter writer = new FileWriter(doc);
-            writer.write("<h1 style='text-align: center; margin-bottom:0px;'>" + schoolName.toUpperCase() + "</h1>"
-                    + "<h3 style='text-align: center;'>" + address.toUpperCase() + " " + schoolLocation.toUpperCase() + "</h3>"
-                    + "<h3 style='text-align: center;'>END OF " + term + " " + academic + " EXAMINATION RESULT</h3><hr>"
+            writer.write("<h2 style='text-align:center;margin-bottom:-30px; margin-top:-30px;'>" + schoolName.toUpperCase() + "</h2>"
+                    + "<h4 style='text-align:center;margin-bottom:-30px; margin-top:-30px;'>" + address.toUpperCase() + " " + schoolLocation.toUpperCase() + "</h4>"
+                    + "<h4 style='text-align:center;margin-bottom:-30px; margin-top:-30px;'>" + contact + "</h4>"
+                    + "<h4 style='text-align:center; margin-bottom:-30px; margin-top:-30px;'>END OF " + term.toUpperCase() + " " + academic + " EXAMINATION RESULT</h4><hr>"
                     + "<table><tbody>"
                     + "<tr>"
                     + "<td style='text-align:left; width:240px'><b>SUBJECT : </b>" + subject.toUpperCase() + "</td>"
@@ -149,7 +152,7 @@ public class Receipt extends javax.swing.JFrame {
                 }
 
                 val += "<tr>"
-                        + "<td style='text-align: left; width:40px'><b>" + mylogics.studentIDAssigned(res.getStuId(), res.getYear_id()) + "</b></td>"
+                        + "<td style='text-align: left; width:40px'>" + mylogics.studentIDAssigned(res.getStuId(), res.getYear_id()) + "</td>"
                         + "<td style='text-align: left; width:300px'>" + mylogics.findStudentByIDName(res.getStuId(), res.getYear_id()) + "</td>"
                         + "<td style='text-align: left; color:blue; width:20px'>" + res.getAssessment() + "</td>"
                         + "<td style='text-align: left; color:blue; width:20px'>" + res.getExams() + "</td>"
@@ -195,6 +198,7 @@ public class Receipt extends javax.swing.JFrame {
         String schoolName = "";
         String address = "";
         String schoolLocation = "";
+        String contact = "";
 
         byte[] imagedata = null;
 
@@ -205,6 +209,7 @@ public class Receipt extends javax.swing.JFrame {
             address = res.getSchoolAddress();
             schoolLocation = res.getSchoolLocation();
             imagedata = res.getSchoolLogo();
+            contact = res.getSchoolContact();
         }
 
         try {
@@ -213,9 +218,10 @@ public class Receipt extends javax.swing.JFrame {
             File doc = new File(root, "newhtml.html");
             // create htm file contents for testing
             FileWriter writer = new FileWriter(doc);
-            writer.write("<h1 style='text-align: center; margin-bottom:0px;'>" + schoolName.toUpperCase() + "</h1>"
-                    + "<h3 style='text-align: center;'>" + address.toUpperCase() + " " + schoolLocation.toUpperCase() + "</h3>"
-                    + "<h3 style='text-align: center;'>END OF " + term + " " + academic + " EXAMINATION RESULT</h3><hr>"
+            writer.write("<h2 style='text-align:center;margin-bottom:-30px; margin-top:-30px;'>" + schoolName.toUpperCase() + "</h2>"
+                    + "<h4 style='text-align:center;margin-bottom:-30px; margin-top:-30px;'>" + address.toUpperCase() + " " + schoolLocation.toUpperCase() + "</h4>"
+                    + "<h4 style='text-align:center;margin-bottom:-30px; margin-top:-30px;'>" + contact + "</h4>"
+                    + "<h4 style='text-align:center;margin-bottom:-30px; margin-top:-30px;'>END OF " + term.toUpperCase() + " " + academic + " EXAMINATION RESULT</h4><hr>"
                     + "<table><tbody>"
                     + "<tr>"
                     + "<td style='text-align:left; width:240px'><b>SUBJECT : </b>" + subject.toUpperCase() + "</td>"
@@ -247,7 +253,7 @@ public class Receipt extends javax.swing.JFrame {
             for (Assessment assessment : assess) {
 
                 val += "<tr>"
-                        + "<td style='text-align: left; width:40px'><b>" + mylogics.studentIDAssigned(assessment.getStuId(), assessment.getYear_id()) + "</b></td>"
+                        + "<td style='text-align: left; width:40px'>" + mylogics.studentIDAssigned(assessment.getStuId(), assessment.getYear_id()) + "</td>"
                         + "<td style='text-align: left; width:260px'>" + mylogics.findStudentByIDName(assessment.getStuId(), assessment.getYear_id()) + "</td>"
                         + "<td style='text-align: left; color:blue; width:20px'>" + assessment.getClassTest() + "</td>"
                         + "<td style='text-align: left; color:blue; width:20px'>" + assessment.getOthers() + "</td>"
@@ -290,6 +296,7 @@ public class Receipt extends javax.swing.JFrame {
         String schoolName = "";
         String address = "";
         String schoolLocation = "";
+        String contact = "";
 
         byte[] imagedata = null;
 
@@ -300,6 +307,7 @@ public class Receipt extends javax.swing.JFrame {
             address = res.getSchoolAddress();
             schoolLocation = res.getSchoolLocation();
             imagedata = res.getSchoolLogo();
+            contact = res.getSchoolContact();
         }
 
         try {
@@ -308,9 +316,10 @@ public class Receipt extends javax.swing.JFrame {
             File doc = new File(root, "newhtml.html");
             // create htm file contents for testing
             FileWriter writer = new FileWriter(doc);
-            writer.write("<h1 style='text-align: center; margin-bottom:0px;'>" + schoolName.toUpperCase() + "</h1>"
-                    + "<h3 style='text-align: center;'>" + address.toUpperCase() + " " + schoolLocation.toUpperCase() + "</h3>"
-                    + "<h3 style='text-align: center;'>END OF " + term + " " + academic + " EXAMINATION RESULT</h3><hr>"
+            writer.write("<h2 style='text-align:center;margin-bottom:-30px; margin-top:-30px;'>" + schoolName.toUpperCase() + "</h2>"
+                    + "<h4 style='text-align:center;margin-bottom:-30px; margin-top:-30px;'>" + address.toUpperCase() + " " + schoolLocation.toUpperCase() + "</h4>"
+                    + "<h4 style='text-align:center;margin-bottom:-30px; margin-top:-30px;'>" + contact + "</h4>"
+                    + "<h4 style='text-align:center;margin-bottom:-30px; margin-top:-30px;'>END OF " + term + " " + academic + " EXAMINATION RESULT</h4><hr>"
                     + "<table><tbody>"
                     + "<tr>"
                     + "<td style='text-align:left; width:240px'><b>SUBJECT : </b>" + subject.toUpperCase() + "</td>"
@@ -341,7 +350,7 @@ public class Receipt extends javax.swing.JFrame {
             for (Exams exe : exams) {
 
                 val += "<tr>"
-                        + "<td style='text-align: left; width:40px'><b>" + mylogics.studentIDAssigned(exe.getStuId(), exe.getYear_id()) + "</b></td>"
+                        + "<td style='text-align: left; width:40px'>" + mylogics.studentIDAssigned(exe.getStuId(), exe.getYear_id()) + "</td>"
                         + "<td style='text-align: left; width:260px'>" + mylogics.findStudentByIDName(exe.getStuId(), exe.getYear_id()) + "</td>"
                         + "<td style='text-align: left; color:blue; width:20px'>" + exe.getObjectives() + "</td>"
                         + "<td style='text-align: left; color:blue; width:20px'>" + exe.getTheory() + "</td>"
@@ -608,7 +617,6 @@ public class Receipt extends javax.swing.JFrame {
             ReceiptForm rcp = new ReceiptForm();
             setPageExamination();
             rcp.setLocationRelativeTo(this);
-            rcp.setAlwaysOnTop(true);
             rcp.setVisible(true);
 
         }
@@ -622,7 +630,6 @@ public class Receipt extends javax.swing.JFrame {
             ReceiptForm rcp = new ReceiptForm();
             setPageAssessment();
             rcp.setLocationRelativeTo(this);
-            rcp.setAlwaysOnTop(true);
             rcp.setVisible(true);
         }
     }//GEN-LAST:event_btn_ResultActionPerformed
@@ -635,13 +642,12 @@ public class Receipt extends javax.swing.JFrame {
             ReceiptForm rcp = new ReceiptForm();
             setPageExams();
             rcp.setLocationRelativeTo(this);
-            rcp.setAlwaysOnTop(true);
             rcp.setVisible(true);
         }
     }//GEN-LAST:event_btn_QuizActionPerformed
 
     private void lbl_backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_backMouseClicked
-        Decide dec = new Decide();
+        Desktop dec = new Desktop();
         dec.setVisible(true);
         dispose();
     }//GEN-LAST:event_lbl_backMouseClicked

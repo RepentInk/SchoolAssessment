@@ -54,6 +54,13 @@ public class Assessment {
         this.fiftyPercentAssessment = fiftyPercentAssessment;
     }
 
+    public Assessment(double classTest, double others, double total, double fiftyPercentAssessment) {
+        this.classTest = classTest;
+        this.others = others;
+        this.total = total;
+        this.fiftyPercentAssessment = fiftyPercentAssessment;
+    }
+
     public int getAid() {
         return aid;
     }

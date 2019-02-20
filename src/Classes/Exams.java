@@ -53,7 +53,12 @@ public class Exams {
         this.fiftyPercentExams = fiftyPercentExams;
     }
 
- 
+    public Exams(double objectives, double theory, double totalExams, double fiftyPercentExams) {
+        this.objectives = objectives;
+        this.theory = theory;
+        this.totalExams = totalExams;
+        this.fiftyPercentExams = fiftyPercentExams;
+    }
 
     public int getEid() {
         return eid;
@@ -110,7 +115,6 @@ public class Exams {
     public void setClass_id(int class_id) {
         this.class_id = class_id;
     }
-    
 
     public double getObjectives() {
         return objectives;
@@ -143,5 +147,5 @@ public class Exams {
     public void setFiftyPercentExams(double fiftyPercentExams) {
         this.fiftyPercentExams = fiftyPercentExams;
     }
-    
+
 }

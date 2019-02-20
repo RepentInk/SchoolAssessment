@@ -83,6 +83,7 @@ public class ImportExcel extends javax.swing.JFrame {
                     String year = cmb_Admitted.getSelectedItem().toString().trim();
                     int id = Integer.parseInt(stuID.getText().toString());
                     int completeID = mylogics.yearID(cmb_Admitted.getSelectedItem().toString());
+                    String idd = "";
 
                     val = i + i;
 
@@ -118,10 +119,19 @@ public class ImportExcel extends javax.swing.JFrame {
                     } else {
                         HTown = row.getCell(4).toString();
                     }
+                    id++;
+                    
+                    if(id <= 9){
+                      idd = "00" + (id);
+                    }else if(id >= 10 ){
+                      idd = "0" + (id);
+                    }else if(id >= 100){
+                      idd = "" + id;
+                    }
 
-                    Student student = new Student(year + (id + 1), completeID, FName, MName, Surname, Contact, HTown);
+                    Student student = new Student(year + (idd), completeID, FName.trim(), MName.trim(), Surname.trim(), Contact.trim(), HTown.trim());
                     pro.saveStudent(student);
-
+                    
                     if (cmb_Admitted.getSelectedIndex() <= 0) {
                     } else {
                         mylogics.totalStudent(stuID, mylogics.yearID(cmb_Admitted.getSelectedItem().toString()));
@@ -166,7 +176,6 @@ public class ImportExcel extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("IMPORT DATA FROM EXCEL");
-        setAlwaysOnTop(true);
         setResizable(false);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N

@@ -65,17 +65,18 @@ public class ProgramDAO implements Processess {
 
     }
 
-    public List<Student> findAllStudent() {
+    public List<Student> findAllStudent(int id) {
         List<Student> studentList = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM Student";
+            String sql = "SELECT * FROM Student where completedYear_id = '"+ id +"'";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
 
             while (rs.next()) {
                 Student student = new Student();
+                student.setId(rs.getInt("id"));
                 student.setStuID(rs.getString("stu_ID"));
-                student.setCompleteID(rs.getInt("completedYear_id"));
+                student.setCompleteID(rs.getInt("deleted_at"));
                 student.setfName(rs.getString("fName"));
                 student.setmName(rs.getString("mName"));
                 student.setSurname(rs.getString("surname"));
@@ -625,14 +626,14 @@ public class ProgramDAO implements Processess {
         return listExams;
     }
 
-    public void updateExams(Exams exams, int stuid, int classid) {
+    public void updateExams(Exams exams, int id, int classid) {
         try {
-            String sql = "UPDATE Exams SET id='" + exams.getEid() + "',objectives='" + exams.getObjectives() + "', theory='" + exams.getTheory() + "', totalExams='" + exams.getTotalExams() + "',"
-                    + "fiftyPercent='" + exams.getFiftyPercentExams() + "' WHERE id='" + exams.getEid() + "' and stuID='" + stuid + "' and class_id='" + classid + "'";
+            String sql = "UPDATE Exams SET objectives='" + exams.getObjectives() + "', theory='" + exams.getTheory() + "', totalExams='" + exams.getTotalExams() + "',"
+                    + "fiftyPercent='" + exams.getFiftyPercentExams() + "' WHERE id='" + id + "' and class_id='" + classid + "'";
             pst = conn.prepareStatement(sql);
             pst.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "Exams is Updated");
+            //JOptionPane.showMessageDialog(null, "Exams is Updated");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         } finally {
@@ -728,14 +729,14 @@ public class ProgramDAO implements Processess {
         return listAssessment;
     }
 
-    public void updateAssessment(Assessment assessment, int stuid, int classid) {
+    public void updateAssessment(Assessment assessment, int id, int classid) {
         try {
-            String sql = "UPDATE Assessment SET id='" + assessment.getAid() + "',classTest='" + assessment.getClassTest() + "', others='" + assessment.getOthers() + "', totalAssess='" + assessment.getTotal() + "',"
-                    + "fiftyPercent='" + assessment.getFiftyPercentAssessment() + "' WHERE id='" + assessment.getAid() + "' and stuID='" + stuid + "' and class_id='" + classid + "'";
+            String sql = "UPDATE Assessment SET classTest='" + assessment.getClassTest() + "', others='" + assessment.getOthers() + "', totalAssess='" + assessment.getTotal() + "',"
+                    + "fiftyPercent='" + assessment.getFiftyPercentAssessment() + "' WHERE id='" + id + "' and class_id='" + classid + "'";
             pst = conn.prepareStatement(sql);
             pst.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "Exams is Updated");
+            // JOptionPane.showMessageDialog(null, "Exams is Updated");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         } finally {
@@ -785,7 +786,7 @@ public class ProgramDAO implements Processess {
             pst.setInt(11, result.getRemarks());
             pst.executeUpdate();
 
-           // JOptionPane.showMessageDialog(null, "Result is Saved");
+            // JOptionPane.showMessageDialog(null, "Result is Saved");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         } finally {
@@ -864,14 +865,14 @@ public class ProgramDAO implements Processess {
         return listResult;
     }
 
-    public void updateResult(Result result, int stuid, int classid) {
+    public void updateResult(Result result, int id, int classid) {
         try {
-            String sql = "UPDATE Result SET id='" + result.getRid() + "',exams='" + result.getExams() + "', assessment='" + result.getAssessment() + "', total='" + result.getTotalResult() + "',"
-                    + "grade='" + result.getGrade() + "', remarks='" + result.getRemarks() + "' WHERE id='" + result.getRid() + "' and stuID='" + stuid + "' and class_id='" + classid + "'";
+            String sql = "UPDATE Result SET exams='" + result.getExams() + "', assessment='" + result.getAssessment() + "', total='" + result.getTotalResult() + "',"
+                    + "grade='" + result.getGrade() + "', remarks='" + result.getRemarks() + "' WHERE id='" + id + "' and class_id='" + classid + "'";
             pst = conn.prepareStatement(sql);
             pst.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "Exams is Updated");
+            //JOptionPane.showMessageDialog(null, "Result is Updated");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         } finally {
@@ -890,7 +891,7 @@ public class ProgramDAO implements Processess {
             pst = conn.prepareStatement(sql);
             pst.executeUpdate();
 
-           // JOptionPane.showMessageDialog(null, "Result is deleted");
+            // JOptionPane.showMessageDialog(null, "Result is deleted");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         } finally {
@@ -935,7 +936,7 @@ public class ProgramDAO implements Processess {
 
             while (rs.next()) {
                 SchoolRemarks remarks = new SchoolRemarks();
-                
+
                 remarks.setId(rs.getInt("id"));
                 remarks.setLowMarks(rs.getDouble("lmarks"));
                 remarks.setHigMarks(rs.getDouble("hmarks"));
@@ -1002,12 +1003,18 @@ public class ProgramDAO implements Processess {
             JOptionPane.showMessageDialog(null, "All Records is cleared");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
+        }finally {
+            try {
+                rs.close();
+                pst.close();
+            } catch (Exception e) {
+            }
         }
     }
 
     public void saveSchoolDetails(School school) {
         try {
-            String subjectSQL = "INSERT INTO SchoolInfo (schoolName,schoolAddress,schoolLocation,schoolVacation,schoolResume,schoolLogo) VALUES (?,?,?,?,?,?)";
+            String subjectSQL = "INSERT INTO SchoolInfo (schoolName,schoolAddress,schoolLocation,schoolVacation,schoolResume,schoolLogo,contact) VALUES (?,?,?,?,?,?,?)";
             pst = conn.prepareStatement(subjectSQL);
             pst.setString(1, school.getSchoolName());
             pst.setString(2, school.getSchoolAddress());
@@ -1015,6 +1022,7 @@ public class ProgramDAO implements Processess {
             pst.setString(4, school.getSchoolVac());
             pst.setString(5, school.getSchoolResume());
             pst.setBytes(6, school.getSchoolLogo());
+            pst.setString(7, school.getSchoolContact());
             pst.executeUpdate();
 
             JOptionPane.showMessageDialog(null, "School Info is Saved");
@@ -1046,7 +1054,7 @@ public class ProgramDAO implements Processess {
                 sch.setSchoolVac(rs.getString("schoolVacation"));
                 sch.setSchoolResume(rs.getString("schoolResume"));
                 sch.setSchoolLogo(rs.getBytes("schoolLogo"));
-
+                sch.setSchoolContact(rs.getString("contact"));
                 listSchool.add(sch);
             }
         } catch (Exception e) {
@@ -1066,7 +1074,7 @@ public class ProgramDAO implements Processess {
     public void updateSchoolDetails(School school, int id) {
         try {
             String sql = "UPDATE SchoolInfo SET schoolName='" + school.getSchoolName() + "', schoolAddress='" + school.getSchoolAddress() + "', schoolLocation='" + school.getSchoolLocation() + "',"
-                    + "schoolVacation='" + school.getSchoolVac() + "', schoolResume='" + school.getSchoolResume() + "',schoolLogo='" + school.getSchoolLogo() + "' WHERE id='" + id + "'";
+                    + "schoolVacation='" + school.getSchoolVac() + "', schoolResume='" + school.getSchoolResume() + "',schoolLogo='" + school.getSchoolLogo() + "', contact='" + school.getSchoolContact() + "' WHERE id='" + id + "'";
             pst = conn.prepareStatement(sql);
             pst.executeUpdate();
 

@@ -5,7 +5,7 @@ import Classes.Subject;
 import Connects.ProgramDAO;
 import Connects.myCon;
 import Connects.myLogics;
-import static Designs.AssessmentR.Assessment_Table;
+import static Designs.AssessmentForm.Assessment_Table;
 import com.sun.glass.events.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -35,7 +35,7 @@ public class Performance extends javax.swing.JFrame {
 
         AssessmentColors();
         yearBatch();
-        
+
         cmd_StudentID.setVisible(false);
 
     }
@@ -43,7 +43,7 @@ public class Performance extends javax.swing.JFrame {
     public void yearBatch() {
         mylogics.setYearToCombo(cmb_Performance, "Select Year Batch");
     }
-    
+
     public void studentName(JComboBox myComboNam) {
         if (myComboNam.getSelectedIndex() <= 0) {
 
@@ -142,6 +142,7 @@ public class Performance extends javax.swing.JFrame {
         cmb_Performance = new javax.swing.JComboBox<>();
         cmd_StudentName = new javax.swing.JComboBox<>();
         cmd_StudentID = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         resultTable = new javax.swing.JTable();
 
@@ -151,7 +152,7 @@ public class Performance extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Enter Student Name to Search", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 14), new java.awt.Color(0, 102, 0))); // NOI18N
 
         btn_Search.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btn_Search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_Search_20px.png"))); // NOI18N
+        btn_Search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/search.png"))); // NOI18N
         btn_Search.setText("   Search");
         btn_Search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,6 +179,14 @@ public class Performance extends javax.swing.JFrame {
         cmd_StudentID.setFont(new java.awt.Font("Agency FB", 0, 20)); // NOI18N
         cmd_StudentID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select ID" }));
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/back.png"))); // NOI18N
+        jLabel1.setToolTipText("Click to go back");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -186,10 +195,12 @@ public class Performance extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(cmb_Performance, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cmd_StudentID, 0, 231, Short.MAX_VALUE)
-                    .addComponent(cmd_StudentName, 0, 231, Short.MAX_VALUE)
-                    .addComponent(btn_Search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(cmd_StudentID, 0, 231, Short.MAX_VALUE)
+                        .addComponent(cmd_StudentName, 0, 231, Short.MAX_VALUE)
+                        .addComponent(btn_Search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel1))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -203,6 +214,8 @@ public class Performance extends javax.swing.JFrame {
                 .addComponent(cmd_StudentName, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(btn_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -278,20 +291,26 @@ public class Performance extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SearchActionPerformed
-      if(cmd_StudentName.getSelectedIndex() == 0 || cmb_Performance.getSelectedIndex() == 0){
-        JOptionPane.showMessageDialog(null, "Select Required Fields");
-      }else{
-        studentPerformanceDetails(resultTable);
-      }
+        if (cmd_StudentName.getSelectedIndex() == 0 || cmb_Performance.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Select Required Fields");
+        } else {
+            studentPerformanceDetails(resultTable);
+        }
     }//GEN-LAST:event_btn_SearchActionPerformed
 
     private void cmb_PerformanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_PerformanceActionPerformed
-         studentName(cmb_Performance);
+        studentName(cmb_Performance);
     }//GEN-LAST:event_cmb_PerformanceActionPerformed
 
     private void cmd_StudentNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_StudentNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmd_StudentNameActionPerformed
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        Desktop des = new Desktop();
+        des.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jLabel1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -334,6 +353,7 @@ public class Performance extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmb_Performance;
     private javax.swing.JComboBox<String> cmd_StudentID;
     private javax.swing.JComboBox<String> cmd_StudentName;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

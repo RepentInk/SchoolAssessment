@@ -11,17 +11,18 @@ import Classes.Student;
 import Classes.Subject;
 import Classes.Term;
 import Classes.Year;
-import static com.oracle.jrockit.jfr.ContentType.Bytes;
 import com.toedter.calendar.JDateChooser;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
+import java.util.Set;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -40,8 +41,18 @@ public class myLogics {
     String t1, t2, t3, t4;
     double ctext, others, total, fpercent;
 
+    private static final Random RANDOM = new Random();
+
     public myLogics() {
         conn = myCon.ConnecrDb();
+    }
+
+    public Set<Integer> pickRandom(int n, int k) {
+        final Set<Integer> picked = new HashSet<>();
+        if (picked.size() < n) {
+            picked.add(RANDOM.nextInt(k + 1));
+        }
+        return picked;
     }
 
     //======== Method populate data into year comboBox
@@ -186,7 +197,7 @@ public class myLogics {
         }
         return myTerm;
     }
-    
+
     public String returnTermName(int txt) {
         String myTerm = null;
         try {
@@ -262,7 +273,7 @@ public class myLogics {
         }
         return myClass;
     }
-    
+
     public String returnClassName(int txt) {
         String myClass = null;
         try {
@@ -284,7 +295,6 @@ public class myLogics {
         }
         return myClass;
     }
-
 
     //============Method save term into db
     public void saveClass(JTextField cla) {
@@ -311,6 +321,18 @@ public class myLogics {
         DefaultComboBoxModel claxCombo = (DefaultComboBoxModel) cmb.getModel();
         claxCombo.removeAllElements();
         claxCombo.addElement(title);
+
+        for (Classess cla : clax) {
+            claxCombo.addElement(cla.getClassName());
+        }
+    }
+
+    public void setPromotedToCombo(JComboBox cmb, String title) {
+        List<Classess> clax = pro.findAllClassess();
+        DefaultComboBoxModel claxCombo = (DefaultComboBoxModel) cmb.getModel();
+        claxCombo.removeAllElements();
+        claxCombo.addElement(title);
+        claxCombo.addElement("----");
 
         for (Classess cla : clax) {
             claxCombo.addElement(cla.getClassName());
@@ -394,8 +416,20 @@ public class myLogics {
         String htown = hTown.getText().trim();
         String batch = bat.getSelectedItem().toString();
 
-        Student student = new Student(batch + (stuID + 1), completeID, fname, mname, sname, contact, htown);
+        String idd = "";
+        stuID++;
+
+        if (stuID <= 9) {
+            idd = "00" + (stuID);
+        } else if (stuID >= 10) {
+            idd = "0" + (stuID);
+        } else if (stuID >= 100) {
+            idd = "" + (stuID);
+        }
+
+        Student student = new Student(batch + (idd), completeID, fname, mname, sname, contact, htown);
         pro.saveStudent(student);
+        JOptionPane.showMessageDialog(null, "Student record is saved");
     }
 
     //======Term method to decide if it exist ==========
@@ -442,6 +476,7 @@ public class myLogics {
         }
         return yName;
     }
+
     public String returnSubjectName(int id) {
         String yName = null;
         try {
@@ -463,7 +498,6 @@ public class myLogics {
         }
         return yName;
     }
-    
 
     //method that save into Subject
     public void saveSubject(JTextField code, JTextField subName) {
@@ -482,10 +516,11 @@ public class myLogics {
     }
 
     //method that save school information
-    public void saveSchoolInfo(JTextField sname, JTextField saddress, JTextField slocation, JDateChooser svacation, JDateChooser sresume, byte[] logo) {
+    public void saveSchoolInfo(JTextField sname, JTextField saddress, JTextField contact, JTextField slocation, JDateChooser svacation, JDateChooser sresume, byte[] logo) {
 
         String schoolname = sname.getText().toString();
         String schooladdress = saddress.getText().toString();
+        String schoolContact = contact.getText().trim();
         String schoollocation = slocation.getText().toString();
         String schoolvacation = ((JTextField) svacation.getDateEditor().getUiComponent()).getText();
         String schoolresume = ((JTextField) sresume.getDateEditor().getUiComponent()).getText();
@@ -493,7 +528,7 @@ public class myLogics {
         if (sname.getText().isEmpty() || saddress.getText().isEmpty() || slocation.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Fill all required fields");
         } else {
-            School school = new School(schoolname, schooladdress, schoollocation, schoolvacation, schoolresume, logo);
+            School school = new School(schoolname, schooladdress, schoolContact, schoollocation, schoolvacation, schoolresume, logo);
             pro.saveSchoolDetails(school);
         }
     }
@@ -538,6 +573,30 @@ public class myLogics {
         }
 
         return studentName;
+    }
+
+    public int totalStudentCount2(int name) {
+        int sum = 0;
+        try {
+
+            String sql = "SELECT count(stu_ID) from Student where completedYear_id='" + name + "' and deleted_at = 1";
+            pst = conn.prepareStatement(sql);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                sum = rs.getInt("count(stu_ID)");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        } finally {
+            try {
+                rs.close();
+                pst.close();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+
+        return sum;
     }
 
     //Returning list based on select from list
@@ -591,6 +650,12 @@ public class myLogics {
 
         } catch (Exception e) {
             JOptionPane.showConfirmDialog(null, e);
+        } finally {
+            try {
+                rs.close();
+                pst.close();
+            } catch (Exception e) {
+            }
         }
 
         return studentinfo;
@@ -687,6 +752,17 @@ public class myLogics {
         }
     }
 
+    public void setStudentNameOnlyCombo(JComboBox cmb, String title, int com) {
+        List<Student> student = findAllStudentName(com);
+        DefaultComboBoxModel stuCombo = (DefaultComboBoxModel) cmb.getModel();
+        stuCombo.removeAllElements();
+        stuCombo.addElement(title);
+
+        for (Student stu : student) {
+            stuCombo.addElement(stu.getSurname().trim() + " " + stu.getmName().trim() + " " + stu.getfName().trim());
+        }
+    }
+
     //======Count total number of student==========
     public int totalStudentCount(int con) {
         int count = 0;
@@ -726,6 +802,12 @@ public class myLogics {
             }
         } catch (Exception e) {
             JOptionPane.showConfirmDialog(null, e);
+        } finally {
+            try {
+                rs.close();
+                pst.close();
+            } catch (Exception e) {
+            }
         }
         return studentinfo;
     }
@@ -734,17 +816,48 @@ public class myLogics {
     public List<Student> findStudentByID(int comID, String id) {
         List<Student> studentinfo = new ArrayList<>();
         try {
-            String sql = "select (fname || ' '|| mname || ' ' || surname) as fullname from Student where stu_ID='" + id + "' and completedYear_id='" + comID + "' AND deleted_at = 1";
+            String sql = "select (surname || ' '|| mname || ' ' || fname) as fullname from Student where stu_ID='" + id + "' and completedYear_id='" + comID + "' AND deleted_at = 1";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
 
-            while (rs.next()) {
+            if (rs.next()) {
                 Student student = new Student();
                 student.setfName(rs.getString("fullname"));
                 studentinfo.add(student);
             }
         } catch (Exception e) {
             JOptionPane.showConfirmDialog(null, e);
+        } finally {
+            try {
+                rs.close();
+                pst.close();
+            } catch (Exception e) {
+            }
+        }
+        return studentinfo;
+    }
+
+    // returning ID by name search
+    public List<Student> findStudentIDByName(int comID, String name) {
+        List<Student> studentinfo = new ArrayList<>();
+        try {
+            String sql = "select stu_ID,(surname || ' '|| mname || ' ' || fname) as fullname from Student where fullname='" + name + "' and completedYear_id='" + comID + "' AND deleted_at = 1";
+            pst = conn.prepareStatement(sql);
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+                Student student = new Student();
+                student.setStuID(rs.getString("stu_ID"));
+                studentinfo.add(student);
+            }
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(null, e);
+        } finally {
+            try {
+                rs.close();
+                pst.close();
+            } catch (Exception e) {
+            }
         }
         return studentinfo;
     }
@@ -815,8 +928,8 @@ public class myLogics {
         }
         return tid;
     }
-    
-     public String academicName(int txt) {
+
+    public String academicName(int txt) {
         String academic = null;
         try {
             String sql = "Select academicYear from Academic where id='" + txt + "'";
@@ -905,10 +1018,32 @@ public class myLogics {
         return stuid;
     }
 
+    public int returnStudentIDYear(String stuName, int year) {
+        int stuid = 0;
+        try {
+            String sql = "Select id from Student where stu_ID='" + stuName + "' and completedYear_id='" + year + "'";
+            pst = conn.prepareStatement(sql);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                stuid = rs.getInt("id");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        } finally {
+            try {
+                rs.close();
+                pst.close();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+        return stuid;
+    }
+
     public String findStudentByIDName(int id, int comy) {
         String studentinfo = null;
         try {
-            String sql = "select (fname || ' '|| mname || ' ' || surname) as fullname from Student where id='" + id + "' and completedYear_id='" + comy + "' AND deleted_at = 1";
+            String sql = "select (surname || ' '|| mname || ' ' || fname) as fullname from Student where id='" + id + "' and completedYear_id='" + comy + "' AND deleted_at = 1";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
 
@@ -918,6 +1053,12 @@ public class myLogics {
             }
         } catch (Exception e) {
             JOptionPane.showConfirmDialog(null, e);
+        } finally {
+            try {
+                rs.close();
+                pst.close();
+            } catch (Exception e) {
+            }
         }
         return studentinfo;
     }
@@ -1067,6 +1208,11 @@ public class myLogics {
         Object[] object;
 
         List<Result> result = pro.findAllResultSpecific(ter, aca, sub, yer, clas);
+
+        if (result.size() <= 0) {
+            JOptionPane.showMessageDialog(null, "No Assessment is added for the selected Academic Year and Term", "NO RECORDS", JOptionPane.INFORMATION_MESSAGE);
+        }
+
         for (Result res : result) {
             total = tot;
 
@@ -1092,7 +1238,6 @@ public class myLogics {
             tmodel.addRow(object);
 
             count++;
-
         }
     }
 
@@ -1259,7 +1404,7 @@ public class myLogics {
 
     public List<Result> reportStudent(int tid, int aid, int yid, int cid) {
         List<Result> resultList = new ArrayList<>();
-      
+
         try {
             String year = "select * from result where term_id='" + tid + "' and academic_id='" + aid + "' and year_id='" + yid + "' and class_id='" + cid + "' GROUP BY stuID";
             pst = conn.prepareStatement(year);
@@ -1276,7 +1421,7 @@ public class myLogics {
                 result.setRemarks(rs.getInt("remarks"));
                 resultList.add(result);
             }
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
             return null;
@@ -1315,10 +1460,10 @@ public class myLogics {
         }
         return resultList;
     }
-    
+
     public List<Result> reportSubject(int tid, int aid, int yid, int cid) {
         List<Result> resultList = new ArrayList<>();
-       
+
         try {
             String year = "select * from result where term_id='" + tid + "' and academic_id='" + aid + "' and year_id='" + yid + "' and class_id='" + cid + "' GROUP BY subject_id";
             pst = conn.prepareStatement(year);
@@ -1330,7 +1475,7 @@ public class myLogics {
                 result.setTotalResult(rs.getDouble("total"));
                 resultList.add(result);
             }
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
             return null;
@@ -1343,13 +1488,12 @@ public class myLogics {
         }
         return resultList;
     }
-    
-    
+
     public List<Result> reportMarks(int tid, int aid, int yid, int cid, int mark) {
         List<Result> resultList = new ArrayList<>();
-       
+
         try {
-            String year = "select total from result where term_id='" + tid + "' and academic_id='" + aid + "' and year_id='" + yid + "' and class_id='" + cid + "' and subject_id='"+ mark +"'";
+            String year = "select total from result where term_id='" + tid + "' and academic_id='" + aid + "' and year_id='" + yid + "' and class_id='" + cid + "' and subject_id='" + mark + "'";
             pst = conn.prepareStatement(year);
             rs = pst.executeQuery();
 
@@ -1358,7 +1502,7 @@ public class myLogics {
                 result.setTotalResult(rs.getDouble("total"));
                 resultList.add(result);
             }
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
             return null;
@@ -1371,54 +1515,51 @@ public class myLogics {
         }
         return resultList;
     }
-    
-  
+
     //Showing assessment specified
     public void studentReportTable(JTable assTable, int tid, int aid, int yid, int cid) {
         DefaultTableModel tmodel = (DefaultTableModel) assTable.getModel();
         tmodel.setRowCount(0);
         tmodel.setColumnCount(0);
-    
+
         Object[] object = null;
-     
+
         List<Result> report = reportSubject(tid, aid, yid, cid);
         List<Result> student = reportStudent(tid, aid, yid, cid);
-      
+
         tmodel.addColumn("ID");
         tmodel.addColumn("Name");
 
-        for(Result res : report) {
-            
+        for (Result res : report) {
+
             String subject = returnSubjectCode(res.getSubject_id());
-          
-            
-            List<Result> stu = reportMarks(tid, aid, yid, cid, res.getSubject_id());   
-            
+
+            List<Result> stu = reportMarks(tid, aid, yid, cid, res.getSubject_id());
+
             for (Result s : stu) {
-                double total = s.getTotalResult() ; 
+                double total = s.getTotalResult();
                 object = new Object[]{total};
                 tmodel.addRow(object);
             }
-          
-            tmodel.addColumn(subject.toUpperCase()); 
-           
+
+            tmodel.addColumn(subject.toUpperCase());
+
         }
-       
+
         tmodel.addColumn("Total");
-        
-        for(Result res : student) {
-           
+
+        for (Result res : student) {
+
             String name = findStudentByIDName(res.getStuId(), res.getYear_id());
             String studentid = studentIDAssigned(res.getStuId(), res.getYear_id());
             double tot = res.getTotalResult();
-            
+
             object = new Object[]{studentid, name, tot};
             tmodel.addRow(object);
         }
-        
+
     }
-    
-   
+
 //    Printing the reports
     //Showing result specified
     public void resultOfStudentReport(JTable assTable, int ter, int aca, int sub, int yer, int clas) {
@@ -1537,9 +1678,10 @@ public class myLogics {
         Object[] object;
 
         List<SchoolRemarks> remarks = pro.findAllSchoolRemaks();
+        int idd = 0;
         for (SchoolRemarks rem : remarks) {
 
-            int id = rem.getId();
+            int id = idd;
             double low = rem.getLowMarks();
             double high = rem.getHigMarks();
             String grade = rem.getGrd();
@@ -1547,7 +1689,7 @@ public class myLogics {
 
             object = new Object[]{id, low, high, grade, remark};
             tmodel.addRow(object);
-
+            idd++;
         }
     }
 
@@ -1564,6 +1706,7 @@ public class myLogics {
             int id = sch.getSchoolid();
             String schoolName = sch.getSchoolName();
             String schoolAddress = sch.getSchoolAddress();
+            String schoolContact = sch.getSchoolContact();
             String schoolLoc = sch.getSchoolLocation();
             String schoolVac = sch.getSchoolVac();
             String schoolResume = sch.getSchoolResume();
@@ -1571,21 +1714,22 @@ public class myLogics {
             format = new ImageIcon(imagedata);
             log.setIcon(format);
 
-            object = new Object[]{id, schoolName, schoolAddress, schoolLoc, schoolVac, schoolResume};
+            object = new Object[]{id, schoolName, schoolAddress, schoolContact, schoolLoc, schoolVac, schoolResume};
             tmodel.addRow(object);
         }
 
     }
 
-    public void updateSchoolDetails(int id, JTextField sname, JTextField saddress, JTextField slocation, JDateChooser svacation, JDateChooser sresume) {
+    public void updateSchoolDetails(int id, JTextField sname, JTextField saddress, JTextField sContact, JTextField slocation, JDateChooser svacation, JDateChooser sresume) {
 
         String schoolname = sname.getText().toString();
         String schooladdress = saddress.getText().toString();
+        String schoolcontact = sContact.getText().trim();
         String schoollocation = slocation.getText().toString();
         String schoolvacation = ((JTextField) svacation.getDateEditor().getUiComponent()).getText();
         String schoolresume = ((JTextField) sresume.getDateEditor().getUiComponent()).getText();
 
-        School school = new School(schoolname, schooladdress, schoollocation, schoolvacation, schoolresume);
+        School school = new School(schoolname, schooladdress, schoolcontact, schoollocation, schoolvacation, schoolresume);
 
         pro.updateSchoolDetails(school, id);
     }
@@ -1603,6 +1747,7 @@ public class myLogics {
                 sch.setSchoolId(rs.getInt("id"));
                 sch.setSchoolName(rs.getString("schoolName"));
                 sch.setSchoolAddress(rs.getString("schoolAddress"));
+                sch.setSchoolContact(rs.getString("contact"));
                 sch.setSchoolLocation(rs.getString("schoolLocation"));
                 sch.setSchoolVac(rs.getString("schoolVacation"));
                 sch.setSchoolResume(rs.getString("schoolResume"));
@@ -1658,7 +1803,7 @@ public class myLogics {
     public int findStudentReport(String info, int comID) {
         int stuId = 0;
         try {
-            String sql = "select id,(surname || ' '|| mname || ' ' || fname) as fullname from Student where fullname='" + info.toUpperCase() + "' and completedYear_id='" + comID + "' and deleted_at = 1";
+            String sql = "select id,fname,mname,surname,(surname || ' ' || mname || ' ' || fname) as fullname from Student where fullname='" + info + "' and completedYear_id='" + comID + "'";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
 
@@ -1689,20 +1834,20 @@ public class myLogics {
 
             while (rs.next()) {
                 Result result = new Result();
-                
+
                 result.setTerm_id(rs.getInt("term_id"));
                 result.setAcademic_id(rs.getInt("academic_id"));
                 result.setSubject_id(rs.getInt("subject_id"));
                 result.setYear_id(rs.getInt("year_id"));
                 result.setClass_id(rs.getInt("class_id"));
-                
+
                 result.setExams(rs.getDouble("exams"));
                 result.setAssessment(rs.getDouble("assessment"));
                 result.setTotalResult(rs.getDouble("total"));
                 result.setGrade(rs.getString("grade"));
                 result.setRemarks(rs.getInt("remarks"));
 
-               stuPerformance.add(result);
+                stuPerformance.add(result);
             }
 
         } catch (Exception e) {
@@ -1718,4 +1863,233 @@ public class myLogics {
         return stuPerformance;
     }
 
+    //Single student performance methods starts here
+    public int findStudentID(String info, int comID) {
+        int studentinfo = 0;
+        try {
+            String sql = "select id,stu_ID,completedYear_id,fname,mname,surname,contact,hometown,(surname || ' '|| mname || ' ' || fname) as fullname from Student where fullname='" + info + "' and completedYear_id='" + comID + "' and deleted_at = 1";
+            pst = conn.prepareStatement(sql);
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+
+                studentinfo = rs.getInt("id");
+
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(null, e);
+        } finally {
+            try {
+                rs.close();
+                pst.close();
+            } catch (Exception e) {
+            }
+        }
+
+        return studentinfo;
+    }
+
+    public List<Result> reportSingleStudent(int stuid, int cid, int aid, int tid, int yid) {
+        List<Result> resultList = new ArrayList<>();
+
+        try {
+            String year = "select * from result where stuID='" + stuid + "' and class_id='" + cid + "' and academic_id='" + aid + "' and term_id='" + tid + "' and year_id='" + yid + "'";
+            pst = conn.prepareStatement(year);
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+                Result result = new Result();
+                result.setSubject_id(rs.getInt("subject_id"));
+                result.setAssessment(rs.getDouble("assessment"));
+                result.setExams(rs.getDouble("exams"));
+                result.setTotalResult(rs.getDouble("total"));
+                result.setGrade(rs.getString("grade"));
+                result.setRemarks(rs.getInt("remarks"));
+                resultList.add(result);
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            return null;
+        } finally {
+            try {
+                rs.close();
+                pst.close();
+            } catch (Exception e) {
+            }
+        }
+        return resultList;
+    }
+
+    public void setStudentPerformanceTable(JTable perTable, int stuid, int cid, int aid, int tid, int yid) {
+        DefaultTableModel tmodel = (DefaultTableModel) perTable.getModel();
+        tmodel.setRowCount(0);
+        Object[] object;
+
+        List<Result> result = reportSingleStudent(stuid, cid, aid, tid, yid);
+
+        for (Result res : result) {
+
+            String subject = returnSubjectName(res.getSubject_id());
+            double classScore = res.getAssessment();
+            double exams = res.getExams();
+            double total = res.getTotalResult();
+            String grd = res.getGrade();
+            String remarks = returnRemarksOnID(res.getRemarks());
+
+            object = new Object[]{subject, classScore, exams, total, grd, remarks};
+            tmodel.addRow(object);
+
+        }
+
+    }
+
+    public List<Result> searchSpecificStudentResult(int sid, int tid, int aid, int suid, int yid, int cid) {
+        List<Result> resultList = new ArrayList<>();
+        try {
+            String year = "select * from result where stuID='" + sid + "' and term_id='" + tid + "' and academic_id='" + aid + "' and subject_id='" + suid + "' and year_id='" + yid + "' and class_id='" + cid + "'";
+            pst = conn.prepareStatement(year);
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+                Result result = new Result();
+                result.setRid(rs.getInt("id"));
+                result.setStuId(rs.getInt("stuID"));
+                result.setYear_id(rs.getInt("year_id"));
+                result.setAssessment(rs.getDouble("assessment"));
+                result.setExams(rs.getDouble("exams"));
+                result.setTotalResult(rs.getDouble("total"));
+                result.setGrade(rs.getString("grade"));
+                result.setRemarks(rs.getInt("remarks"));
+                resultList.add(result);
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            return null;
+        } finally {
+            try {
+                rs.close();
+                pst.close();
+            } catch (Exception e) {
+            }
+        }
+        return resultList;
+    }
+
+    //searching of student exams result
+    public List<Exams> searchSpecificStudentExams(int sid, int tid, int aid, int suid, int yid, int cid) {
+        List<Exams> examsList = new ArrayList<>();
+        try {
+            String year = "select * from Exams where stuID='" + sid + "' and term_id='" + tid + "' and academic_id='" + aid + "' and subject_id='" + suid + "' and year_id='" + yid + "' and class_id='" + cid + "'";
+            pst = conn.prepareStatement(year);
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+                Exams exams = new Exams();
+                exams.setEid(rs.getInt("id"));
+                exams.setStuId(rs.getInt("stuID"));
+                exams.setYear_id(rs.getInt("year_id"));
+                exams.setObjectives(rs.getDouble("objectives"));
+                exams.setTheory(rs.getDouble("theory"));
+                exams.setTotalExams(rs.getDouble("totalExams"));
+                exams.setFiftyPercentExams(rs.getDouble("fiftyPercent"));
+                examsList.add(exams);
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            return null;
+        } finally {
+            try {
+                rs.close();
+                pst.close();
+            } catch (Exception e) {
+            }
+        }
+        return examsList;
+    }
+
+    //searching student assessment
+    public List<Assessment> searchSpecificStudentAssessment(int sid, int tid, int aid, int suid, int yid, int cid) {
+        List<Assessment> assessList = new ArrayList<>();
+        try {
+            String year = "select * from Assessment where stuID='" + sid + "' and term_id='" + tid + "' and academic_id='" + aid + "' and subject_id='" + suid + "' and year_id='" + yid + "' and class_id='" + cid + "'";
+            pst = conn.prepareStatement(year);
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+                Assessment assess = new Assessment();
+                assess.setAid(rs.getInt("id"));
+                assess.setStuId(rs.getInt("stuID"));
+                assess.setYear_id(rs.getInt("year_id"));
+                assess.setClassTest(rs.getDouble("classTest"));
+                assess.setOthers(rs.getDouble("others"));
+                assess.setTotal(rs.getDouble("totalAssess"));
+                assess.setFiftyPercentAssessment(rs.getDouble("fiftyPercent"));
+                assessList.add(assess);
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            return null;
+        } finally {
+            try {
+                rs.close();
+                pst.close();
+            } catch (Exception e) {
+            }
+        }
+        return assessList;
+    }
+
+    //============= Updating Result, Exams and Assessment ==================
+    public void updateResult(JLabel id, JTextField exams, JTextField assess, JTextField total, JLabel grade, int remarks, int clasid) {
+
+        int sid = Integer.parseInt(id.getText().toString());
+        int cid = clasid;
+
+        double exe = Double.parseDouble(exams.getText());
+        double ass = Double.parseDouble(assess.getText());
+        double tot = Double.parseDouble(total.getText());
+        String grd = grade.getText();
+        int rem = remarks;
+
+        Result result = new Result(exe, ass, tot, grd, rem);
+
+        pro.updateResult(result, sid, cid);
+    }
+
+    public void updateExams(JLabel id, JTextField clastext, JTextField other, JTextField total, JTextField per, int clasid) {
+
+        int sid = Integer.parseInt(id.getText().toString());
+        int cid = clasid;
+
+        double obj = Double.parseDouble(clastext.getText());
+        double theory = Double.parseDouble(other.getText());
+        double totEx = Double.parseDouble(total.getText());
+        double percent = Double.parseDouble(per.getText());
+
+        Exams exe = new Exams(obj, theory, totEx, percent);
+
+        pro.updateExams(exe, sid, cid);
+    }
+
+    public void updateAssessment(JLabel id, JTextField clastext, JTextField other, JTextField total, JTextField per, int clasid) {
+
+        int sid = Integer.parseInt(id.getText().toString());
+        int cid = clasid;
+
+        double clasText = Double.parseDouble(clastext.getText());
+        double others = Double.parseDouble(other.getText());
+        double totA = Double.parseDouble(total.getText());
+        double percent = Double.parseDouble(per.getText());
+
+        Assessment assess = new Assessment(clasText, others, totA, percent);
+
+        pro.updateAssessment(assess, sid, cid);
+    }
+
+    //============ End here ===============================================
 }

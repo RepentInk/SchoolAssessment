@@ -1,7 +1,10 @@
 package Designs;
 
 import Connects.myCon;
+import java.awt.print.PageFormat;
+import java.awt.print.Paper;
 import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -25,8 +28,9 @@ public class ReceiptForm extends javax.swing.JFrame {
         initComponents();
         conn = myCon.ConnecrDb();
         setIconImage(mets.myImage("/Icons/globe.png"));
-        
+
         //setPageTwo();
+        btn_Print.setVisible(false);
     }
 
     public void Print() {
@@ -43,75 +47,52 @@ public class ReceiptForm extends javax.swing.JFrame {
         }
     }
 
-    public void setPageMe(){
-
+    public void setPageMe() {
         JScrollPane editorScrollPane = new JScrollPane(pane);
         editorScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         File file = new File("C://newhtml.html");
-        
-            try {
-                pane.setPage(file.toURI().toURL());
-            } catch (IOException ex) {
-                Logger.getLogger(ReceiptForm.class.getName()).log(Level.SEVERE, null, ex);
-            }
 
-        
+        try {
+            pane.setPage(file.toURI().toURL());
+        } catch (IOException ex) {
+            Logger.getLogger(ReceiptForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
         pane.setEditable(true);
+    }
 
+    public void invoice_job() {
+        try {
+            int rows = StudentForm.studentPerformanceTable.getRowCount();
+            PrinterJob printerJob = PrinterJob.getPrinterJob();
+            PageFormat pageFormat = printerJob.defaultPage();
+            Paper paper = new Paper();
+            paper.setSize(600, (double) (paper.getHeight() - rows * 1));
+            paper.setImageableArea(paper.getWidth() + rows * 5, 20, paper.getWidth() - rows * 2, paper.getHeight() - rows * 2);
+            pageFormat.setPaper(paper);
+            pageFormat.setOrientation(PageFormat.PORTRAIT);
+            printerJob.setPrintable(pane.getPrintable(null, null), pageFormat);
+            printerJob.print();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
     
-    public void setPageTwo(){
-    
-    // get location of the code source
-    URL url = Designs.ReceiptForm.class.getProtectionDomain().getCodeSource().getLocation();
-
-     String name = "Becky Name";
-    try {
-        // extract directory from code source url
-        String root = (new File(url.toURI())).getParentFile().getPath();
-        File doc = new File(root, "newhtml.html");
-        // create htm file contents for testing
-        FileWriter writer = new FileWriter(doc);
-        writer.write("<h1 style='text-align: center;'>" + name + "</h1>");
-        String val = "";
-        
-              val += "<table><thead>"
-                      + "<tr>"
-                      + "<th>Name</th>"
-                      + "<th>Age</th>"
-                      + "<th>Country</th>"
-                      + "</tr>"
-                      + "</thead><tbody>";
-              
-              for(int a = 1; a <= 10; a++){ 
-                  
-                 val += "<tr>"
-                         + "<td>" + "Nyarko Isaac" + "</td>"
-                         + "<td>" + 23 + "</td>"
-                         + "<td>" + "Country" + "</td>"
-                         + "</tr>";
-                          
-               };
-               
-               val += "</tbody></table>";
-               
-        
-        writer.write(val);
-        writer.close();
-        // open it in the editor
-        pane.setPage(doc.toURI().toURL());
-    } catch (Exception e) {
-        e.printStackTrace();
-    }}
-    
-    public String myName(){
-        String name = null;
-        for (int i = 0; i < 10; i++) {
-            name = "<tr><td>Nyarko Isaac</td></tr>"; 
+    public void printReport() {
+        try {
+            int rows = 1200;
+            PrinterJob printerJob = PrinterJob.getPrinterJob();
+            PageFormat pageFormat = printerJob.defaultPage();
+            Paper paper = new Paper();
+            paper.setSize(600, (double) (paper.getHeight() - rows * 50));
+            paper.setImageableArea(paper.getWidth() + rows * 5, 120, paper.getWidth() - rows * 2, paper.getHeight() - rows * 5);
+            pageFormat.setPaper(paper);
+            pageFormat.setOrientation(PageFormat.PORTRAIT);
+            printerJob.setPrintable(pane.getPrintable(null, null), pageFormat);
+            printerJob.print();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        
-        return name;
     }
 
     /**
@@ -127,6 +108,7 @@ public class ReceiptForm extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         pane = new javax.swing.JTextPane();
         btn_Print = new javax.swing.JButton();
+        print_me = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("REPORT PRINTING FORM");
@@ -146,12 +128,23 @@ public class ReceiptForm extends javax.swing.JFrame {
             }
         });
 
+        print_me.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        print_me.setForeground(new java.awt.Color(102, 0, 0));
+        print_me.setText("Print");
+        print_me.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                print_meActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(0, 502, Short.MAX_VALUE)
+                .addGap(0, 427, Short.MAX_VALUE)
+                .addComponent(print_me)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_Print)
                 .addContainerGap())
             .addComponent(jScrollPane1)
@@ -159,10 +152,12 @@ public class ReceiptForm extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_Print, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btn_Print, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(print_me, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -183,8 +178,12 @@ public class ReceiptForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_PrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_PrintActionPerformed
-        Print();
+        invoice_job();
     }//GEN-LAST:event_btn_PrintActionPerformed
+
+    private void print_meActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_print_meActionPerformed
+        printReport();
+    }//GEN-LAST:event_print_meActionPerformed
 
     /**
      * @param args the command line arguments
@@ -222,9 +221,10 @@ public class ReceiptForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_Print;
+    public static javax.swing.JButton btn_Print;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTextPane pane;
+    public static javax.swing.JButton print_me;
     // End of variables declaration//GEN-END:variables
 }
