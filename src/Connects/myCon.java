@@ -49,6 +49,36 @@ public class myCon {
             return null;
         }
     }
+    
+    //Capitalizing first letter
+    public String capitalizer(String word) {
+        String[] words = word.split(" ");
+        StringBuilder sb = new StringBuilder();
+        if (words[0].length() > 0) {
+            sb.append(Character.toUpperCase(words[0].charAt(0)) + words[0].subSequence(1, words[0].length()).toString().toLowerCase());
+            for (int i = 1; i < words.length; i++) {
+                sb.append(" ");
+                sb.append(Character.toUpperCase(words[i].charAt(0)) + words[i].subSequence(1, words[i].length()).toString().toLowerCase());
+            }
+        }
+        return sb.toString();
+    }
+    
+    
+     //Capitalizing first letter Only
+    public String capitalizerFirstLetter(String word) {
+        String[] words = word.split(" ");
+        StringBuilder sb = new StringBuilder();
+        if (words[0].length() > 0) {
+            sb.append(Character.toUpperCase(words[0].charAt(0)) + words[0].subSequence(1, words[0].length()).toString().toLowerCase());
+            for (int i = 1; i < words.length; i++) {
+                sb.append(" ");
+                sb.append(Character.toLowerCase(words[i].charAt(0)) + words[i].subSequence(1, words[i].length()).toString().toLowerCase());
+            }
+        }
+        return sb.toString();
+    }
+
 
 // Method that set the icon
     public Image myImage(String img) {
@@ -126,7 +156,7 @@ public class myCon {
             Component cellComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
             if (column == 1) {
                 // cellComponent.setBackground(Color.magenta);
-                cellComponent.setForeground(Color.BLACK);
+                cellComponent.setForeground(Color.blue);
                 cellComponent.setFont(new java.awt.Font("Tahoma", 1, 12));
             }
             return cellComponent;
@@ -139,7 +169,7 @@ public class myCon {
             Component cellComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
             if (column == 2) {
                 // cellComponent.setBackground(Color.magenta);
-                cellComponent.setForeground(Color.BLUE);
+                cellComponent.setForeground(Color.blue);
                 cellComponent.setFont(new java.awt.Font("Tahoma", 1, 12));
             }
             return cellComponent;
@@ -152,7 +182,7 @@ public class myCon {
             Component cellComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
             if (column == 3) {
                 // cellComponent.setBackground(Color.magenta);
-                cellComponent.setForeground(Color.BLUE);
+                cellComponent.setForeground(Color.red);
                 cellComponent.setFont(new java.awt.Font("Tahoma", 1, 12));
             }
             return cellComponent;
@@ -165,7 +195,7 @@ public class myCon {
             Component cellComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
             if (column == 4) {
                 // cellComponent.setBackground(Color.magenta);
-                cellComponent.setForeground(Color.RED);
+                cellComponent.setForeground(Color.black);
                 cellComponent.setFont(new java.awt.Font("Tahoma", 1, 12));
             }
             return cellComponent;
@@ -178,7 +208,7 @@ public class myCon {
             Component cellComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
             if (column == 5) {
                 // cellComponent.setBackground(Color.magenta);
-                cellComponent.setForeground(Color.BLUE);
+                cellComponent.setForeground(Color.red);
                 cellComponent.setFont(new java.awt.Font("Tahoma", 1, 12));
             }
             return cellComponent;
@@ -191,7 +221,7 @@ public class myCon {
             Component cellComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
             if (column == 6) {
                 // cellComponent.setBackground(Color.magenta);
-                cellComponent.setForeground(Color.RED);
+                cellComponent.setForeground(Color.blue);
                 cellComponent.setFont(new java.awt.Font("Tahoma", 1, 12));
             }
             return cellComponent;
@@ -204,7 +234,7 @@ public class myCon {
             Component cellComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
             if (column == 7) {
                 // cellComponent.setBackground(Color.magenta);
-                cellComponent.setForeground(Color.BLUE);
+                cellComponent.setForeground(Color.red);
                 cellComponent.setFont(new java.awt.Font("Tahoma", 1, 12));
             }
             return cellComponent;

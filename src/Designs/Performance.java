@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.UIManager;
@@ -32,7 +33,7 @@ public class Performance extends javax.swing.JFrame {
         initComponents();
         conn = myCon.ConnecrDb();
         setIconImage(mets.myImage("/Icons/globe.png"));
-
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         AssessmentColors();
         yearBatch();
 
@@ -81,38 +82,6 @@ public class Performance extends javax.swing.JFrame {
 
     }
 
-//    //Returning a single student searching
-//    public void returnSingle() {
-//        String sid = txt_search.getText().trim();
-//
-//        if (txt_search.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(null, "Please enter ID");
-//        } else {
-//
-//            List<Result> result = pro.resultPerformance(sid);
-//            DefaultTableModel tmodel = (DefaultTableModel) resultTable.getModel();
-//            tmodel.setRowCount(0);
-//            Object[] object;
-//            
-//            try {
-//                for (Result res : result) {
-//                    String course = courseName(res.getSubject().toUpperCase());
-//                    double quiz = res.getSclass();
-//                    double exam = res.getExams();
-//                    double total = res.getTotal();
-//                    String grade = res.getGrade();
-//                    String term = res.getTerm();
-//                    String year = res.getAcademic();
-//
-//                    object = new Object[]{course, quiz, exam, total, grade, term, year};
-//                    tmodel.addRow(object);
-//                }
-//
-//            } catch (Exception e) {
-//                JOptionPane.showMessageDialog(null, e);
-//            }
-//        }
-//    }
     public void AssessmentColors() {
         resultTable.getColumnModel().getColumn(0).setCellRenderer(new myCon.CustomRenderer());
         resultTable.getColumnModel().getColumn(1).setCellRenderer(new myCon.CustomRenderer1());
@@ -138,7 +107,6 @@ public class Performance extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        btn_Search = new javax.swing.JButton();
         cmb_Performance = new javax.swing.JComboBox<>();
         cmd_StudentName = new javax.swing.JComboBox<>();
         cmd_StudentID = new javax.swing.JComboBox<>();
@@ -150,15 +118,6 @@ public class Performance extends javax.swing.JFrame {
         setTitle("MONITORING A PARTICULAR STUDENT PERFORMANCE FORM");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Enter Student Name to Search", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 14), new java.awt.Color(0, 102, 0))); // NOI18N
-
-        btn_Search.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btn_Search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/search.png"))); // NOI18N
-        btn_Search.setText("   Search");
-        btn_Search.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_SearchActionPerformed(evt);
-            }
-        });
 
         cmb_Performance.setFont(new java.awt.Font("Agency FB", 0, 24)); // NOI18N
         cmb_Performance.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Year" }));
@@ -198,8 +157,7 @@ public class Performance extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(cmd_StudentID, 0, 231, Short.MAX_VALUE)
-                        .addComponent(cmd_StudentName, 0, 231, Short.MAX_VALUE)
-                        .addComponent(btn_Search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(cmd_StudentName, 0, 231, Short.MAX_VALUE))
                     .addComponent(jLabel1))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -212,11 +170,9 @@ public class Performance extends javax.swing.JFrame {
                 .addComponent(cmd_StudentID, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cmd_StudentName, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(btn_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(308, Short.MAX_VALUE))
         );
 
         resultTable.setFont(new java.awt.Font("Agency FB", 0, 11)); // NOI18N
@@ -290,20 +246,16 @@ public class Performance extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SearchActionPerformed
-        if (cmd_StudentName.getSelectedIndex() == 0 || cmb_Performance.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(null, "Select Required Fields");
-        } else {
-            studentPerformanceDetails(resultTable);
-        }
-    }//GEN-LAST:event_btn_SearchActionPerformed
-
     private void cmb_PerformanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_PerformanceActionPerformed
         studentName(cmb_Performance);
     }//GEN-LAST:event_cmb_PerformanceActionPerformed
 
     private void cmd_StudentNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_StudentNameActionPerformed
-        // TODO add your handling code here:
+        if (cmd_StudentName.getSelectedIndex() <= 0 || cmb_Performance.getSelectedIndex() <= 0) {
+
+        } else {
+            studentPerformanceDetails(resultTable);
+        }
     }//GEN-LAST:event_cmd_StudentNameActionPerformed
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
@@ -349,7 +301,6 @@ public class Performance extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_Search;
     private javax.swing.JComboBox<String> cmb_Performance;
     private javax.swing.JComboBox<String> cmd_StudentID;
     private javax.swing.JComboBox<String> cmd_StudentName;

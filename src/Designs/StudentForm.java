@@ -23,6 +23,7 @@ import java.sql.ResultSet;
 import java.text.DecimalFormat;
 import java.util.List;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -46,7 +47,7 @@ public class StudentForm extends javax.swing.JFrame {
         initComponents();
         setIconImage(mets.myImage("/icons/globe.png"));
 
-        //JOptionPane.showMessageDialog(null, mylogics.pickRandom(1000, 9999));
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         allClassess();
         cmd_StudentID.setVisible(false);
         PerformanceColors();
@@ -93,7 +94,6 @@ public class StudentForm extends javax.swing.JFrame {
     }
 
     public void setStudentPerformance(JComboBox myComboNam) {
-
         int stuid = mylogics.findStudentReport(cmd_StudentName.getSelectedItem().toString().trim(), mylogics.yearID(cmd_Batch.getSelectedItem().toString().trim()));
         int clas = mylogics.classID(cmd_Class.getSelectedItem().toString().trim());
         int aca = mylogics.academicID(cmb_Academic.getSelectedItem().toString().trim());
@@ -116,20 +116,14 @@ public class StudentForm extends javax.swing.JFrame {
         studentPerformanceTable.getColumnModel().getColumn(3).setCellRenderer(new myCon.CustomRenderer3());
         studentPerformanceTable.getColumnModel().getColumn(4).setCellRenderer(new myCon.CustomRenderer4());
         studentPerformanceTable.getColumnModel().getColumn(5).setCellRenderer(new myCon.CustomRenderer5());
-        // studentPerformanceTable.getColumnModel().getColumn(6).setCellRenderer(new myCon.CustomRenderer6());
-        //studentPerformanceTable.getColumnModel().getColumn(7).setCellRenderer(new myCon.CustomRenderer7());
-
         studentPerformanceTable.getTableHeader().setDefaultRenderer(new myCon.HeaderColor());
-
     }
 
     public void BillTableColors() {
         bill_table.getColumnModel().getColumn(0).setCellRenderer(new myCon.CustomRenderer());
         bill_table.getColumnModel().getColumn(1).setCellRenderer(new myCon.CustomRenderer1());
         bill_table.getColumnModel().getColumn(2).setCellRenderer(new myCon.CustomRenderer2());
-
         bill_table.getTableHeader().setDefaultRenderer(new myCon.HeaderColor());
-
     }
 
     public void allConduct() {
@@ -149,7 +143,6 @@ public class StudentForm extends javax.swing.JFrame {
     }
 
     public void sumupBills() {
-
         DecimalFormat df2 = new DecimalFormat("####.###");
         double total = 0;
 
@@ -163,7 +156,6 @@ public class StudentForm extends javax.swing.JFrame {
     }
 
     public void studentTotalMarks() {
-
         DecimalFormat df2 = new DecimalFormat("####.###");
         double total = 0;
 
@@ -177,7 +169,6 @@ public class StudentForm extends javax.swing.JFrame {
     }
 
     public void sumupTermFees() {
-
         DecimalFormat df2 = new DecimalFormat("####.###");
         double total = 0;
 
@@ -259,51 +250,82 @@ public class StudentForm extends javax.swing.JFrame {
             }
 
             if (id == idd) {
-
-                if (pos == 1) {
+                if (pos % 10 == 1) {
                     rpos = pos + "st";
-                } else if (pos == 2) {
+                } else if (pos % 10 == 2) {
                     rpos = pos + "nd";
-                } else if (pos == 3) {
+                } else if (pos % 10 == 3) {
                     rpos = pos + "rd";
                 } else {
                     rpos = pos + "th";
                 }
-
             }
-
             count++;
         }
-
         return rpos;
     }
 
-    public void getingMarks() {
-
+    public String getingMarks(int stuID, int subj) {
         int ter = mylogics.termID(cmd_Term.getSelectedItem().toString().trim());
         int aca = mylogics.academicID(cmb_Academic.getSelectedItem().toString().trim());
         int yer = mylogics.yearID(cmd_Batch.getSelectedItem().toString().trim());
         int clas = mylogics.classID(cmd_Class.getSelectedItem().toString().trim());
 
-        double total = 0;
+        double total = 0, tot = 0;
         int id = 0;
+        int sub = 0, pos = 0, count = 1;
 
         List<Result> result = bmet.returnStudentPosition(clas, aca, yer, ter);
 
+        String rpos = "";
+
         for (Result res : result) {
-            total = res.getTotalResult();
-            id = res.getRid();
-            System.out.println(id + " " + total);
+            sub = res.getSubject_id();
+
+            List<Result> subject = bmet.returnStudentSubject(clas, aca, yer, ter, sub);
+            for (Result r : subject) {
+                total = tot;
+
+                id = r.getStuId();
+
+                tot = r.getTotalResult();
+
+                if (tot > total) {
+                    pos = count;
+                } else if (tot == total) {
+                    pos = pos;
+                    count = pos + 1;
+                } else {
+                    pos = count;
+                }
+
+                if (id == stuID && sub == subj) {
+
+                    if (pos % 10 == 1 && pos != 11) {
+                        rpos = pos + "st";
+                    } else if (pos % 10 == 2) {
+                        rpos = pos + "nd";
+                    } else if (pos % 10 == 3) {
+                        rpos = pos + "rd";
+                    } else {
+                        rpos = pos + "th";
+                    }
+
+                }
+                count++;
+            }
+            count = 0;
+            return rpos;
         }
+        return null;
     }
 
     public void setReportToPrint() {
-
         String term = cmd_Term.getSelectedItem().toString().toUpperCase().trim();
         String academic = cmb_Academic.getSelectedItem().toString().toUpperCase().trim();
         String batch = cmd_Batch.getSelectedItem().toString().toUpperCase().trim();
         String stuName = cmd_StudentName.getSelectedItem().toString().toUpperCase().trim();
-        String stuClass = cmd_Class.getSelectedItem().toString().toUpperCase().trim();
+        String stuClass = mets.capitalizer(cmd_Class.getSelectedItem().toString().trim());
 
         int ter = mylogics.termID(cmd_Term.getSelectedItem().toString().trim());
         int aca = mylogics.academicID(cmb_Academic.getSelectedItem().toString().trim());
@@ -325,7 +347,7 @@ public class StudentForm extends javax.swing.JFrame {
         String conduct = "", attitude = "", interest = "", tRemarks = "", hRemarks = "";
         double arrears = 0.0, totalFees = 0.0;
         int aten = 0, outof = 0;
-        String promoted = "", prom = "";
+        String promoted = "", prom = "", con = "", att = "", inti = "", teacher = "", head = "";
 
         byte[] imagedata = null;
 
@@ -354,10 +376,40 @@ public class StudentForm extends javax.swing.JFrame {
             outof = info.getOutof();
             promoted = mylogics.returnClassName(info.getPromoted());
 
+            if (attitude == null) {
+                att = "----";
+            } else {
+                att = mets.capitalizer(attitude);
+            }
+
+            if (conduct == null) {
+                con = "----";
+            } else {
+                con = mets.capitalizer(conduct);
+            }
+
+            if (interest == null) {
+                inti = "----";
+            } else {
+                inti = mets.capitalizer(interest);
+            }
+
+            if (tRemarks == null) {
+                teacher = "----";
+            } else {
+                teacher = mets.capitalizer(tRemarks);
+            }
+
+            if (hRemarks == null) {
+                head = "----";
+            } else {
+                head = mets.capitalizer(hRemarks);
+            }
+
             if (promoted == null) {
                 prom = "----";
             } else {
-                prom = promoted;
+                prom = mets.capitalizer(promoted);
             }
         }
 
@@ -369,11 +421,12 @@ public class StudentForm extends javax.swing.JFrame {
             //String imgsrc = StudentForm.class.getClassLoader().getSystemResource("book.jpg").toString();
             String img = (new File(url.toURI())).getParentFile().getPath();
             //String myImg = new File("Icons/book.jpg").getAbsolutePath();
-            File myImg = new File(img, "book.jpg");
+            File myImg = new File(img, "Icons/book.jpg");
 
             FileWriter writer = new FileWriter(doc);
 
-            writer.write("<img src='" + myImg + "' alt='Logo' width='50px' height='50px' style='float:left'/>"
+            writer.write("<html><body><img src=\"" + myImg + "\">"
+                    + "<img src='" + myImg + "' width='50px' height='50px' />"
                     + "<h2 style='text-align: center; margin-bottom:-20px; margin-top:-20px;'>" + schoolName.toUpperCase() + "</h2>"
                     + "<h4 style='text-align: center;  margin-bottom:-20px; margin-top:-20px;'>" + address.toUpperCase() + " " + schoolLocation.toUpperCase() + "</h4>"
                     + "<h4 style='text-align: center;  margin-bottom:-20px; margin-top:-20px;'>" + contact + "</h4>"
@@ -406,8 +459,9 @@ public class StudentForm extends javax.swing.JFrame {
                     + "<th style='text-align: left;'>Subject</th>"
                     + "<th style='text-align: left;' width='80px'>Class (50%)</th>"
                     + "<th style='text-align: left;' width='85px'>Exams (50%)</th>"
-                    + "<th style='text-align: left;' width='95px'>Total (100%)</th>"
+                    + "<th style='text-align: left;' width='85px'>Total (100%)</th>"
                     + "<th style='text-align: left;'>Grd</th>"
+                    + "<th style='text-align: left;'>Pos</th>"
                     + "<th style='text-align: left;'>Remarks</th>"
                     + "</tr><hr>"
                     + "</thead><tbody style='font-size:9px>";
@@ -420,13 +474,60 @@ public class StudentForm extends javax.swing.JFrame {
                 totExam += res.getExams();
                 totalTot += res.getTotalResult();
 
+                int subj = res.getSubject_id();
+
+                double total = 0, tot = 0;
+                int id = 0;
+                int sub = 0, pos = 0, count = 1;
+
+                List<Result> result1 = bmet.returnStudentPosition(clas, aca, yer, ter);
+
+                String rpos = "";
+
+                for (Result res1 : result1) {
+                    sub = res1.getSubject_id();
+
+                    List<Result> subject = bmet.returnStudentSubject(clas, aca, yer, ter, sub);
+                    for (Result r : subject) {
+                        total = tot;
+                        id = r.getStuId();
+                        tot = r.getTotalResult();
+
+                        if (tot > total) {
+                            pos = count;
+                        } else if (tot == total) {
+                            pos = pos;
+                            count = pos + 1;
+                        } else {
+                            pos = count;
+                        }
+
+                        if (id == sid && sub == subj) {
+
+                            if (pos % 10 == 1 && pos != 11) {
+                                rpos = pos + "st";
+                            } else if (pos % 10 == 2) {
+                                rpos = pos + "nd";
+                            } else if (pos % 10 == 3) {
+                                rpos = pos + "rd";
+                            } else {
+                                rpos = pos + "th";
+                            }
+
+                        }
+                        count++;
+                    }
+                    count = 1;
+                }
+
                 val += "<tr style='padding-top:-120px; padding-bottom:-120px;'>"
-                        + "<td style='text-align: left; width:260px'>" + mylogics.returnSubjectName(res.getSubject_id()) + "</td>"
+                        + "<td style='text-align: left; width:260px'>" + mets.capitalizer(mylogics.returnSubjectName(res.getSubject_id())) + "</td>"
                         + "<td style='text-align: left; width:20px; color:blue'>" + res.getAssessment() + "</td>"
                         + "<td style='text-align: left; color:blue; width:20px'>" + res.getExams() + "</td>"
                         + "<td style='text-align: left; color:red; width:20px'>" + res.getTotalResult() + "</td>"
-                        + "<td style='text-align: left; color:blue; width:10px'>" + res.getGrade() + "</td>"
-                        + "<td style='text-align: left; width:70px; color:red'>" + mylogics.returnRemarksOnID(res.getRemarks()) + "</td>";
+                        + "<td style='text-align: left; color:red; width:10px'>" + res.getGrade() + "</td>"
+                        + "<td style='text-align: left; color:blue; width:20px'>" + rpos + "</td>"
+                        + "<td style='text-align: left; width:70px; color:blue'>" + mets.capitalizer(mylogics.returnRemarksOnID(res.getRemarks())) + "</td>";
 
             };
 
@@ -450,11 +551,11 @@ public class StudentForm extends javax.swing.JFrame {
                     + "</tr>"
                     + "<tr>"
                     + "<td> Conduct : </td>"
-                    + "<td style='border-bottom:1px dotted black; text-align:center; padding-bottom:-80px; color:blue'>" + conduct + "</td>"
+                    + "<td style='border-bottom:1px dotted black; text-align:center; padding-bottom:-80px; color:blue'>" + con + "</td>"
                     + "<td> Interest : </td>"
-                    + "<td style='border-bottom:1px dotted black; text-align:center; padding-bottom:-80px; width:50px; color:blue'>" + interest + "</td>"
+                    + "<td style='border-bottom:1px dotted black; text-align:center; padding-bottom:-80px; width:50px; color:blue'>" + inti + "</td>"
                     + "<td> Attitude : </td> "
-                    + "<td style='border-bottom:1px dotted black; text-align:center; padding-bottom:-80px; color:blue'>" + attitude + "</td>"
+                    + "<td style='border-bottom:1px dotted black; text-align:center; padding-bottom:-80px; color:blue'>" + att + "</td>"
                     + "</tr>"
                     + "</tbody>"
                     + "</table>";
@@ -464,11 +565,11 @@ public class StudentForm extends javax.swing.JFrame {
                     + "<tbody>"
                     + "<tr>"
                     + "<td> Class Teacher's Remarks : </td>"
-                    + "<td style='border-bottom:1px dotted black; text-align:center; padding-bottom:-80px; color:blue'>" + tRemarks + "</td>"
+                    + "<td style='border-bottom:1px dotted black; text-align:center; padding-bottom:-80px; color:blue'>" + teacher + "</td>"
                     + "</tr>"
                     + "<tr>"
                     + "<td> Head Teacher's Remarks : </td>"
-                    + "<td style='border-bottom:1px dotted black; text-align:center; padding-bottom:-80px; color:blue'>" + hRemarks + "</td>"
+                    + "<td style='border-bottom:1px dotted black; text-align:center; padding-bottom:-80px; color:blue'>" + head + "</td>"
                     + "</tr>"
                     + "<tr>"
                     + "<td> Headmaster's Signature : </td>"
@@ -494,7 +595,7 @@ public class StudentForm extends javax.swing.JFrame {
                 schoolfees += bil.getAmount();
 
                 val += "<tr>"
-                        + "<td>" + bil.getBillItem() + "</td>"
+                        + "<td>" + mets.capitalizer(bil.getBillItem()) + "</td>"
                         + "<td>" + "GHC " + bil.getAmount() + "</td>"
                         + "</tr>";
             };
@@ -505,7 +606,8 @@ public class StudentForm extends javax.swing.JFrame {
                     + "<td><b>" + "GHC " + totalbil + "</b></td>"
                     + "</tr>"
                     + "</tbody>"
-                    + "</table";
+                    + "</table"
+                    + "</body></html>";
 
             writer.write(val);
             writer.close();
@@ -538,7 +640,6 @@ public class StudentForm extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         cmd_StudentName = new javax.swing.JComboBox<>();
         cmd_StudentID = new javax.swing.JComboBox<>();
-        btn_search = new javax.swing.JButton();
         lbl_id = new javax.swing.JLabel();
         txt_totalMarks = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -576,20 +677,20 @@ public class StudentForm extends javax.swing.JFrame {
 
         studentPerformanceTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Subjects", "Class Score", "Exams Score", "Total", "Grd", "Remarks"
+                "Subjects", "Class Score", "Exams Score", "Total", "Grd", "Pos", "Remarks"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false, false
+                true, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -610,6 +711,8 @@ public class StudentForm extends javax.swing.JFrame {
             studentPerformanceTable.getColumnModel().getColumn(3).setPreferredWidth(30);
             studentPerformanceTable.getColumnModel().getColumn(4).setResizable(false);
             studentPerformanceTable.getColumnModel().getColumn(4).setPreferredWidth(30);
+            studentPerformanceTable.getColumnModel().getColumn(5).setResizable(false);
+            studentPerformanceTable.getColumnModel().getColumn(6).setResizable(false);
         }
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Select Term Info", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 15), new java.awt.Color(51, 0, 0))); // NOI18N
@@ -683,15 +786,6 @@ public class StudentForm extends javax.swing.JFrame {
         cmd_StudentID.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         cmd_StudentID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        btn_search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/search.png"))); // NOI18N
-        btn_search.setText("Search");
-        btn_search.setToolTipText("Click to search ");
-        btn_search.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_searchActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -699,18 +793,13 @@ public class StudentForm extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(lbl_id, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txt_totalMarks, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_search))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmd_StudentID, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmd_StudentName, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(lbl_id, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txt_totalMarks, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmd_StudentID, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmd_StudentName, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -719,17 +808,10 @@ public class StudentForm extends javax.swing.JFrame {
                 .addComponent(cmd_StudentID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cmd_StudentName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(10, 10, 10)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(btn_search)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(txt_totalMarks, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(lbl_id, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txt_totalMarks, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                    .addComponent(lbl_id, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -1046,20 +1128,14 @@ public class StudentForm extends javax.swing.JFrame {
     }//GEN-LAST:event_cmd_BatchActionPerformed
 
     private void cmd_StudentNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_StudentNameActionPerformed
-
-    }//GEN-LAST:event_cmd_StudentNameActionPerformed
-
-    private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
         if (cmd_StudentName.getSelectedIndex() <= 0) {
-            JOptionPane.showMessageDialog(null, "Please Select Name");
         } else {
             setEmpty();
             setStudentPerformance(cmd_StudentName);
             aStudentTermInfo();
             studentTotalMarks();
-            // getingMarks();
         }
-    }//GEN-LAST:event_btn_searchActionPerformed
+    }//GEN-LAST:event_cmd_StudentNameActionPerformed
 
     private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
         saveTermInfo();
@@ -1085,7 +1161,7 @@ public class StudentForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_updateActionPerformed
 
     private void btn_previewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_previewActionPerformed
-        ReceiptForm rcp = new ReceiptForm();
+        ReceiptForm rcp = new ReceiptForm(this, true);
         setReportToPrint();
         rcp.setVisible(true);
         ReceiptForm.btn_Print.setVisible(true);
@@ -1133,7 +1209,6 @@ public class StudentForm extends javax.swing.JFrame {
     private javax.swing.JButton btn_back;
     private javax.swing.JButton btn_preview;
     private javax.swing.JButton btn_save;
-    private javax.swing.JButton btn_search;
     private javax.swing.JButton btn_update;
     private javax.swing.JComboBox<String> cmb_Academic;
     private javax.swing.JComboBox<String> cmb_attendance;

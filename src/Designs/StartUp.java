@@ -5,6 +5,7 @@ import Connects.billMethods;
 import Connects.logicHandler;
 import Connects.myCon;
 import Connects.myLogics;
+import Splash.SplashScreen;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,7 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-public class main {
+public class StartUp {
 
     myCon mets = new myCon();
     Connection conn = null;
@@ -34,9 +35,11 @@ public class main {
     logicHandler lhand = new logicHandler();
     static billMethods bmet = new billMethods();
 
-    public static void main(String args[]) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
-        UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
-
+//    public static void main(String args[]) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
+//        UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
+//        returnShow();
+//    }
+    public void returnShow() {
         LoginPage login = new LoginPage();
 
         DateFormat format = new SimpleDateFormat("MMMM EE dd, yyyy", Locale.ENGLISH);
@@ -66,27 +69,26 @@ public class main {
         } catch (ParseException ex) {
             login.setVisible(true);
         }
-
     }
 
-    public static String returnDate() {
+    public String returnDate() {
         String endDate = bmet.endDate();
         return endDate;
     }
 
-    public static int returnRegister() {
+    public int returnRegister() {
         int register = bmet.returnRegister();
         return register;
     }
 
-    public static String returnCurrentDate() {
+    public String returnCurrentDate() {
         DateFormat dateFormat = new SimpleDateFormat("MMMM EE dd, yyyy");
         Date date = new Date();
         String curDate = dateFormat.format(date);
         return curDate;
     }
 
-    public static String addMonth(int i) {
+    public String addMonth(int i) {
         DateFormat dateFormat = new SimpleDateFormat("MMMM EE dd, yyyy");
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.MONTH, i);
@@ -94,7 +96,7 @@ public class main {
         return result;
     }
 
-    public static void showLogin() {
+    public void showLogin() {
         LoginPage login = new LoginPage();
         login.setVisible(true);
         login.txt_username.setEnabled(false);

@@ -22,6 +22,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -67,6 +69,7 @@ public class AssessmentForm extends javax.swing.JFrame {
         conn = myCon.ConnecrDb();
 
         //setExtendedState(MAXIMIZED_BOTH);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
 
         setIconImage(mets.myImage("/icons/globe.png"));
@@ -79,6 +82,8 @@ public class AssessmentForm extends javax.swing.JFrame {
         lbl_result.setVisible(false);
         lbl_assess.setVisible(false);
         lbl_exams.setVisible(false);
+
+        progress_save.setVisible(false);
     }
 
     public void AssessmentColors() {
@@ -472,23 +477,9 @@ public class AssessmentForm extends javax.swing.JFrame {
             for (int i = 0; i < listAssessment.size(); i++) {
                 Assessment ass = new Assessment();
                 ass = listAssessment.get(i);
-
-                try {
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, e);
-                } finally {
-                    try {
-                        rs.close();
-                        pst.close();
-                    } catch (Exception e) {
-                    }
-                }
                 pro.saveAssessment(ass);
             }
 
-        } else if (listAssessment.size() == 0) {
-            Assessment assess = new Assessment(stuID, terID, acaID, subjID, yearID, clasID, ctext, others, total, fpercent);
-            pro.saveAssessment(assess);
         } else {
 
             for (int i = 0; i < listAssessment.size(); i++) {
@@ -542,9 +533,6 @@ public class AssessmentForm extends javax.swing.JFrame {
                 pro.saveExams(exe);
             }
 
-        } else if (listExams.size() == 0) {
-            Exams exams = new Exams(stuID, terID, acaID, subjID, yearID, clasID, ctext, others, total, fpercent);
-            pro.saveExams(exams);
         } else {
 
             for (int ex = 0; ex < listExams.size(); ex++) {
@@ -592,20 +580,36 @@ public class AssessmentForm extends javax.swing.JFrame {
         total = Double.parseDouble(t3);
 
         if (txt_fpercent.getText().isEmpty() && txt_spercent.getText().isEmpty() && txt_GrandTotal.getText().isEmpty()) {
+
             for (int ex = 0; ex < listResult.size(); ex++) {
-                Result res = new Result();
-                res = listResult.get(ex);
-                pro.saveResult(res);
+                try {
+                    Result res = new Result();
+                    res = listResult.get(ex);
+                    pro.saveResult(res);
+                    progress_save.setValue(ex);
+                    progress_save.setMaximum(listResult.size());
+                    Thread.sleep(50);
+                } catch (InterruptedException ex1) {
+                    Logger.getLogger(AssessmentForm.class.getName()).log(Level.SEVERE, null, ex1);
+                }
             }
-        } else if (listResult.size() == 0) {
-            Result result = new Result(stuID, terID, acaID, subjID, yearID, clasID, others, ctext, total, grade, remarksid);
-            pro.saveResult(result);
+
         } else {
+
             for (int ex = 0; ex < listResult.size(); ex++) {
-                Result res = new Result();
-                res = listResult.get(ex);
-                pro.saveResult(res);
+                try {
+                    Result res = new Result();
+                    res = listResult.get(ex);
+                    pro.saveResult(res);
+
+                    progress_save.setValue(ex);
+                    progress_save.setMaximum(listResult.size() + 1);
+                    Thread.sleep(50);
+                } catch (InterruptedException ex1) {
+                    Logger.getLogger(AssessmentForm.class.getName()).log(Level.SEVERE, null, ex1);
+                }
             }
+
             Result result = new Result(stuID, terID, acaID, subjID, yearID, clasID, others, ctext, total, grade, remarksid);
             pro.saveResult(result);
         }
@@ -623,15 +627,127 @@ public class AssessmentForm extends javax.swing.JFrame {
         yearID = mylogics.yearID(cmd_Batch.getSelectedItem().toString());
         clasID = mylogics.classID(cmd_Class.getSelectedItem().toString());
 
+        int remarksid = mylogics.returnRemarksID(lbl_Grade1.getText());
+
+        double clastext = 0, otherscors = 0, totalQuize = 0, fiftyQuize = 0;
+        double exeObj = 0, oexeTheory = 0, exeTotal = 0, exeFiftyPercent = 0;
+        double fifPercentQ = 0, fifPercentE = 0, grandTotal = 0, percentf = 0, percentff = 0;
+
+        String fifPer = txt_fpercent.getText().trim();
+        String sisPer = txt_spercent.getText().trim();
+        String grandTot = txt_GrandTotal.getText().trim();
+        String fGrade = lbl_Grade.getText().trim();
+
+        String eobj = txt_EOBJ.getText().trim();
+        String etheory = txt_Theory.getText().trim();
+        String etot = txt_totalE.getText().trim();
+        String ePercent = txt_spercent.getText().trim();
+
+        String cTest = txt_CTest.getText().trim();
+        String cOther = txt_Others.getText().trim();
+        String ctotQuize = txt_totalQ.getText().trim();
+        String cpercent = txt_fpercent.getText().trim();
+
+        //Conditions on results
+        if (fifPer.isEmpty()) {
+            fifPer = "0";
+        }
+        if (sisPer.isEmpty()) {
+            sisPer = "0";
+        }
+        if (grandTot.isEmpty()) {
+            grandTot = "0";
+        }
+        if (fGrade.isEmpty()) {
+            fGrade = "Not Set";
+        }
+
+        //Conditions on exams
+        if (eobj.isEmpty()) {
+            eobj = "0";
+        }
+        if (etheory.isEmpty()) {
+            etheory = "0";
+        }
+        if (etot.isEmpty()) {
+            etot = "0";
+        }
+        if (ePercent.isEmpty()) {
+            ePercent = "0";
+        }
+
+        //Conditions on assessment or class performance
+        if (cTest.isEmpty()) {
+            cTest = "0";
+        }
+        if (cOther.isEmpty()) {
+            cOther = "0";
+        }
+        if (ctotQuize.isEmpty()) {
+            ctotQuize = "0";
+        }
+        if (cpercent.isEmpty()) {
+            cpercent = "0";
+        }
+
+        //getting results
+        fifPercentQ = Double.parseDouble(fifPer);
+        fifPercentE = Double.parseDouble(sisPer);
+        grandTotal = Double.parseDouble(grandTot);
+
+        //Getting assessment
+        clastext = Double.parseDouble(cTest);
+        otherscors = Double.parseDouble(cOther);
+        totalQuize = Double.parseDouble(ctotQuize);
+        fiftyQuize = Double.parseDouble(cpercent);
+
+        //Getting Exams scores
+        exeObj = Double.parseDouble(eobj);
+        oexeTheory = Double.parseDouble(etheory);
+        exeTotal = Double.parseDouble(etot);
+        exeFiftyPercent = Double.parseDouble(ePercent);
+
         if (mylogics.compareResult(stuID, terID, acaID, subjID, yearID, clasID) == true) {
             JOptionPane.showMessageDialog(null, "Student Assessment Exist");
         } else {
-            saveQuiz();
-            saveExams();
-            saveResult();
-            showInTable();
 
-            JOptionPane.showMessageDialog(null, "Saved");
+            if (listResult.size() <= 0) {
+
+                Exams exams = new Exams(stuID, terID, acaID, subjID, yearID, clasID, exeObj, oexeTheory, exeTotal, exeFiftyPercent);
+                Assessment assess = new Assessment(stuID, terID, acaID, subjID, yearID, clasID, clastext, otherscors, totalQuize, fiftyQuize);
+                Result result = new Result(stuID, terID, acaID, subjID, yearID, clasID, fifPercentE, fifPercentQ, grandTotal, fGrade, remarksid);
+
+                pro.saveResult(result);
+                pro.saveExams(exams);
+                pro.saveAssessment(assess);
+
+                showInTable();
+                JOptionPane.showMessageDialog(null, "Saved");
+            } else {
+                progress_save.setVisible(true);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+
+                            for (int ex = 0; ex < listResult.size(); ex++) {
+                                saveQuiz();
+                                saveExams();
+                                saveResult();
+
+                                if (ex == listResult.size()) {
+                                    showInTable();
+                                    JOptionPane.showMessageDialog(null, "Saved");
+                                    progress_save.setVisible(false);
+                                }
+                            }
+
+                        } catch (Exception e) {
+                        }
+                    }
+                }).start();
+            }
+
         }
     }
 
@@ -850,10 +966,9 @@ public class AssessmentForm extends javax.swing.JFrame {
 
             List<Result> result = mylogics.resultsListToPopulate(mylogics.studentID(id), terID, acaID, subjID, yearID, clasID);
 
-            if (result.size() <= 0) {
-                JOptionPane.showMessageDialog(null, "Assessment not recorded", "NO RESULT", JOptionPane.INFORMATION_MESSAGE);
-            }
-
+//            if (result.size() <= 0) {
+//                JOptionPane.showMessageDialog(null, "Assessment not recorded", "NO RESULT", JOptionPane.INFORMATION_MESSAGE);
+//            }
             for (Result res : result) {
                 lbl_result.setText("" + res.getRid());
                 cmd_StuID.setSelectedItem(mylogics.studentIDAssigned(res.getStuId(), yearID));
@@ -989,7 +1104,7 @@ public class AssessmentForm extends javax.swing.JFrame {
 
     //preview print out
     public void previewPrint() {
-        Receipt rec = new Receipt();
+        Receipt rec = new Receipt(this, true);
         rec.setLocationRelativeTo(this);
         rec.setAlwaysOnTop(true);
         rec.setVisible(true);
@@ -1013,8 +1128,7 @@ public class AssessmentForm extends javax.swing.JFrame {
 
     //Exporting to excel
     public void exportToExcel() {
-        ExcelExportReport eep = new ExcelExportReport();
-        eep.setLocationRelativeTo(this);
+        ExcelExportReport eep = new ExcelExportReport(null, true);
         eep.setVisible(true);
     }
 
@@ -1202,6 +1316,7 @@ public class AssessmentForm extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Assessment_Table = new javax.swing.JTable();
+        progress_save = new javax.swing.JProgressBar();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         exams_Table = new javax.swing.JTable();
@@ -1291,8 +1406,8 @@ public class AssessmentForm extends javax.swing.JFrame {
         jLabel2.setText("Academic Year");
 
         btn_Show.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btn_Show.setForeground(new java.awt.Color(255, 0, 0));
-        btn_Show.setText("Show Records");
+        btn_Show.setForeground(new java.awt.Color(102, 0, 51));
+        btn_Show.setText("Show Assessment");
         btn_Show.setToolTipText("Click to Show list");
         btn_Show.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1946,15 +2061,22 @@ public class AssessmentForm extends javax.swing.JFrame {
             Assessment_Table.getColumnModel().getColumn(7).setPreferredWidth(90);
         }
 
+        progress_save.setForeground(new java.awt.Color(102, 255, 204));
+        progress_save.setToolTipText("");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE)
+            .addComponent(progress_save, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 682, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addComponent(progress_save, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 673, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Result of Exams & Class Performance", jPanel6);
@@ -1991,7 +2113,7 @@ public class AssessmentForm extends javax.swing.JFrame {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 91, Short.MAX_VALUE))
+                .addGap(0, 112, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Exams Score", jPanel7);
@@ -2028,7 +2150,7 @@ public class AssessmentForm extends javax.swing.JFrame {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 592, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 90, Short.MAX_VALUE))
+                .addGap(0, 111, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Class Performance", jPanel8);
@@ -2760,6 +2882,7 @@ public class AssessmentForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem menu_Save;
     private javax.swing.JMenuItem menu_Show;
     private javax.swing.JMenuItem menu_Update;
+    private javax.swing.JProgressBar progress_save;
     private javax.swing.JButton search_student_result;
     public static javax.swing.JRadioButton thirtypercent;
     private javax.swing.JTextField txt_CTest;

@@ -36,6 +36,8 @@ public class myLogics {
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
+    
+    billMethods bmets = new billMethods();
 
     int stuID, terID, acaID, subjID, yearID, clasID;
     String t1, t2, t3, t4;
@@ -174,7 +176,7 @@ public class myLogics {
             acade.addElement(aca.getAcademicYear());
         }
     }
-
+    
     //======Term method to decide if it exist ==========
     public boolean returnTerm(String txt) {
         boolean myTerm = false;
@@ -1938,7 +1940,55 @@ public class myLogics {
             String grd = res.getGrade();
             String remarks = returnRemarksOnID(res.getRemarks());
 
-            object = new Object[]{subject, classScore, exams, total, grd, remarks};
+            int subj = res.getSubject_id();
+
+            double total1 = 0, tot = 0;
+            int id = 0;
+            int sub = 0, pos = 0, count = 1;
+
+            List<Result> result1 = bmets.returnStudentPosition(cid, aid, yid, tid);
+
+            String rpos = "";
+
+            for (Result res1 : result1) {
+                sub = res1.getSubject_id();
+
+                List<Result> subject1 = bmets.returnStudentSubject(cid, aid, yid, tid,sub);
+                for (Result r : subject1) {
+                    total1 = tot;
+
+                    id = r.getStuId();
+
+                    tot = r.getTotalResult();
+
+                    if (tot > total1) {
+                        pos = count;
+                    } else if (tot == total1) {
+                        pos = pos;
+                        count = pos + 1;
+                    } else {
+                        pos = count;
+                    }
+
+                    if (id == stuid && sub == subj) {
+
+                        if (pos % 10 == 1 && pos != 11) {
+                            rpos = pos + "st";
+                        } else if (pos % 10 == 2) {
+                            rpos = pos + "nd";
+                        } else if (pos % 10 == 3) {
+                            rpos = pos + "rd";
+                        } else {
+                            rpos = pos + "th";
+                        }
+
+                    }
+                    count++;
+                }
+                count = 1;
+            }
+
+            object = new Object[]{subject, classScore, exams, total, grd, rpos, remarks};
             tmodel.addRow(object);
 
         }

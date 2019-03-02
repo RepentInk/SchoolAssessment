@@ -1,18 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Designs;
 
 import Classes.Student;
 import Connects.ProgramDAO;
+import Connects.myCon;
 import Connects.myLogics;
-import java.awt.Color;
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.List;
-import javax.swing.DefaultComboBoxModel;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -21,18 +19,20 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-/**
- *
- * @author INK
- */
-public class ImportExcel extends javax.swing.JFrame {
+public class ImportExcel extends java.awt.Dialog {
 
     ProgramDAO pro = new ProgramDAO();
     myLogics mylogics = new myLogics();
 
-    public ImportExcel() {
-        initComponents();
+    myCon mets = new myCon();
+    Connection conn = null;
+    ResultSet rs = null;
+    PreparedStatement pst = null;
 
+    public ImportExcel(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+        setIconImage(mets.myImage("/Icons/globe.png"));
         allYears();
         profress_loading.setVisible(false);
     }
@@ -62,85 +62,100 @@ public class ImportExcel extends javax.swing.JFrame {
     public void saveImportDetails() {
 
         String path = txt_import.getText();
-        String Surname, MName, FName, Contact, HTown;
-        int val = 0;
 
         if (path.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Select Excel Sheet of Details to Save");
         } else {
 
             try {
-                FileInputStream file = new FileInputStream(new File(path));
-                XSSFWorkbook workbook = new XSSFWorkbook(file);
-                XSSFSheet sheet = workbook.getSheetAt(0);
-                Row row;
 
-                JOptionPane.showMessageDialog(null, "Wait system is saving data");
+                new Thread(new Runnable() {
 
-                for (int i = 1; i <= sheet.getLastRowNum(); i++) {
-                    row = (Row) sheet.getRow(i); // Getting and casting the row from the sheet
+                    String Surname, MName, FName, Contact, HTown;
+                    int val = 0;
 
-                    String year = cmb_Admitted.getSelectedItem().toString().trim();
-                    int id = Integer.parseInt(stuID.getText().toString());
-                    int completeID = mylogics.yearID(cmb_Admitted.getSelectedItem().toString());
-                    String idd = "";
+                    FileInputStream file = new FileInputStream(new File(path));
+                    XSSFWorkbook workbook = new XSSFWorkbook(file);
+                    XSSFSheet sheet = workbook.getSheetAt(0);
+                    Row row;
 
-                    val = i + i;
+                    @Override
+                    public void run() {
+                        for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+                            row = (Row) sheet.getRow(i); // Getting and casting the row from the sheet
 
-                    if (row.getCell(0) == null) {
-                        Surname = " ";
-                    } else {
-                        Surname = row.getCell(0).getStringCellValue();
+                            String year = cmb_Admitted.getSelectedItem().toString().trim();
+                            int id = Integer.parseInt(stuID.getText().toString());
+                            int completeID = mylogics.yearID(cmb_Admitted.getSelectedItem().toString());
+                            String idd = "";
+
+                            val = i + i;
+
+                            if (row.getCell(0) == null) {
+                                Surname = " ";
+                            } else {
+                                Surname = row.getCell(0).getStringCellValue();
+                            }
+
+                            if (row.getCell(1) == null) {
+                                MName = " ";
+                            } else {
+                                MName = row.getCell(1).toString();
+                            }
+
+                            if (row.getCell(2) == null) {
+                                FName = " ";
+                            } else {
+                                FName = row.getCell(2).toString();
+                            }
+
+                            int con;
+                            if (row.getCell(3) == null) {
+                                Contact = "- -";
+                            } else {
+                                con = (int) row.getCell(3).getNumericCellValue();
+                                Contact = String.valueOf(con);
+                                //Contact = row.getCell(4).toString();
+                            }
+
+                            if (row.getCell(4) == null) {
+                                HTown = " ";
+                            } else {
+                                HTown = row.getCell(4).toString();
+                            }
+                            id++;
+
+                            if (id <= 9) {
+                                idd = "00" + (id);
+                            } else if (id >= 10) {
+                                idd = "0" + (id);
+                            } else if (id >= 100) {
+                                idd = "" + id;
+                            }
+
+                            Student student = new Student(year + (idd), completeID, FName.trim(), MName.trim(), Surname.trim(), Contact.trim(), HTown.trim());
+                            pro.saveStudent(student);
+
+                            if (cmb_Admitted.getSelectedIndex() <= 0) {
+                            } else {
+                                mylogics.totalStudent(stuID, mylogics.yearID(cmb_Admitted.getSelectedItem().toString()));
+                            }
+                            profress_loading.setValue(i);
+                            profress_loading.setMaximum(sheet.getLastRowNum());
+
+                            try {
+                                Thread.sleep(50);
+                            } catch (InterruptedException ex) {
+                                JOptionPane.showMessageDialog(null, ex);
+                            }
+
+                            if (i == sheet.getLastRowNum()) {
+                                JOptionPane.showMessageDialog(null, "Students records is saved");
+                                dispose();
+                            }
+                        }
                     }
-
-                    if (row.getCell(1) == null) {
-                        MName = " ";
-                    } else {
-                        MName = row.getCell(1).toString();
-                    }
-
-                    if (row.getCell(2) == null) {
-                        FName = " ";
-                    } else {
-                        FName = row.getCell(2).toString();
-                    }
-
-                    int con;
-                    if (row.getCell(3) == null) {
-                        Contact = "- -";
-                    } else {
-                        con = (int) row.getCell(3).getNumericCellValue();
-                        Contact = String.valueOf(con);
-                        //Contact = row.getCell(4).toString();
-                    }
-
-                    if (row.getCell(4) == null) {
-                        HTown = " ";
-                    } else {
-                        HTown = row.getCell(4).toString();
-                    }
-                    id++;
-                    
-                    if(id <= 9){
-                      idd = "00" + (id);
-                    }else if(id >= 10 ){
-                      idd = "0" + (id);
-                    }else if(id >= 100){
-                      idd = "" + id;
-                    }
-
-                    Student student = new Student(year + (idd), completeID, FName.trim(), MName.trim(), Surname.trim(), Contact.trim(), HTown.trim());
-                    pro.saveStudent(student);
-                    
-                    if (cmb_Admitted.getSelectedIndex() <= 0) {
-                    } else {
-                        mylogics.totalStudent(stuID, mylogics.yearID(cmb_Admitted.getSelectedItem().toString()));
-                    }
-                    profress_loading.setValue(val);
-
-                }
-
-                JOptionPane.showMessageDialog(null, "Students records is saved");
+                }).start();
 
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, ex);
@@ -154,7 +169,6 @@ public class ImportExcel extends javax.swing.JFrame {
      * WARNING: Do NOT modify this code. The content of this method is always
      * regenerated by the Form Editor.
      */
-    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -174,9 +188,13 @@ public class ImportExcel extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("IMPORT DATA FROM EXCEL");
-        setResizable(false);
+        setPreferredSize(new java.awt.Dimension(417, 370));
+        setTitle("REGISTERING BULK STUDENTS");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                closeDialog(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -226,6 +244,7 @@ public class ImportExcel extends javax.swing.JFrame {
 
         profress_loading.setBackground(new java.awt.Color(51, 51, 51));
         profress_loading.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        profress_loading.setForeground(new java.awt.Color(255, 102, 102));
 
         stuID.setEditable(false);
         stuID.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
@@ -273,7 +292,7 @@ public class ImportExcel extends javax.swing.JFrame {
             .addComponent(jSeparator1)
             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
@@ -303,27 +322,32 @@ public class ImportExcel extends javax.swing.JFrame {
                     .addComponent(btn_import))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_Save, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addComponent(profress_loading, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addGap(17, 17, 17)
+                .addComponent(profress_loading, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    /**
+     * Closes the dialog
+     */
+    private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeDialog
+        setVisible(false);
+        dispose();
+    }//GEN-LAST:event_closeDialog
 
     private void btn_importActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_importActionPerformed
         getFilePath();
@@ -339,10 +363,6 @@ public class ImportExcel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_SaveActionPerformed
 
-    private void cmb_AdmittedKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmb_AdmittedKeyPressed
-
-    }//GEN-LAST:event_cmb_AdmittedKeyPressed
-
     private void cmb_AdmittedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_AdmittedActionPerformed
         if (cmb_Admitted.getSelectedIndex() <= 0) {
         } else {
@@ -350,42 +370,28 @@ public class ImportExcel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cmb_AdmittedActionPerformed
 
+    private void cmb_AdmittedKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmb_AdmittedKeyPressed
+
+    }//GEN-LAST:event_cmb_AdmittedKeyPressed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) throws ClassNotFoundException, IllegalAccessException, InstantiationException, UnsupportedLookAndFeelException {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ImportExcel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ImportExcel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ImportExcel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ImportExcel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
+    public static void main(String args[]) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
         UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ImportExcel().setVisible(true);
+                ImportExcel dialog = new ImportExcel(new java.awt.Frame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Save;

@@ -1,17 +1,17 @@
 package Designs;
 
-import Classes.Academic;
 import Classes.Assessment;
 import Classes.Exams;
 import Classes.Result;
 import Classes.School;
-import Classes.SchoolRemarks;
-import Classes.Subject;
-import Classes.Term;
-import Classes.Year;
 import Connects.ProgramDAO;
 import Connects.myCon;
 import Connects.myLogics;
+import static Designs.Receipt.cmb_Academic;
+import static Designs.Receipt.cmb_Subject;
+import static Designs.Receipt.cmd_Batch;
+import static Designs.Receipt.cmd_class;
+import static Designs.Receipt.cmd_term;
 import static Designs.ReceiptForm.pane;
 import java.io.File;
 import java.io.FileWriter;
@@ -20,17 +20,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
-import java.util.Locale;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
 
-public class Receipt extends javax.swing.JFrame {
+public class Receipt extends java.awt.Dialog {
 
     myCon mets = new myCon();
     Connection conn = null;
@@ -40,8 +34,10 @@ public class Receipt extends javax.swing.JFrame {
     ProgramDAO pro = new ProgramDAO();
     myLogics mylogics = new myLogics();
 
-    public Receipt() {
+    public Receipt(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
+
         conn = myCon.ConnecrDb();
         setIconImage(mets.myImage("/Icons/globe.png"));
 
@@ -111,8 +107,8 @@ public class Receipt extends javax.swing.JFrame {
                     + "<h4 style='text-align:center; margin-bottom:-30px; margin-top:-30px;'>END OF " + term.toUpperCase() + " " + academic + " EXAMINATION RESULT</h4><hr>"
                     + "<table><tbody>"
                     + "<tr>"
-                    + "<td style='text-align:left; width:240px'><b>SUBJECT : </b>" + subject.toUpperCase() + "</td>"
-                    + "<td style=''><b>CLASS : </b>" + studentClass.toUpperCase() + "</td>"
+                    + "<td style='text-align:left; width:240px'><b>SUBJECT : </b>" + mets.capitalizer(subject) + "</td>"
+                    + "<td style=''><b>CLASS : </b>" + mets.capitalizer(studentClass) + "</td>"
                     + "</tr>"
                     + "<tr>"
                     + "<td style='text-align:left; width:240px'><b>DATE :</b> " + date.toUpperCase() + " " + time + "</td>"
@@ -159,7 +155,7 @@ public class Receipt extends javax.swing.JFrame {
                         + "<td style='text-align: left; color:red; width:20px'>" + res.getTotalResult() + "</td>"
                         + "<td style='text-align: left; width:9px'>" + res.getGrade() + "</td>"
                         + "<td style='text-align: left; color:red; width:9px'>" + pos + "</td>"
-                        + "<td style='text-align: left; color:blue; width:60px'>" + mylogics.returnRemarksOnID(res.getRemarks()) + "</td>"
+                        + "<td style='text-align: left; color:blue; width:60px'>" + mets.capitalizer(mylogics.returnRemarksOnID(res.getRemarks())) + "</td>"
                         + "</tr>";
                 count++;
             };
@@ -224,8 +220,8 @@ public class Receipt extends javax.swing.JFrame {
                     + "<h4 style='text-align:center;margin-bottom:-30px; margin-top:-30px;'>END OF " + term.toUpperCase() + " " + academic + " EXAMINATION RESULT</h4><hr>"
                     + "<table><tbody>"
                     + "<tr>"
-                    + "<td style='text-align:left; width:240px'><b>SUBJECT : </b>" + subject.toUpperCase() + "</td>"
-                    + "<td style=''><b>CLASS : </b>" + studentClass.toUpperCase() + "</td>"
+                    + "<td style='text-align:left; width:240px'><b>SUBJECT : </b>" + mets.capitalizer(subject) + "</td>"
+                    + "<td style=''><b>CLASS : </b>" + mets.capitalizer(studentClass) + "</td>"
                     + "</tr>"
                     + "<tr>"
                     + "<td style='text-align:left; width:240px'><b>DATE :</b> " + date.toUpperCase() + " " + time + "</td>"
@@ -322,8 +318,8 @@ public class Receipt extends javax.swing.JFrame {
                     + "<h4 style='text-align:center;margin-bottom:-30px; margin-top:-30px;'>END OF " + term + " " + academic + " EXAMINATION RESULT</h4><hr>"
                     + "<table><tbody>"
                     + "<tr>"
-                    + "<td style='text-align:left; width:240px'><b>SUBJECT : </b>" + subject.toUpperCase() + "</td>"
-                    + "<td style=''><b>CLASS : </b>" + studentClass.toUpperCase() + "</td>"
+                    + "<td style='text-align:left; width:240px'><b>SUBJECT : </b>" + mets.capitalizer(subject) + "</td>"
+                    + "<td style=''><b>CLASS : </b>" + mets.capitalizer(studentClass) + "</td>"
                     + "</tr>"
                     + "<tr>"
                     + "<td style='text-align:left; width:240px'><b>DATE :</b> " + date.toUpperCase() + " " + time + "</td>"
@@ -376,7 +372,6 @@ public class Receipt extends javax.swing.JFrame {
      * WARNING: Do NOT modify this code. The content of this method is always
      * regenerated by the Form Editor.
      */
-    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -399,9 +394,12 @@ public class Receipt extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         cmd_term = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("RECEIPT FORM");
-        setResizable(false);
+        setTitle("A REPORT FORM");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                closeDialog(evt);
+            }
+        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Select Requirement Before Printing", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(153, 0, 0))); // NOI18N
 
@@ -577,8 +575,8 @@ public class Receipt extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -592,21 +590,52 @@ public class Receipt extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmd_classActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_classActionPerformed
-        //txt_Q1.setText("" + semID());
-    }//GEN-LAST:event_cmd_classActionPerformed
+    /**
+     * Closes the dialog
+     */
+    private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeDialog
+        setVisible(false);
+        dispose();
+    }//GEN-LAST:event_closeDialog
+
+    private void cmd_BatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_BatchActionPerformed
+        // txt_EQ1.setText("" + batchID());
+    }//GEN-LAST:event_cmd_BatchActionPerformed
+
+    private void btn_ResultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ResultActionPerformed
+        if (cmd_class.getSelectedIndex() == 0 || cmb_Academic.getSelectedIndex() == 0 || cmb_Subject.getSelectedIndex() == 0 || cmd_Batch.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Please select the following Semester, Academic Year, Subject and Batch Before Printing");
+        } else {
+            ReceiptForm rcp = new ReceiptForm(null, true);
+            setPageAssessment();
+            rcp.setLocationRelativeTo(this);
+            rcp.setVisible(true);
+        }
+    }//GEN-LAST:event_btn_ResultActionPerformed
 
     private void cmb_AcademicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_AcademicActionPerformed
         // txt_Q2.setText("" + academicID());
     }//GEN-LAST:event_cmb_AcademicActionPerformed
 
+    private void btn_QuizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_QuizActionPerformed
+
+        if (cmd_class.getSelectedIndex() == 0 || cmb_Academic.getSelectedIndex() == 0 || cmb_Subject.getSelectedIndex() == 0 || cmd_Batch.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Please select the following Semester, Academic Year, Subject and Batch Before Printing");
+        } else {
+            ReceiptForm rcp = new ReceiptForm(null, true);
+            setPageExams();
+            rcp.setLocationRelativeTo(this);
+            rcp.setVisible(true);
+        }
+    }//GEN-LAST:event_btn_QuizActionPerformed
+
     private void cmb_SubjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_SubjectActionPerformed
         // txt_EOBJ.setText("" + courseID());
     }//GEN-LAST:event_cmb_SubjectActionPerformed
 
-    private void cmd_BatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_BatchActionPerformed
-        // txt_EQ1.setText("" + batchID());
-    }//GEN-LAST:event_cmd_BatchActionPerformed
+    private void cmd_classActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_classActionPerformed
+        //txt_Q1.setText("" + semID());
+    }//GEN-LAST:event_cmd_classActionPerformed
 
     private void btn_ReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReportActionPerformed
 
@@ -614,37 +643,13 @@ public class Receipt extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please select the following Semester, Academic Year, Subject and Batch Before Printing");
         } else {
 
-            ReceiptForm rcp = new ReceiptForm();
+            ReceiptForm rcp = new ReceiptForm(null, true);
             setPageExamination();
             rcp.setLocationRelativeTo(this);
             rcp.setVisible(true);
 
         }
     }//GEN-LAST:event_btn_ReportActionPerformed
-
-    private void btn_ResultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ResultActionPerformed
-
-        if (cmd_class.getSelectedIndex() == 0 || cmb_Academic.getSelectedIndex() == 0 || cmb_Subject.getSelectedIndex() == 0 || cmd_Batch.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(null, "Please select the following Semester, Academic Year, Subject and Batch Before Printing");
-        } else {
-            ReceiptForm rcp = new ReceiptForm();
-            setPageAssessment();
-            rcp.setLocationRelativeTo(this);
-            rcp.setVisible(true);
-        }
-    }//GEN-LAST:event_btn_ResultActionPerformed
-
-    private void btn_QuizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_QuizActionPerformed
-
-        if (cmd_class.getSelectedIndex() == 0 || cmb_Academic.getSelectedIndex() == 0 || cmb_Subject.getSelectedIndex() == 0 || cmd_Batch.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(null, "Please select the following Semester, Academic Year, Subject and Batch Before Printing");
-        } else {
-            ReceiptForm rcp = new ReceiptForm();
-            setPageExams();
-            rcp.setLocationRelativeTo(this);
-            rcp.setVisible(true);
-        }
-    }//GEN-LAST:event_btn_QuizActionPerformed
 
     private void lbl_backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_backMouseClicked
         Desktop dec = new Desktop();
@@ -660,40 +665,20 @@ public class Receipt extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Receipt.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Receipt.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Receipt.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Receipt.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
         UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Receipt().setVisible(true);
+                Receipt dialog = new Receipt(new java.awt.Frame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Quiz;

@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -30,7 +31,7 @@ public class AllStudents extends javax.swing.JFrame {
         conn = myCon.ConnecrDb();
 
         setIconImage(mets.myImage("/icons/globe.png"));
-
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         allClassess();
         AssessmentColors();
         lbl_id.setVisible(false);

@@ -829,7 +829,36 @@ public class billMethods {
     public List<Result> returnStudentPosition(int clas, int aca, int yid, int terid) {
         List<Result> resultList = new ArrayList<>();
         try {
-            String sql = "SELECT id,stuID,total,subject_id FROM Result WHERE class_id='" + clas + "' and academic_id='" + aca + "' and year_id='" + yid + "' and term_id='" + terid + "' ORDER BY total";
+            String sql = "SELECT id,stuID,total,subject_id FROM Result WHERE class_id='" + clas + "' and academic_id='" + aca + "' and year_id='" + yid + "' and term_id='" + terid + "' GROUP BY subject_id";
+            pst = conn.prepareStatement(sql);
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+                Result result = new Result();
+                result.setRid(rs.getInt("id"));
+                result.setStuId(rs.getInt("stuID"));
+                result.setSubject_id(rs.getInt("subject_id"));
+                result.setTotalResult(rs.getDouble("total"));
+                resultList.add(result);
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            return null;
+        } finally {
+            try {
+                rs.close();
+                pst.close();
+            } catch (Exception e) {
+            }
+        }
+        return resultList;
+    }
+    
+     public List<Result> returnStudentSubject(int clas, int aca, int yid, int terid, int sub) {
+        List<Result> resultList = new ArrayList<>();
+        try {
+            String sql = "SELECT id,stuID,total FROM Result WHERE class_id='" + clas + "' and academic_id='" + aca + "' and year_id='" + yid + "' and term_id='" + terid + "' and subject_id='"+ sub +"' ORDER BY total DESC";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
 
@@ -1148,4 +1177,7 @@ public class billMethods {
     }
 
     //======== End =======================================
+    
+    
+    
 }

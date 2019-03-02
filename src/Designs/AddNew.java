@@ -23,6 +23,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -54,7 +55,8 @@ public class AddNew extends javax.swing.JFrame {
         setIconImage(mets.myImage("/Icons/globe.png"));
 
         setLocationRelativeTo(null);
-
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        
         lbl_id.setVisible(false);
         lbl_StuID.setVisible(false);
         lbl_sid.setVisible(false);
@@ -3014,9 +3016,8 @@ public class AddNew extends javax.swing.JFrame {
 
     private void btn_ImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ImportActionPerformed
         try {
-            ImportExcel importexcel = new ImportExcel();
+            ImportExcel importexcel = new ImportExcel(this, true);
             importexcel.setVisible(true);
-
         } catch (Exception e) {
         } finally {
             try {
