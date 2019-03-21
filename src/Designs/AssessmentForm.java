@@ -2076,7 +2076,8 @@ public class AssessmentForm extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addComponent(progress_save, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 673, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 618, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Result of Exams & Class Performance", jPanel6);
@@ -2112,8 +2113,8 @@ public class AssessmentForm extends javax.swing.JFrame {
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 112, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 67, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Exams Score", jPanel7);
@@ -2149,8 +2150,8 @@ public class AssessmentForm extends javax.swing.JFrame {
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 592, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 111, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 67, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Class Performance", jPanel8);
@@ -2728,7 +2729,7 @@ public class AssessmentForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void cmd_searchStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_searchStudentActionPerformed
-
+         
     }//GEN-LAST:event_cmd_searchStudentActionPerformed
 
     private void search_student_resultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_student_resultActionPerformed

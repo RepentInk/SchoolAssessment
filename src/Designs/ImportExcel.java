@@ -41,22 +41,18 @@ public class ImportExcel extends java.awt.Dialog {
         mylogics.setYearToCombo(cmb_Admitted, "Select year Batch");
     }
 
-    public String getFilePath() {
+    public void getFilePath() {
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
-        chooser.setDialogTitle("Select the Excel File that contains Student Details");
         File f = chooser.getSelectedFile();
-        String filename = f.getAbsolutePath();
 
-        if (filename.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Select an excel file to import");
-        } else {
-
+        try {
+            String filename = f.getAbsolutePath();
             txt_import.setText(filename);
             profress_loading.setVisible(true);
-            return filename;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Select an excel file to import");
         }
-        return null;
     }
 
     public void saveImportDetails() {
@@ -91,6 +87,12 @@ public class ImportExcel extends java.awt.Dialog {
 
                             val = i + i;
 
+                            if (row.getCell(0).toString().isEmpty() && row.getCell(1).toString().isEmpty() && row.getCell(2).toString().isEmpty() && row.getCell(3).toString().isEmpty() && row.getCell(4).toString().isEmpty()) {
+                                JOptionPane.showMessageDialog(null, "Students records saved");
+                                dispose();
+                                break;
+                            }
+
                             if (row.getCell(0) == null) {
                                 Surname = " ";
                             } else {
@@ -115,7 +117,6 @@ public class ImportExcel extends java.awt.Dialog {
                             } else {
                                 con = (int) row.getCell(3).getNumericCellValue();
                                 Contact = String.valueOf(con);
-                                //Contact = row.getCell(4).toString();
                             }
 
                             if (row.getCell(4) == null) {
@@ -150,9 +151,10 @@ public class ImportExcel extends java.awt.Dialog {
                             }
 
                             if (i == sheet.getLastRowNum()) {
-                                JOptionPane.showMessageDialog(null, "Students records is saved");
+                                JOptionPane.showMessageDialog(null, "Students records saved");
                                 dispose();
                             }
+
                         }
                     }
                 }).start();

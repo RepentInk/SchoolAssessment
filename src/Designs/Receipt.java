@@ -79,11 +79,9 @@ public class Receipt extends java.awt.Dialog {
         String address = "";
         String schoolLocation = "";
 
-        byte[] imagedata = null;
-
-        int count = 1, pos = 0;
+        int count = 1, pos = 0, decide = 0;
         double total, tot = 0;
-        String contact = "";
+        String contact = "", rpos = "";
 
         List<School> school = pro.findAllSchoolDetails();
 
@@ -91,8 +89,8 @@ public class Receipt extends java.awt.Dialog {
             schoolName = res.getSchoolName();
             address = res.getSchoolAddress();
             schoolLocation = res.getSchoolLocation();
-            imagedata = res.getSchoolLogo();
             contact = res.getSchoolContact();
+            decide = res.getPos();
         }
 
         try {
@@ -125,10 +123,17 @@ public class Receipt extends java.awt.Dialog {
                     + "<th style='text-align: left;'>Fullname</th>"
                     + "<th style='text-align: left;'>Class</th>"
                     + "<th style='text-align: left;'>Exams</th>"
-                    + "<th style='text-align: left;'>Total</th>"
-                    + "<th style='text-align: left;'>Grd</th>"
-                    + "<th style='text-align: left;'>Pos</th>"
-                    + "<th style='text-align: left;'>Remarks</th>"
+                    + "<th style='text-align: left;'>Total</th>";
+
+            if (decide == 1) {
+                val += "<th style='text-align: left;'>Pos</th>";
+            } else if (decide == 2) {
+                val += "<th style='text-align: left;'>Grd</th>";
+            } else {
+                val += "<th style='text-align: left;'>Grd</th>"
+                        + "<th style='text-align: left;'>Pos</th>";
+            }
+            val += "<th style='text-align: left;'>Remarks</th>"
                     + "</tr><hr>"
                     + "</thead><tbody style='font-size:7px>";
 
@@ -147,15 +152,33 @@ public class Receipt extends java.awt.Dialog {
                     pos = count;
                 }
 
+                if (pos % 10 == 1 && pos != 11) {
+                    rpos = pos + "st";
+                } else if (pos % 10 == 2 && pos != 12) {
+                    rpos = pos + "nd";
+                } else if (pos % 10 == 3 && pos != 13) {
+                    rpos = pos + "rd";
+                } else {
+                    rpos = pos + "th";
+                }
+
                 val += "<tr>"
                         + "<td style='text-align: left; width:40px'>" + mylogics.studentIDAssigned(res.getStuId(), res.getYear_id()) + "</td>"
                         + "<td style='text-align: left; width:300px'>" + mylogics.findStudentByIDName(res.getStuId(), res.getYear_id()) + "</td>"
                         + "<td style='text-align: left; color:blue; width:20px'>" + res.getAssessment() + "</td>"
                         + "<td style='text-align: left; color:blue; width:20px'>" + res.getExams() + "</td>"
-                        + "<td style='text-align: left; color:red; width:20px'>" + res.getTotalResult() + "</td>"
-                        + "<td style='text-align: left; width:9px'>" + res.getGrade() + "</td>"
-                        + "<td style='text-align: left; color:red; width:9px'>" + pos + "</td>"
-                        + "<td style='text-align: left; color:blue; width:60px'>" + mets.capitalizer(mylogics.returnRemarksOnID(res.getRemarks())) + "</td>"
+                        + "<td style='text-align: left; color:red; width:20px'>" + res.getTotalResult() + "</td>";
+
+                if (decide == 1) {
+                    val += "<td style='text-align: left; color:blue; width:20px'>" + rpos + "</td>";
+                } else if (decide == 2) {
+                    val += "<td style='text-align: left; color:black; width:10px'>" + res.getGrade() + "</td>";
+                } else {
+                    val += "<td style='text-align: left; color:black; width:10px'>" + res.getGrade() + "</td>"
+                            + "<td style='text-align: left; color:blue; width:20px'>" + rpos + "</td>";
+                }
+
+                val += "<td style='text-align: left; color:blue; width:60px'>" + mets.capitalizer(mylogics.returnRemarksOnID(res.getRemarks())) + "</td>"
                         + "</tr>";
                 count++;
             };
@@ -196,15 +219,12 @@ public class Receipt extends java.awt.Dialog {
         String schoolLocation = "";
         String contact = "";
 
-        byte[] imagedata = null;
-
         List<School> school = pro.findAllSchoolDetails();
 
         for (School res : school) {
             schoolName = res.getSchoolName();
             address = res.getSchoolAddress();
             schoolLocation = res.getSchoolLocation();
-            imagedata = res.getSchoolLogo();
             contact = res.getSchoolContact();
         }
 
@@ -294,15 +314,12 @@ public class Receipt extends java.awt.Dialog {
         String schoolLocation = "";
         String contact = "";
 
-        byte[] imagedata = null;
-
         List<School> school = pro.findAllSchoolDetails();
 
         for (School res : school) {
             schoolName = res.getSchoolName();
             address = res.getSchoolAddress();
             schoolLocation = res.getSchoolLocation();
-            imagedata = res.getSchoolLogo();
             contact = res.getSchoolContact();
         }
 

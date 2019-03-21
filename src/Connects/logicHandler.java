@@ -15,6 +15,7 @@ import Designs.Desktop;
 import Designs.RegisterForm;
 import Designs.LoginPage;
 import java.awt.Color;
+import java.awt.Dialog;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -276,19 +277,43 @@ public class logicHandler {
 
             String tRemarks = tremarks.getText().trim();
             String hRemarks = hremark.getText().trim();
-            double balance = Double.parseDouble(balan.getText().trim());
-            double totalFees = Double.parseDouble(totalf.getText().toString());
-
+           
             int aten = Integer.parseInt(attend.getSelectedItem().toString());
             int outf = Integer.parseInt(outof.getSelectedItem().toString());
             int prom = mylogics.classID(promote.getSelectedItem().toString());
 
-            double mark = Double.parseDouble(marks.getText().trim());
-
             boolean exist = bmet.exitTermInfo(cd, aca, yd, sid, term);
+            
+            String mks = marks.getText().trim();
+            String balanc = balan.getText().trim();
+            String tot = totalf.getText().trim();
+
+            String mmks = "", bal = "", tota = "";
+            
+            if (mks == "") {
+                mmks = "0";
+            } else {
+                mmks = mks;
+            }
+
+            if (balanc == "") {
+                bal = "0";
+            } else {
+                bal = balanc;
+            }
+
+            if (tot == "") {
+                tota = "0";
+            } else {
+                tota = tot;
+            }
+
+            double totalFees = Double.parseDouble(tota);
+            double balance = Double.parseDouble(bal);
+            double mark = Double.parseDouble(mmks);
 
             if (exist == true) {
-                JOptionPane.showMessageDialog(null, "Term Info on select student already exist");
+                JOptionPane.showMessageDialog(null, "Term Info on selected student already exist");
             } else {
                 TermInfo terminfo = new TermInfo(cd, aca, yd, sid, atitude, conduct, interest, term, tRemarks, hRemarks, balance, totalFees, aten, outf, prom, mark);
                 bmet.saveTermInfo(terminfo);
@@ -307,15 +332,39 @@ public class logicHandler {
 
             String tRemarks = tremarks.getText().trim();
             String hRemarks = hremark.getText().trim();
-            double balance = Double.parseDouble(balan.getText().trim());
-            double totalFees = Double.parseDouble(totalf.getText().toString());
             int idd = Integer.parseInt(id.getText().toString());
 
             int atten = Integer.parseInt(attend.getSelectedItem().toString());
             int outof = Integer.parseInt(outF.getSelectedItem().toString());
             int promote = mylogics.classID(promoted.getSelectedItem().toString());
 
-            double mark = Double.parseDouble(marks.getText().trim());
+            String mks = marks.getText().trim();
+            String balanc = balan.getText().trim();
+            String tot = totalf.getText().toString();
+
+            String mmks = "", bal = "", tota = "";
+            
+            if (mks == "") {
+                mmks = "0";
+            } else {
+                mmks = mks;
+            }
+
+            if (balanc == "") {
+                bal = "0";
+            } else {
+                bal = balanc;
+            }
+
+            if (tot == "") {
+                tota = "0";
+            } else {
+                tota = tot;
+            }
+
+            double totalFees = Double.parseDouble(tota);
+            double balance = Double.parseDouble(bal);
+            double mark = Double.parseDouble(mmks);
 
             TermInfo terminfo = new TermInfo(atitude, conduct, interest, tRemarks, hRemarks, balance, totalFees, atten, outof, promote, mark);
             bmet.updateTermInfo(terminfo, idd);
@@ -478,8 +527,8 @@ public class logicHandler {
 
     //========== End Here ======================================
     //========= RegisterForm Method ================================
-    public void saveRegister(JFormattedTextField contact, JTextField code, JFrame f1) {
-
+    public void saveRegister(JFormattedTextField contact, JTextField code, Dialog f1) {
+        LoginPage log = new LoginPage();
         String con = contact.getText();
         String cod = code.getText();
 
@@ -489,9 +538,9 @@ public class logicHandler {
             registered = 1;
             Register reg = new Register(con, registered);
             bmet.saveRegister(reg);
-            loginPage();
             f1.dispose();
-
+            loginPage();
+            
         } else if (cod.equalsIgnoreCase("123DH-WEHD2-90D09-NMH23")) {
             registered = 1;
             Register reg = new Register(con, registered);
@@ -552,7 +601,7 @@ public class logicHandler {
             String status = "";
 
             if (decide == 0) {
-                status = "STOPPED";
+                status = "..STOPPED..".toLowerCase();
             } else if (decide == 1) {
                 status = "PRESENT";
             }
@@ -609,9 +658,74 @@ public class logicHandler {
         }
 
         Student student = new Student(yer, fname, mname, sname, Contact, htown, status);
-        
+
         bmet.updateStudent(student, id, stuid);
     }
 
     //=================End==========================================
+    //================ Showing student total marks =================
+    public void studentMarks(JTable resTable, int tid, int aid, int yid, int cid) {
+        DefaultTableModel tmodel = (DefaultTableModel) resTable.getModel();
+        tmodel.setRowCount(0);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                int count = 1, pos = 0;
+                double total, tot = 0;
+
+                Object[] object;
+
+                String position = "";
+
+                List<TermInfo> info = bmet.studentTotalMarks(cid, aid, tid, yid);
+
+                if (info.size() <= 0) {
+                    JOptionPane.showMessageDialog(null, "No record added yet");
+                }
+
+                try {
+
+                    for (TermInfo inf : info) {
+                        total = tot;
+
+                        String studentid = mylogics.studentIDAssigned(inf.getStuID(), inf.getYerID());
+                        String fullname = mylogics.findStudentByIDName(inf.getStuID(), inf.getYerID());
+                        tot = inf.getTotalMarks();
+
+                        if (tot > total) {
+                            pos = count;
+                        } else if (tot == total) {
+                            pos = pos;
+                            count = pos + 1;
+                        } else {
+                            pos = count;
+                        }
+
+                        if (pos % 10 == 1 && pos != 11) {
+                            position = pos + "st";
+                        } else if (pos % 10 == 2) {
+                            position = pos + "nd";
+                        } else if (pos % 10 == 3) {
+                            position = pos + "rd";
+                        } else {
+                            position = pos + "th";
+                        }
+
+                        object = new Object[]{studentid, fullname, tot, position};
+                        tmodel.addRow(object);
+
+                        count++;
+                    }
+
+                    Thread.sleep(50);
+                } catch (InterruptedException ex) {
+
+                }
+            }
+        }).start();
+    }
+
+    //================ End =========================================
 }

@@ -137,10 +137,10 @@ public class AllStudents extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Agency FB", 1, 15)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Agency FB", 1, 20)); // NOI18N
         jLabel2.setText("First Name");
 
-        jLabel3.setFont(new java.awt.Font("Agency FB", 1, 15)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Agency FB", 1, 20)); // NOI18N
         jLabel3.setText("Middle Name");
 
         txt_MName.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
@@ -155,7 +155,7 @@ public class AllStudents extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Agency FB", 1, 15)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Agency FB", 1, 20)); // NOI18N
         jLabel5.setText("Surname");
 
         txt_SName.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
@@ -170,7 +170,7 @@ public class AllStudents extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("Agency FB", 1, 15)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Agency FB", 1, 20)); // NOI18N
         jLabel7.setText("Contact");
 
         try {
@@ -190,7 +190,7 @@ public class AllStudents extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Agency FB", 1, 15)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Agency FB", 1, 20)); // NOI18N
         jLabel8.setText("Hometown");
 
         txt_HTown.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
@@ -205,21 +205,21 @@ public class AllStudents extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Agency FB", 1, 20)); // NOI18N
         jLabel1.setText("Change Year Batch");
 
         year_batch.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         year_batch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jLabel6.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Agency FB", 1, 20)); // NOI18N
         jLabel6.setText("Status");
 
         buttonGroup1.add(present);
-        present.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
+        present.setFont(new java.awt.Font("Agency FB", 1, 16)); // NOI18N
         present.setText("Present");
 
         buttonGroup1.add(stopped);
-        stopped.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
+        stopped.setFont(new java.awt.Font("Agency FB", 1, 16)); // NOI18N
         stopped.setText("Stopped");
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/update.png"))); // NOI18N
@@ -230,7 +230,7 @@ public class AllStudents extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Agency FB", 1, 20)); // NOI18N
         jLabel9.setText("Student ID");
 
         lbl_stuID.setBackground(new java.awt.Color(255, 255, 255));
@@ -309,7 +309,7 @@ public class AllStudents extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lbl_stuID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE))
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)

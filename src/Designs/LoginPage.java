@@ -8,6 +8,9 @@ import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -30,22 +33,30 @@ public class LoginPage extends javax.swing.JFrame {
 
         lbl_register.setVisible(false);
         lbl_reg.setVisible(false);
+        
+        jLabel4.setText("All Right Reserved @ Trinity " + returnYear());
     }
 
     public void showSignUpPage() {
-        SignupPage sup = new SignupPage();
+        SignupPage sup = new SignupPage(this, true);
         sup.setVisible(true);
-        this.dispose();
     }
 
     public void showRegisterForm() {
-        RegisterForm regf = new RegisterForm();
+        RegisterForm regf = new RegisterForm(this, true);
         regf.setVisible(true);
         this.dispose();
     }
 
     public void login() {
         lhand.getLogin(txt_username, txt_password, this);
+    }
+
+    public String returnYear() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy");
+        Calendar cal = Calendar.getInstance();
+        String result = dateFormat.format(cal.getTime());
+        return result;
     }
 
     /**
@@ -78,10 +89,8 @@ public class LoginPage extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(83, 72, 70));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setModalExclusionType(java.awt.Dialog.ModalExclusionType.TOOLKIT_EXCLUDE);
         setUndecorated(true);
         setResizable(false);
-        setType(java.awt.Window.Type.POPUP);
 
         jPanel1.setBackground(new java.awt.Color(83, 72, 70));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -225,7 +234,7 @@ public class LoginPage extends javax.swing.JFrame {
         lbl_reg.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbl_reg.setForeground(new java.awt.Color(0, 0, 204));
         lbl_reg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_reg.setText("Click to Enter Registration Code");
+        lbl_reg.setText("Click here to Enter Registration Key");
         lbl_reg.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbl_regMouseClicked(evt);
@@ -269,7 +278,6 @@ public class LoginPage extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("All Right Reserved @ Trinity 2019");
         jLabel4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);

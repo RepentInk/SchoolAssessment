@@ -10,16 +10,16 @@ public class TermInfo {
     public TermInfo() {
     }
 
-    public TermInfo(int id, int clasID, int acaID, int yerID, int stuID, int terID, int attiID, int conID, int intID, String teacherRemarks, String headRemarks, double balance, double totalfees, int attendance, int outof, int promoted, double totalMarks) {
+    public TermInfo(int id, int clasID, int acaID, int yerID, int stuID, int attiID, int conID, int intID, int terID, String teacherRemarks, String headRemarks, double balance, double totalfees, int attendance, int outof, int promoted, double totalMarks) {
         this.id = id;
         this.clasID = clasID;
         this.acaID = acaID;
         this.yerID = yerID;
         this.stuID = stuID;
-        this.terID = terID;
         this.attiID = attiID;
         this.conID = conID;
         this.intID = intID;
+        this.terID = terID;
         this.teacherRemarks = teacherRemarks;
         this.headRemarks = headRemarks;
         this.balance = balance;
@@ -30,15 +30,15 @@ public class TermInfo {
         this.totalMarks = totalMarks;
     }
 
-    public TermInfo(int clasID, int acaID, int yerID, int stuID, int terID, int attiID, int conID, int intID, String teacherRemarks, String headRemarks, double balance, double totalfees, int attendance, int outof, int promoted, double totalMarks) {
+    public TermInfo(int clasID, int acaID, int yerID, int stuID, int attiID, int conID, int intID, int terID, String teacherRemarks, String headRemarks, double balance, double totalfees, int attendance, int outof, int promoted, double totalMarks) {
         this.clasID = clasID;
         this.acaID = acaID;
         this.yerID = yerID;
         this.stuID = stuID;
-        this.terID = terID;
         this.attiID = attiID;
         this.conID = conID;
         this.intID = intID;
+        this.terID = terID;
         this.teacherRemarks = teacherRemarks;
         this.headRemarks = headRemarks;
         this.balance = balance;
@@ -198,5 +198,5 @@ public class TermInfo {
     public void setTotalMarks(double totalMarks) {
         this.totalMarks = totalMarks;
     }
-   
+
 }

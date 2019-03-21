@@ -13,39 +13,31 @@ public class School {
     private String schoolVac;
     private String schoolResume;
     private String schoolContact;
-    private byte[] schoolLogo;
+    private int pos;
 
     public School() {
     }
 
-    public School(String schoolName, String schoolAddress, String schoolContact, String schoolLocation, String schoolVac, String schoolResume, byte[] schoolLogo) {
-        this.schoolName = schoolName;
-        this.schoolAddress = schoolAddress;
-        this.schoolLocation = schoolLocation;
-        this.schoolVac = schoolVac;
-        this.schoolResume = schoolResume;
-        this.schoolLogo = schoolLogo;
-        this.schoolContact = schoolContact;
-    }
-
-    public School(String schoolName, String schoolAddress, String schoolContact, String schoolLocation, String schoolVac, String schoolResume) {
+    public School(String schoolName, String schoolAddress, String schoolContact, String schoolLocation, String schoolVac, String schoolResume, int pos) {
         this.schoolName = schoolName;
         this.schoolAddress = schoolAddress;
         this.schoolLocation = schoolLocation;
         this.schoolVac = schoolVac;
         this.schoolResume = schoolResume;
         this.schoolContact = schoolContact;
+        this.pos = pos;
     }
 
-    public School(int schoolid, String schoolName, String schoolAddress, String schoolContact, String schoolLocation, String schoolVac, String schoolResume, byte[] schoolLogo) {
+
+    public School(int schoolid, String schoolName, String schoolAddress, String schoolContact, String schoolLocation, String schoolVac, String schoolResume, int pos) {
         this.schoolid = schoolid;
         this.schoolName = schoolName;
         this.schoolAddress = schoolAddress;
         this.schoolLocation = schoolLocation;
         this.schoolVac = schoolVac;
         this.schoolResume = schoolResume;
-        this.schoolLogo = schoolLogo;
         this.schoolContact = schoolContact;
+        this.pos = pos;
     }
 
     public int getSchoolid() {
@@ -96,20 +88,20 @@ public class School {
         this.schoolResume = schoolResume;
     }
 
-    public byte[] getSchoolLogo() {
-        return schoolLogo;
-    }
-
-    public void setSchoolLogo(byte[] schoolLogo) {
-        this.schoolLogo = schoolLogo;
-    }
-
     public String getSchoolContact() {
         return schoolContact;
     }
 
     public void setSchoolContact(String schoolContact) {
         this.schoolContact = schoolContact;
+    }
+
+    public int getPos() {
+        return pos;
+    }
+
+    public void setPos(int pos) {
+        this.pos = pos;
     }
 
 }

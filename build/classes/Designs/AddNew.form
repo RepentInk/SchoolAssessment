@@ -7,6 +7,8 @@
         <Property name="text" type="java.lang.String" value="jButton7"/>
       </Properties>
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
+    </Component>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenu1">
@@ -191,6 +193,11 @@
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <Properties>
+        <Property name="horizontalScrollBar" type="javax.swing.JScrollBar" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="null"/>
+        </Property>
+      </Properties>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
@@ -259,9 +266,9 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace pref="336" max="32767" attributes="0"/>
+                              <EmptySpace pref="215" max="32767" attributes="0"/>
                               <Component id="jPanel11" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="336" max="32767" attributes="0"/>
+                              <EmptySpace pref="535" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -312,7 +319,7 @@
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                                 <TitledBorder title="Optional Field">
-                                  <Font PropertyName="font" name="Tahoma" size="15" style="1"/>
+                                  <Font PropertyName="font" name="Tahoma" size="18" style="1"/>
                                   <Color PropertyName="color" blue="53" green="a8" red="34" type="rgb"/>
                                 </TitledBorder>
                               </Border>
@@ -324,17 +331,25 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jLabel7" max="32767" attributes="0"/>
+                                          <Component id="jLabel8" pref="193" max="32767" attributes="0"/>
+                                      </Group>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel7" min="-2" pref="147" max="-2" attributes="0"/>
-                                          <Component id="jLabel8" min="-2" pref="147" max="-2" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                              <Component id="lbl_StuID" min="-2" pref="31" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="158" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="txt_Contact" max="32767" attributes="0"/>
+                                                  <Component id="txt_HTown" max="32767" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
-                                      <EmptySpace min="0" pref="11" max="32767" attributes="0"/>
-                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="txt_Contact" min="-2" pref="179" max="-2" attributes="0"/>
-                                          <Component id="lbl_StuID" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
-                                          <Component id="txt_HTown" alignment="0" min="-2" pref="179" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -373,7 +388,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel8">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Agency FB" size="15" style="1"/>
+                                  <Font name="Agency FB" size="18" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Hometown"/>
                               </Properties>
@@ -381,7 +396,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel7">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Agency FB" size="15" style="1"/>
+                                  <Font name="Agency FB" size="18" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Contact"/>
                               </Properties>
@@ -409,8 +424,8 @@
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                                 <TitledBorder title="Required Field">
-                                  <Font PropertyName="font" name="Tahoma" size="15" style="1"/>
-                                  <Color PropertyName="color" blue="83" green="cc" red="2" type="rgb"/>
+                                  <Font PropertyName="font" name="Tahoma" size="18" style="1"/>
+                                  <Color PropertyName="color" blue="99" green="99" red="0" type="rgb"/>
                                 </TitledBorder>
                               </Border>
                             </Property>
@@ -422,54 +437,52 @@
                                   <Group type="102" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Component id="jLabel6" min="-2" pref="141" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="cmb_YearBatch" max="32767" attributes="0"/>
-                                          </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jLabel3" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
-                                                  <Component id="jLabel4" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                  <Component id="jLabel3" pref="187" max="32767" attributes="0"/>
+                                                  <Component id="jLabel9" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
                                               </Group>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="txt_SName" max="32767" attributes="0"/>
-                                                  <Component id="txt_MName" max="32767" attributes="0"/>
+                                                  <Component id="txt_MName" alignment="1" max="32767" attributes="0"/>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="stuIdtxt" min="-2" pref="65" max="-2" attributes="0"/>
+                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                      <Component id="btn_prev" min="-2" pref="49" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="btn_next" min="-2" pref="49" max="-2" attributes="0"/>
+                                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                                  </Group>
+                                                  <Component id="txt_FName" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                           <Group type="102" attributes="0">
                                               <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="txt_ID" min="-2" pref="49" max="-2" attributes="0"/>
-                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="txt_ID" min="-2" pref="49" max="-2" attributes="0"/>
+                                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                                  </Group>
+                                                  <Component id="btn_Import" pref="265" max="32767" attributes="0"/>
+                                              </Group>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jLabel2" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
-                                                  <Component id="jLabel9" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="jLabel4" max="32767" attributes="0"/>
+                                                  <Component id="jLabel6" pref="187" max="32767" attributes="0"/>
                                               </Group>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="txt_FName" max="32767" attributes="0"/>
-                                                  <Group type="102" attributes="0">
-                                                      <Component id="stuIdtxt" min="-2" pref="65" max="-2" attributes="0"/>
-                                                      <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="btn_prev" min="-2" pref="49" max="-2" attributes="0"/>
-                                                      <EmptySpace pref="17" max="32767" attributes="0"/>
-                                                      <Component id="btn_next" min="-2" pref="49" max="-2" attributes="0"/>
-                                                  </Group>
+                                                  <Component id="txt_SName" max="32767" attributes="0"/>
+                                                  <Component id="cmb_YearBatch" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="jSeparator13" max="32767" attributes="0"/>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="btn_Import" min="-2" pref="184" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                                  </Group>
                               </Group>
                             </DimensionLayout>
                             <DimensionLayout dim="1">
@@ -485,8 +498,10 @@
                                       <Component id="jSeparator13" min="-2" pref="2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                                          <Component id="stuIdtxt" max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="stuIdtxt" alignment="3" max="32767" attributes="0"/>
+                                          </Group>
                                           <Component id="btn_prev" max="32767" attributes="0"/>
                                           <Component id="btn_next" alignment="0" max="32767" attributes="0"/>
                                       </Group>
@@ -552,7 +567,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel3">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Agency FB" size="15" style="1"/>
+                                  <Font name="Agency FB" size="18" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Middle Name"/>
                               </Properties>
@@ -560,7 +575,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel4">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Agency FB" size="15" style="1"/>
+                                  <Font name="Agency FB" size="18" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Surname"/>
                               </Properties>
@@ -568,7 +583,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel2">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Agency FB" size="15" style="1"/>
+                                  <Font name="Agency FB" size="18" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="First Name"/>
                               </Properties>
@@ -576,7 +591,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel6">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Agency FB" size="15" style="1"/>
+                                  <Font name="Agency FB" size="18" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Year Batch"/>
                               </Properties>
@@ -603,7 +618,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel9">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Agency FB" size="15" style="1"/>
+                                  <Font name="Agency FB" size="18" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Student ID"/>
                               </Properties>
@@ -623,7 +638,7 @@
                             <Component class="javax.swing.JButton" name="btn_Import">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Agency FB" size="14" style="1"/>
+                                  <Font name="Agency FB" size="18" style="1"/>
                                 </Property>
                                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                   <Color blue="0" green="0" red="cc" type="rgb"/>
@@ -637,7 +652,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel14">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Agency FB" size="14" style="1"/>
+                                  <Font name="Agency FB" size="18" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Total Students in selected Batch :"/>
                               </Properties>
@@ -684,7 +699,7 @@
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                                 <TitledBorder title="Search Batch to View Names">
-                                  <Font PropertyName="font" name="Tahoma" size="15" style="1"/>
+                                  <Font PropertyName="font" name="Tahoma" size="18" style="1"/>
                                   <Color PropertyName="color" blue="5b" green="9f" red="13" type="rgb"/>
                                 </TitledBorder>
                               </Border>
@@ -696,9 +711,9 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="cmb_Search" min="-2" pref="101" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
+                                      <Component id="cmb_Search" max="32767" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="jScrollPane2" min="-2" pref="273" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -780,18 +795,18 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace pref="351" max="32767" attributes="0"/>
+                              <EmptySpace pref="216" max="32767" attributes="0"/>
                               <Component id="jPanel16" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="352" max="32767" attributes="0"/>
+                              <EmptySpace pref="604" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace pref="168" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                               <Component id="jPanel16" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="195" max="32767" attributes="0"/>
+                              <EmptySpace pref="331" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -805,7 +820,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jPanel17" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -825,7 +840,7 @@
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                                 <TitledBorder title="Enter Subject">
-                                  <Font PropertyName="font" name="Tahoma" size="15" style="1"/>
+                                  <Font PropertyName="font" name="Tahoma" size="18" style="1"/>
                                   <Color PropertyName="color" blue="53" green="a8" red="34" type="rgb"/>
                                 </TitledBorder>
                               </Border>
@@ -838,26 +853,29 @@
                                   <Group type="102" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel13" min="-2" pref="112" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <Component id="jLabel13" min="-2" pref="185" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="txt_SubName" pref="176" max="32767" attributes="0"/>
                                                   <Group type="102" attributes="0">
+                                                      <EmptySpace max="-2" attributes="0"/>
                                                       <Component id="lbl_id" min="-2" pref="35" max="-2" attributes="0"/>
-                                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" attributes="0">
+                                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                                      <Component id="txt_SubName" min="-2" pref="194" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
+                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                  <Component id="jLabel19" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="jLabel12" alignment="0" pref="112" max="32767" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jLabel12" max="32767" attributes="0"/>
+                                                  <Component id="jLabel19" max="32767" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="cmd_Subjects" pref="194" max="32767" attributes="0"/>
                                                   <Component id="txt_SubCode" max="32767" attributes="0"/>
-                                                  <Component id="cmd_Subjects" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -881,7 +899,7 @@
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txt_SubName" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txt_SubName" alignment="3" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="lbl_id" min="-2" pref="24" max="-2" attributes="0"/>
@@ -916,7 +934,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel12">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Agency FB" size="15" style="1"/>
+                                  <Font name="Agency FB" size="18" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Subject Code"/>
                               </Properties>
@@ -924,7 +942,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel13">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Agency FB" size="15" style="1"/>
+                                  <Font name="Agency FB" size="18" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Subject Name"/>
                               </Properties>
@@ -934,7 +952,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel19">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Agency FB" size="15" style="1"/>
+                                  <Font name="Agency FB" size="18" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="All Subjects"/>
                               </Properties>
@@ -974,18 +992,18 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace pref="273" max="32767" attributes="0"/>
+                              <EmptySpace pref="223" max="32767" attributes="0"/>
                               <Component id="jPanel7" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="289" max="32767" attributes="0"/>
+                              <EmptySpace pref="451" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                              <Component id="jPanel7" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jPanel7" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1003,20 +1021,20 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
                               <Component id="jSeparator14" alignment="0" max="32767" attributes="0"/>
-                              <Group type="102" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Component id="jLabel21" min="-2" pref="128" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="cmd_gradingSystem" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          <Component id="lbl_remarksID" min="-2" pref="54" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="jLabel20" alignment="1" pref="479" max="32767" attributes="0"/>
+                                      <Component id="jLabel20" alignment="1" max="32767" attributes="0"/>
                                       <Component id="jPanel8" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jScrollPane4" alignment="0" max="32767" attributes="0"/>
                                       <Group type="102" alignment="1" attributes="0">
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                          <Component id="lbl_remarksID" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel21" pref="180" max="32767" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="cmd_gradingSystem" min="-2" pref="383" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -1036,13 +1054,13 @@
                                       <Component id="jLabel21" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="lbl_remarksID" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="lbl_remarksID" min="-2" pref="13" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jSeparator14" min="-2" pref="10" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="jPanel8" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jScrollPane4" pref="204" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane4" pref="266" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -1079,7 +1097,7 @@
                         <Component class="javax.swing.JLabel" name="jLabel21">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Tahoma" size="15" style="1"/>
+                              <Font name="Tahoma" size="18" style="1"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Grading Format"/>
                           </Properties>
@@ -1167,7 +1185,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel24">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Agency FB" size="18" style="1"/>
+                                  <Font name="Agency FB" size="24" style="1"/>
                                 </Property>
                                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                   <Color blue="33" green="0" red="0" type="rgb"/>
@@ -1208,7 +1226,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel22">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Agency FB" size="18" style="1"/>
+                                  <Font name="Agency FB" size="24" style="1"/>
                                 </Property>
                                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                   <Color blue="33" green="0" red="0" type="rgb"/>
@@ -1219,7 +1237,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel25">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Agency FB" size="18" style="1"/>
+                                  <Font name="Agency FB" size="24" style="1"/>
                                 </Property>
                                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                   <Color blue="33" green="0" red="0" type="rgb"/>
@@ -1241,7 +1259,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel23">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Agency FB" size="18" style="1"/>
+                                  <Font name="Agency FB" size="24" style="1"/>
                                 </Property>
                                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                   <Color blue="33" green="0" red="0" type="rgb"/>
@@ -1297,6 +1315,7 @@
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                                   <Image iconType="3" name="/Icons/plus.png"/>
                                 </Property>
+                                <Property name="toolTipText" type="java.lang.String" value="Click to add more"/>
                               </Properties>
                               <Events>
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
@@ -1304,10 +1323,13 @@
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel26">
                               <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="12" style="0"/>
+                                </Property>
                                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                   <Color blue="33" green="0" red="cc" type="rgb"/>
                                 </Property>
-                                <Property name="text" type="java.lang.String" value="eg. 80                 eg. 100             eg. 1                                 eg. Excellent"/>
+                                <Property name="text" type="java.lang.String" value="eg. 80           eg. 100         eg. 1 or A                 eg. Excellent"/>
                               </Properties>
                             </Component>
                           </SubComponents>
@@ -1321,12 +1343,15 @@
                           <SubComponents>
                             <Component class="javax.swing.JTable" name="remarks_table">
                               <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="14" style="0"/>
+                                </Property>
                                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                  <Table columnCount="5" rowCount="4">
-                                    <Column editable="true" title="Id" type="java.lang.Integer"/>
-                                    <Column editable="true" title="Low Score" type="java.lang.Double"/>
-                                    <Column editable="true" title="High Score" type="java.lang.Double"/>
-                                    <Column editable="true" title="Grade" type="java.lang.Integer"/>
+                                  <Table columnCount="5" rowCount="0">
+                                    <Column editable="true" title="Id" type="java.lang.String"/>
+                                    <Column editable="true" title="Low Score" type="java.lang.String"/>
+                                    <Column editable="true" title="High Score" type="java.lang.String"/>
+                                    <Column editable="true" title="Grade" type="java.lang.String"/>
                                     <Column editable="true" title="Remarks" type="java.lang.String"/>
                                   </Table>
                                 </Property>
@@ -1371,6 +1396,9 @@
                           </SubComponents>
                         </Container>
                         <Component class="javax.swing.JLabel" name="lbl_remarksID">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="43"/>
+                          </Properties>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -1389,9 +1417,9 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace pref="243" max="32767" attributes="0"/>
+                              <EmptySpace pref="209" max="32767" attributes="0"/>
                               <Component id="jPanel14" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="263" max="32767" attributes="0"/>
+                              <EmptySpace pref="568" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1416,102 +1444,24 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jScrollPane3" alignment="0" max="32767" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="0" pref="87" max="32767" attributes="0"/>
-                                          <Component id="jPanel15" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="0" pref="88" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
+                                  <Component id="jPanel15" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jPanel15" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jScrollPane3" min="-2" pref="113" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                                  <Component id="jPanel15" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Container class="javax.swing.JScrollPane" name="jScrollPane3">
-                          <AuxValues>
-                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-                          </AuxValues>
-
-                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-                          <SubComponents>
-                            <Component class="javax.swing.JTable" name="table_schoolInfo">
-                              <Properties>
-                                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                  <Table columnCount="7" rowCount="4">
-                                    <Column editable="true" title="Id" type="java.lang.Integer"/>
-                                    <Column editable="true" title="Schoolname" type="java.lang.String"/>
-                                    <Column editable="true" title="Address" type="java.lang.String"/>
-                                    <Column editable="true" title="Contact" type="java.lang.String"/>
-                                    <Column editable="true" title="Location" type="java.lang.String"/>
-                                    <Column editable="true" title="Vac Date" type="java.lang.String"/>
-                                    <Column editable="true" title="Resume Date" type="java.lang.String"/>
-                                  </Table>
-                                </Property>
-                                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-                                  <TableColumnModel selectionModel="0">
-                                    <Column maxWidth="-1" minWidth="-1" prefWidth="10" resizable="true">
-                                      <Title/>
-                                      <Editor/>
-                                      <Renderer/>
-                                    </Column>
-                                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                                      <Title/>
-                                      <Editor/>
-                                      <Renderer/>
-                                    </Column>
-                                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                                      <Title/>
-                                      <Editor/>
-                                      <Renderer/>
-                                    </Column>
-                                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                                      <Title/>
-                                      <Editor/>
-                                      <Renderer/>
-                                    </Column>
-                                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                                      <Title/>
-                                      <Editor/>
-                                      <Renderer/>
-                                    </Column>
-                                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                                      <Title/>
-                                      <Editor/>
-                                      <Renderer/>
-                                    </Column>
-                                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                                      <Title/>
-                                      <Editor/>
-                                      <Renderer/>
-                                    </Column>
-                                  </TableColumnModel>
-                                </Property>
-                                <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-                                  <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
-                                </Property>
-                              </Properties>
-                              <Events>
-                                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="table_schoolInfoMouseClicked"/>
-                              </Events>
-                            </Component>
-                          </SubComponents>
-                        </Container>
                         <Container class="javax.swing.JPanel" name="jPanel15">
                           <Properties>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -1531,59 +1481,40 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel30" min="-2" pref="122" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="txt_schoolLocation" min="-2" pref="156" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
+                                              <Component id="lbl_sid" min="-2" pref="29" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel28" min="-2" pref="122" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="txt_schoolAddress" min="-2" pref="156" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel27" min="-2" pref="122" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="txt_schoolName" min="-2" pref="156" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel31" min="-2" pref="122" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="txt_schoolResume" min="-2" pref="156" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel29" min="-2" pref="122" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="txt_schoolVac" min="-2" pref="156" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="102" alignment="1" attributes="0">
-                                                      <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
-                                                      <Component id="lbl_sid" min="-2" pref="29" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                      <Component id="jLabel32" max="32767" attributes="0"/>
-                                                      <Component id="jLabel33" pref="122" max="32767" attributes="0"/>
-                                                      <Component id="jLabel34" max="32767" attributes="0"/>
-                                                  </Group>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="jLabel38" pref="193" max="32767" attributes="0"/>
+                                                  <Component id="jLabel41" max="32767" attributes="0"/>
+                                                  <Component id="jLabel27" alignment="0" min="-2" pref="176" max="-2" attributes="0"/>
+                                                  <Component id="jLabel28" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="jLabel37" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="jLabel30" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="jLabel29" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="jLabel31" alignment="0" max="32767" attributes="0"/>
                                               </Group>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="txt_path" min="-2" pref="156" max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                      <Component id="btn_Logo" max="32767" attributes="0"/>
-                                                      <Component id="jDesktopPane1" min="-2" max="-2" attributes="0"/>
+                                                  <Group type="102" alignment="1" attributes="0">
+                                                      <Component id="rd_pos" pref="114" max="32767" attributes="0"/>
+                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                      <Component id="rd_grade" min="-2" max="-2" attributes="0"/>
                                                   </Group>
+                                                  <Component id="rd_posandgrade" max="32767" attributes="0"/>
+                                                  <Component id="txt_schoolResume" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="txt_schoolVac" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="txt_schoolLocation" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="txt_schoolContact" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="txt_schoolAddress" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="txt_schoolName" alignment="0" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel37" min="-2" pref="122" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="txt_schoolContact" min="-2" pref="156" max="-2" attributes="0"/>
-                                          </Group>
                                       </Group>
-                                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                   </Group>
+                                  <Component id="jScrollPane3" alignment="0" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                             <DimensionLayout dim="1">
@@ -1594,49 +1525,48 @@
                                           <Component id="txt_schoolName" max="-2" attributes="0"/>
                                           <Component id="jLabel27" min="-2" pref="20" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="txt_schoolAddress" alignment="0" max="-2" attributes="0"/>
                                           <Component id="jLabel28" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="txt_schoolContact" alignment="0" max="-2" attributes="0"/>
                                           <Component id="jLabel37" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="txt_schoolLocation" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel30" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jLabel29" min="-2" pref="20" max="-2" attributes="0"/>
                                           <Component id="txt_schoolVac" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" attributes="0">
                                           <Component id="jLabel31" min="-2" pref="20" max="-2" attributes="0"/>
                                           <Component id="txt_schoolResume" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Component id="jLabel32" min="-2" pref="21" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="jLabel33" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="jLabel34" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Component id="jDesktopPane1" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace pref="10" max="32767" attributes="0"/>
-                                      <Component id="txt_path" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="btn_Logo" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lbl_sid" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="rd_posandgrade" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel38" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabel41" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                              <Component id="rd_pos" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="rd_grade" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jScrollPane3" pref="255" max="32767" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="lbl_sid" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -1650,7 +1580,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel27">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Agency FB" size="14" style="1"/>
+                                  <Font name="Agency FB" size="18" style="1"/>
                                 </Property>
                                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                   <Color blue="0" green="0" red="33" type="rgb"/>
@@ -1668,7 +1598,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel30">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Agency FB" size="14" style="1"/>
+                                  <Font name="Agency FB" size="18" style="1"/>
                                 </Property>
                                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                   <Color blue="0" green="0" red="33" type="rgb"/>
@@ -1691,7 +1621,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel31">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Agency FB" size="14" style="1"/>
+                                  <Font name="Agency FB" size="18" style="1"/>
                                 </Property>
                                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                   <Color blue="0" green="0" red="33" type="rgb"/>
@@ -1712,7 +1642,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel29">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Agency FB" size="14" style="1"/>
+                                  <Font name="Agency FB" size="18" style="1"/>
                                 </Property>
                                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                   <Color blue="0" green="0" red="33" type="rgb"/>
@@ -1723,7 +1653,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel28">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Agency FB" size="14" style="1"/>
+                                  <Font name="Agency FB" size="18" style="1"/>
                                 </Property>
                                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                   <Color blue="0" green="0" red="33" type="rgb"/>
@@ -1731,77 +1661,12 @@
                                 <Property name="text" type="java.lang.String" value="Address"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="jLabel32">
-                              <Properties>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Agency FB" size="14" style="1"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="School Logo"/>
-                              </Properties>
-                            </Component>
-                            <Container class="javax.swing.JDesktopPane" name="jDesktopPane1">
-
-                              <Layout>
-                                <DimensionLayout dim="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                          <Component id="lbl_Logo" min="-2" pref="156" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                </DimensionLayout>
-                                <DimensionLayout dim="1">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                          <Component id="lbl_Logo" min="-2" pref="158" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                </DimensionLayout>
-                              </Layout>
-                              <SubComponents>
-                                <Component class="javax.swing.JLabel" name="lbl_Logo">
-                                  <Properties>
-                                    <Property name="horizontalAlignment" type="int" value="0"/>
-                                  </Properties>
-                                </Component>
-                              </SubComponents>
-                            </Container>
-                            <Component class="javax.swing.JButton" name="btn_Logo">
-                              <Properties>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Agency FB" size="14" style="1"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="Add Image"/>
-                              </Properties>
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_LogoActionPerformed"/>
-                              </Events>
-                            </Component>
-                            <Component class="javax.swing.JTextField" name="txt_path">
-                            </Component>
-                            <Component class="javax.swing.JLabel" name="jLabel33">
-                              <Properties>
-                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="0" green="0" red="ff" type="rgb"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="Note : Logo Dimension"/>
-                              </Properties>
-                            </Component>
-                            <Component class="javax.swing.JLabel" name="jLabel34">
-                              <Properties>
-                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="0" green="0" red="ff" type="rgb"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="should be 156 x 158"/>
-                              </Properties>
-                            </Component>
                             <Component class="javax.swing.JLabel" name="lbl_sid">
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel37">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Agency FB" size="14" style="1"/>
+                                  <Font name="Agency FB" size="18" style="1"/>
                                 </Property>
                                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                   <Color blue="0" green="0" red="33" type="rgb"/>
@@ -1819,6 +1684,133 @@
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_schoolContactActionPerformed"/>
                               </Events>
                             </Component>
+                            <Component class="javax.swing.JRadioButton" name="rd_posandgrade">
+                              <Properties>
+                                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                                  <ComponentRef name="buttonGroup1"/>
+                                </Property>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="11" style="1"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Positions &amp; Grades"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rd_posandgradeActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="javax.swing.JRadioButton" name="rd_pos">
+                              <Properties>
+                                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                                  <ComponentRef name="buttonGroup1"/>
+                                </Property>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="11" style="1"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Positions Only"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rd_posActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="javax.swing.JRadioButton" name="rd_grade">
+                              <Properties>
+                                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                                  <ComponentRef name="buttonGroup1"/>
+                                </Property>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="11" style="1"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Grades Only"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rd_gradeActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="jLabel38">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Agency FB" size="18" style="1"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Select one to be indicated"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="jLabel41">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Agency FB" size="18" style="1"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="on student report card"/>
+                              </Properties>
+                            </Component>
+                            <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+                              <AuxValues>
+                                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                              </AuxValues>
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                              <SubComponents>
+                                <Component class="javax.swing.JTable" name="table_schoolInfo">
+                                  <Properties>
+                                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                                      <Table columnCount="7" rowCount="1">
+                                        <Column editable="true" title="Id" type="java.lang.Integer"/>
+                                        <Column editable="true" title="Schoolname" type="java.lang.String"/>
+                                        <Column editable="true" title="Address" type="java.lang.String"/>
+                                        <Column editable="true" title="Contact" type="java.lang.String"/>
+                                        <Column editable="true" title="Location" type="java.lang.String"/>
+                                        <Column editable="true" title="Vac Date" type="java.lang.String"/>
+                                        <Column editable="true" title="Resume Date" type="java.lang.String"/>
+                                      </Table>
+                                    </Property>
+                                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                                      <TableColumnModel selectionModel="0">
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="10" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
+                                      </TableColumnModel>
+                                    </Property>
+                                    <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                                      <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                                    </Property>
+                                  </Properties>
+                                  <Events>
+                                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="table_schoolInfoMouseClicked"/>
+                                  </Events>
+                                </Component>
+                              </SubComponents>
+                            </Container>
                           </SubComponents>
                         </Container>
                       </SubComponents>
@@ -1842,17 +1834,17 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace pref="170" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace pref="159" max="32767" attributes="0"/>
                               <Component id="jPanel19" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="168" max="32767" attributes="0"/>
+                              <EmptySpace pref="357" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jPanel19" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
@@ -1923,10 +1915,10 @@
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="btn_SaveAcademic" min="-2" pref="58" max="-2" attributes="0"/>
-                                          <Component id="academic" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="txt_Academic" pref="157" max="32767" attributes="0"/>
+                                          <Component id="academic" alignment="0" pref="157" max="32767" attributes="0"/>
+                                          <Component id="txt_Academic" max="32767" attributes="0"/>
                                       </Group>
-                                      <EmptySpace pref="30" max="32767" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -1965,7 +1957,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel15">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Agency FB" size="15" style="1"/>
+                                  <Font name="Agency FB" size="18" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Enter Academic Year"/>
                               </Properties>
@@ -1983,7 +1975,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel10">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Agency FB" size="15" style="1"/>
+                                  <Font name="Agency FB" size="18" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Academic"/>
                               </Properties>
@@ -2071,7 +2063,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel16">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Agency FB" size="15" style="1"/>
+                                  <Font name="Agency FB" size="18" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Enter New Year"/>
                               </Properties>
@@ -2089,7 +2081,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel1">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Agency FB" size="15" style="1"/>
+                                  <Font name="Agency FB" size="18" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Years"/>
                               </Properties>
@@ -2138,9 +2130,9 @@
                                           <Component id="Cmd_term" alignment="0" max="32767" attributes="0"/>
                                           <Group type="102" attributes="0">
                                               <Component id="btn_SaveSemester" min="-2" pref="61" max="-2" attributes="0"/>
-                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                              <EmptySpace min="0" pref="187" max="32767" attributes="0"/>
                                           </Group>
-                                          <Component id="txt_Term" pref="238" max="32767" attributes="0"/>
+                                          <Component id="txt_Term" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                   </Group>
@@ -2181,7 +2173,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel18">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Agency FB" size="15" style="1"/>
+                                  <Font name="Agency FB" size="18" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Enter New Term"/>
                               </Properties>
@@ -2199,7 +2191,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel5">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Agency FB" size="15" style="1"/>
+                                  <Font name="Agency FB" size="18" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Term"/>
                               </Properties>
@@ -2249,7 +2241,7 @@
                                           <Group type="102" alignment="0" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="txt_Classess" max="32767" attributes="0"/>
-                                                  <Component id="classess" pref="208" max="32767" attributes="0"/>
+                                                  <Component id="classess" max="32767" attributes="0"/>
                                               </Group>
                                               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                                           </Group>
@@ -2292,7 +2284,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel17">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Agency FB" size="15" style="1"/>
+                                  <Font name="Agency FB" size="18" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Enter Class"/>
                               </Properties>
@@ -2310,7 +2302,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel11">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Agency FB" size="15" style="1"/>
+                                  <Font name="Agency FB" size="18" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Classes"/>
                               </Properties>
@@ -2352,18 +2344,18 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace pref="33" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="150" max="-2" attributes="0"/>
                               <Component id="jPanel24" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="237" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jPanel24" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="36" max="32767" attributes="0"/>
+                              <EmptySpace pref="69" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -2392,7 +2384,7 @@
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="jPanel27" max="32767" attributes="0"/>
                                       <Component id="jPanel25" max="32767" attributes="0"/>
@@ -2413,6 +2405,7 @@
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                                 <TitledBorder title="Add Interest">
+                                  <Font PropertyName="font" name="Tahoma" size="14" style="0"/>
                                   <Color PropertyName="color" blue="0" green="66" red="0" type="rgb"/>
                                 </TitledBorder>
                               </Border>
@@ -2474,7 +2467,7 @@
                             <Component class="javax.swing.JButton" name="btn_saveAttitude">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="11" style="1"/>
+                                  <Font name="Tahoma" size="13" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Save"/>
                               </Properties>
@@ -2506,7 +2499,7 @@
                             <Component class="javax.swing.JButton" name="btn_DeleteAttitude">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="11" style="1"/>
+                                  <Font name="Tahoma" size="13" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Delete"/>
                               </Properties>
@@ -2524,7 +2517,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel35">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="12" style="1"/>
+                                  <Font name="Agency FB" size="18" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="All Attitude"/>
                               </Properties>
@@ -2532,7 +2525,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel36">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="12" style="1"/>
+                                  <Font name="Agency FB" size="18" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Enter New Attitude"/>
                               </Properties>
@@ -2546,6 +2539,7 @@
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                                 <TitledBorder title="Add  Conduct">
+                                  <Font PropertyName="font" name="Tahoma" size="14" style="0"/>
                                   <Color PropertyName="color" blue="0" green="66" red="0" type="rgb"/>
                                 </TitledBorder>
                               </Border>
@@ -2559,7 +2553,7 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jLabel39" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="jLabel40" alignment="0" pref="133" max="32767" attributes="0"/>
+                                          <Component id="jLabel40" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -2598,7 +2592,7 @@
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="lbl_conduct" min="-2" pref="26" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
+                                      <EmptySpace pref="24" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -2607,7 +2601,7 @@
                             <Component class="javax.swing.JButton" name="btn_SaveConduct">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="11" style="1"/>
+                                  <Font name="Tahoma" size="13" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Save"/>
                               </Properties>
@@ -2639,7 +2633,7 @@
                             <Component class="javax.swing.JButton" name="btn_DeleteConduct">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="11" style="1"/>
+                                  <Font name="Tahoma" size="13" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Delete"/>
                               </Properties>
@@ -2657,7 +2651,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel39">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="12" style="1"/>
+                                  <Font name="Agency FB" size="18" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="All Conduct"/>
                               </Properties>
@@ -2665,7 +2659,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel40">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="12" style="1"/>
+                                  <Font name="Agency FB" size="18" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Enter New Conduct"/>
                               </Properties>
@@ -2679,6 +2673,7 @@
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                                 <TitledBorder title="Add Interest">
+                                  <Font PropertyName="font" name="Tahoma" size="14" style="0"/>
                                   <Color PropertyName="color" blue="0" green="66" red="0" type="rgb"/>
                                 </TitledBorder>
                               </Border>
@@ -2740,7 +2735,7 @@
                             <Component class="javax.swing.JButton" name="btn_SaveInterest">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="11" style="1"/>
+                                  <Font name="Tahoma" size="13" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Save"/>
                               </Properties>
@@ -2772,7 +2767,7 @@
                             <Component class="javax.swing.JButton" name="btn_DeleteInterest">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="11" style="1"/>
+                                  <Font name="Tahoma" size="13" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Delete"/>
                               </Properties>
@@ -2790,7 +2785,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel43">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="12" style="1"/>
+                                  <Font name="Agency FB" size="18" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="All Interest"/>
                               </Properties>
@@ -2798,7 +2793,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel44">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="12" style="1"/>
+                                  <Font name="Agency FB" size="18" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Enter New Interest"/>
                               </Properties>
@@ -2812,6 +2807,7 @@
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                                 <TitledBorder title="Add Bill">
+                                  <Font PropertyName="font" name="Tahoma" size="14" style="0"/>
                                   <Color PropertyName="color" blue="0" green="66" red="0" type="rgb"/>
                                 </TitledBorder>
                               </Border>
@@ -2825,7 +2821,7 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jLabel47" alignment="1" max="32767" attributes="0"/>
-                                          <Component id="jLabel46" alignment="0" pref="137" max="32767" attributes="0"/>
+                                          <Component id="jLabel46" alignment="0" max="32767" attributes="0"/>
                                           <Component id="jLabel45" alignment="1" max="32767" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="lbl_bill" min="-2" pref="48" max="-2" attributes="0"/>
@@ -2882,7 +2878,7 @@
                             <Component class="javax.swing.JButton" name="btn_SaveBill">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="11" style="1"/>
+                                  <Font name="Tahoma" size="13" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Save"/>
                               </Properties>
@@ -2914,7 +2910,7 @@
                             <Component class="javax.swing.JButton" name="btn_DeleteBill">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="11" style="1"/>
+                                  <Font name="Tahoma" size="13" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Delete"/>
                               </Properties>
@@ -2932,7 +2928,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel45">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="12" style="1"/>
+                                  <Font name="Agency FB" size="18" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="All Bill Item"/>
                               </Properties>
@@ -2940,7 +2936,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel46">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="12" style="1"/>
+                                  <Font name="Agency FB" size="18" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Enter New Bill Item"/>
                               </Properties>
@@ -2948,7 +2944,7 @@
                             <Component class="javax.swing.JLabel" name="jLabel47">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="12" style="1"/>
+                                  <Font name="Agency FB" size="18" style="1"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Enter Amount"/>
                               </Properties>

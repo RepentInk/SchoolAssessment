@@ -117,7 +117,7 @@ public class Performance extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("MONITORING A PARTICULAR STUDENT PERFORMANCE FORM");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Enter Student Name to Search", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 14), new java.awt.Color(0, 102, 0))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Enter Student Name to Search", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 18), new java.awt.Color(0, 102, 0))); // NOI18N
 
         cmb_Performance.setFont(new java.awt.Font("Agency FB", 0, 24)); // NOI18N
         cmb_Performance.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Year" }));
@@ -175,7 +175,7 @@ public class Performance extends javax.swing.JFrame {
                 .addContainerGap(308, Short.MAX_VALUE))
         );
 
-        resultTable.setFont(new java.awt.Font("Agency FB", 0, 11)); // NOI18N
+        resultTable.setFont(new java.awt.Font("Agency FB", 0, 14)); // NOI18N
         resultTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
@@ -225,7 +225,7 @@ public class Performance extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE))
                 .addContainerGap())
         );
 

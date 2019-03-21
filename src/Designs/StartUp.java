@@ -35,10 +35,6 @@ public class StartUp {
     logicHandler lhand = new logicHandler();
     static billMethods bmet = new billMethods();
 
-//    public static void main(String args[]) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
-//        UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
-//        returnShow();
-//    }
     public void returnShow() {
         LoginPage login = new LoginPage();
 

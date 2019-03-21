@@ -162,7 +162,7 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="lbl_stuID" max="32767" attributes="0"/>
-                              <Component id="jLabel9" pref="21" max="32767" attributes="0"/>
+                              <Component id="jLabel9" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -254,7 +254,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel2">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Agency FB" size="15" style="1"/>
+                      <Font name="Agency FB" size="20" style="1"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="First Name"/>
                   </Properties>
@@ -262,7 +262,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel3">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Agency FB" size="15" style="1"/>
+                      <Font name="Agency FB" size="20" style="1"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Middle Name"/>
                   </Properties>
@@ -281,7 +281,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel5">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Agency FB" size="15" style="1"/>
+                      <Font name="Agency FB" size="20" style="1"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Surname"/>
                   </Properties>
@@ -300,7 +300,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel7">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Agency FB" size="15" style="1"/>
+                      <Font name="Agency FB" size="20" style="1"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Contact"/>
                   </Properties>
@@ -322,7 +322,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel8">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Agency FB" size="15" style="1"/>
+                      <Font name="Agency FB" size="20" style="1"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Hometown"/>
                   </Properties>
@@ -345,7 +345,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel1">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Agency FB" size="14" style="1"/>
+                      <Font name="Agency FB" size="20" style="1"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Change Year Batch"/>
                   </Properties>
@@ -371,7 +371,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel6">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Agency FB" size="14" style="1"/>
+                      <Font name="Agency FB" size="20" style="1"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Status"/>
                   </Properties>
@@ -382,7 +382,7 @@
                       <ComponentRef name="buttonGroup1"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Agency FB" size="14" style="1"/>
+                      <Font name="Agency FB" size="16" style="1"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Present"/>
                   </Properties>
@@ -393,7 +393,7 @@
                       <ComponentRef name="buttonGroup1"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Agency FB" size="14" style="1"/>
+                      <Font name="Agency FB" size="16" style="1"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Stopped"/>
                   </Properties>
@@ -414,7 +414,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel9">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Agency FB" size="14" style="1"/>
+                      <Font name="Agency FB" size="20" style="1"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Student ID"/>
                   </Properties>

@@ -95,7 +95,7 @@ public class Desktop extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(2, 204, 131));
-        jLabel1.setText("                              STUDENTS ASSESSMENT CALCULATION SOFTWARE");
+        jLabel1.setText("                           STUDENTS ASSESSMENT CALCULATION SOFTWARE");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 51, 51));
@@ -124,9 +124,9 @@ public class Desktop extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -267,7 +267,7 @@ public class Desktop extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addComponent(lbl_expired, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,9 +292,7 @@ public class Desktop extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -336,8 +334,8 @@ public class Desktop extends javax.swing.JFrame {
 
     private void btn_AddUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AddUserActionPerformed
         try {
-            SignupPage de = new SignupPage();
-            mets.backMe(de);
+            SignupPage de = new SignupPage(this, true);
+            de.setVisible(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -388,7 +386,7 @@ public class Desktop extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_AddUser2ActionPerformed
 
     private void lbl_expiredMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_expiredMouseClicked
-        RegisterForm reg = new RegisterForm();
+        RegisterForm reg = new RegisterForm(this, true);
         reg.setVisible(true);
         dispose();
     }//GEN-LAST:event_lbl_expiredMouseClicked

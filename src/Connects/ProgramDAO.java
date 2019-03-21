@@ -1014,15 +1014,15 @@ public class ProgramDAO implements Processess {
 
     public void saveSchoolDetails(School school) {
         try {
-            String subjectSQL = "INSERT INTO SchoolInfo (schoolName,schoolAddress,schoolLocation,schoolVacation,schoolResume,schoolLogo,contact) VALUES (?,?,?,?,?,?,?)";
+            String subjectSQL = "INSERT INTO SchoolInfo (schoolName,schoolAddress,schoolLocation,schoolVacation,schoolResume,contact,pos) VALUES (?,?,?,?,?,?,?)";
             pst = conn.prepareStatement(subjectSQL);
             pst.setString(1, school.getSchoolName());
             pst.setString(2, school.getSchoolAddress());
             pst.setString(3, school.getSchoolLocation());
             pst.setString(4, school.getSchoolVac());
             pst.setString(5, school.getSchoolResume());
-            pst.setBytes(6, school.getSchoolLogo());
-            pst.setString(7, school.getSchoolContact());
+            pst.setString(6, school.getSchoolContact());
+            pst.setInt(7, school.getPos());
             pst.executeUpdate();
 
             JOptionPane.showMessageDialog(null, "School Info is Saved");
@@ -1053,8 +1053,8 @@ public class ProgramDAO implements Processess {
                 sch.setSchoolLocation(rs.getString("schoolLocation"));
                 sch.setSchoolVac(rs.getString("schoolVacation"));
                 sch.setSchoolResume(rs.getString("schoolResume"));
-                sch.setSchoolLogo(rs.getBytes("schoolLogo"));
                 sch.setSchoolContact(rs.getString("contact"));
+                sch.setPos(rs.getInt("pos"));
                 listSchool.add(sch);
             }
         } catch (Exception e) {
@@ -1074,7 +1074,7 @@ public class ProgramDAO implements Processess {
     public void updateSchoolDetails(School school, int id) {
         try {
             String sql = "UPDATE SchoolInfo SET schoolName='" + school.getSchoolName() + "', schoolAddress='" + school.getSchoolAddress() + "', schoolLocation='" + school.getSchoolLocation() + "',"
-                    + "schoolVacation='" + school.getSchoolVac() + "', schoolResume='" + school.getSchoolResume() + "',schoolLogo='" + school.getSchoolLogo() + "', contact='" + school.getSchoolContact() + "' WHERE id='" + id + "'";
+                    + "schoolVacation='" + school.getSchoolVac() + "', schoolResume='" + school.getSchoolResume() + "', contact='" + school.getSchoolContact() + "', pos='"+ school.getPos() +"' WHERE id='" + id + "'";
             pst = conn.prepareStatement(sql);
             pst.executeUpdate();
 

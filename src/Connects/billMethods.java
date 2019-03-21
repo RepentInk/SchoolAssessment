@@ -1178,6 +1178,56 @@ public class billMethods {
 
     //======== End =======================================
     
+  //============ Getting total marks per term ==================
+    public List<TermInfo> studentTotalMarks(int clas, int aca, int ter, int yer) {
+        List<TermInfo> terminfoList = new ArrayList<>();
+        try {
+            String sql = "SELECT stuID,totalMarks,yerID FROM TermInfo where clasID = '" + clas + "' and acaID='" + aca + "' and yerID='" + yer + "' and terID='" + ter + "' ORDER BY totalMarks DESC";
+            pst = conn.prepareStatement(sql);
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+                TermInfo tinfo = new TermInfo();
+                tinfo.setStuID(rs.getInt("stuID"));
+                tinfo.setTotalMarks(rs.getDouble("totalMarks"));
+                tinfo.setYerID(rs.getInt("yerID"));
+                terminfoList.add(tinfo);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            return null;
+        } finally {
+            try {
+                rs.close();
+                pst.close();
+            } catch (Exception e) {
+            }
+        }
+
+        return terminfoList;
+    }
+    
+  //============ End ===========================================
+    
+  //============ School Details delete ========================
+    
+    public void clearRemarks() {
+        try {
+            String sql = "DELETE FROM SchoolDetails";
+            pst = conn.prepareStatement(sql);
+            pst.executeUpdate();
+
+            JOptionPane.showMessageDialog(null, "Grading system cleared");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        } finally {
+            try {
+                rs.close();
+                pst.close();
+            } catch (Exception e) {
+            }
+        }
+    }
     
     
 }

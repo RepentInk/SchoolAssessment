@@ -21,6 +21,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+import javafx.scene.control.RadioButton;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -36,7 +37,7 @@ public class myLogics {
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
-    
+
     billMethods bmets = new billMethods();
 
     int stuID, terID, acaID, subjID, yearID, clasID;
@@ -176,7 +177,7 @@ public class myLogics {
             acade.addElement(aca.getAcademicYear());
         }
     }
-    
+
     //======Term method to decide if it exist ==========
     public boolean returnTerm(String txt) {
         boolean myTerm = false;
@@ -518,7 +519,7 @@ public class myLogics {
     }
 
     //method that save school information
-    public void saveSchoolInfo(JTextField sname, JTextField saddress, JTextField contact, JTextField slocation, JDateChooser svacation, JDateChooser sresume, byte[] logo) {
+    public void saveSchoolInfo(JTextField sname, JTextField saddress, JTextField contact, JTextField slocation, JDateChooser svacation, JDateChooser sresume, int radio) {
 
         String schoolname = sname.getText().toString();
         String schooladdress = saddress.getText().toString();
@@ -530,7 +531,7 @@ public class myLogics {
         if (sname.getText().isEmpty() || saddress.getText().isEmpty() || slocation.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Fill all required fields");
         } else {
-            School school = new School(schoolname, schooladdress, schoolContact, schoollocation, schoolvacation, schoolresume, logo);
+            School school = new School(schoolname, schooladdress, schoolContact, schoollocation, schoolvacation, schoolresume, radio);
             pro.saveSchoolDetails(school);
         }
     }
@@ -1206,6 +1207,7 @@ public class myLogics {
         tmodel.setRowCount(0);
         int count = 1, pos = 0;
         double total, tot = 0;
+        String rpos = "";
 
         Object[] object;
 
@@ -1236,7 +1238,17 @@ public class myLogics {
                 pos = count;
             }
 
-            object = new Object[]{studentid, fullname.trim(), assessment, exams, tot, grade, pos, remarks};
+            if (pos % 10 == 1 && pos != 11) {
+                rpos = pos + "st";
+            } else if (pos % 10 == 2 && pos != 12) {
+                rpos = pos + "nd";
+            } else if (pos % 10 == 3 && pos != 13) {
+                rpos = pos + "rd";
+            } else {
+                rpos = pos + "th";
+            }
+
+            object = new Object[]{studentid, fullname.trim(), assessment, exams, tot, grade, rpos, remarks};
             tmodel.addRow(object);
 
             count++;
@@ -1696,12 +1708,11 @@ public class myLogics {
     }
 
     //Showing assessment specified
-    public void schoolDetails(JTable assTable, JLabel log) {
+    public void schoolDetails(JTable assTable) {
         DefaultTableModel tmodel = (DefaultTableModel) assTable.getModel();
         tmodel.setRowCount(0);
 
         Object[] object;
-        ImageIcon format = null;
 
         List<School> school = pro.findAllSchoolDetails();
         for (School sch : school) {
@@ -1712,17 +1723,14 @@ public class myLogics {
             String schoolLoc = sch.getSchoolLocation();
             String schoolVac = sch.getSchoolVac();
             String schoolResume = sch.getSchoolResume();
-            byte[] imagedata = sch.getSchoolLogo();
-            format = new ImageIcon(imagedata);
-            log.setIcon(format);
-
+            
             object = new Object[]{id, schoolName, schoolAddress, schoolContact, schoolLoc, schoolVac, schoolResume};
             tmodel.addRow(object);
         }
 
     }
 
-    public void updateSchoolDetails(int id, JTextField sname, JTextField saddress, JTextField sContact, JTextField slocation, JDateChooser svacation, JDateChooser sresume) {
+    public void updateSchoolDetails(int id, JTextField sname, JTextField saddress, JTextField sContact, JTextField slocation, JDateChooser svacation, JDateChooser sresume, int poss) {
 
         String schoolname = sname.getText().toString();
         String schooladdress = saddress.getText().toString();
@@ -1731,7 +1739,7 @@ public class myLogics {
         String schoolvacation = ((JTextField) svacation.getDateEditor().getUiComponent()).getText();
         String schoolresume = ((JTextField) sresume.getDateEditor().getUiComponent()).getText();
 
-        School school = new School(schoolname, schooladdress, schoolcontact, schoollocation, schoolvacation, schoolresume);
+        School school = new School(schoolname, schooladdress, schoolcontact, schoollocation, schoolvacation, schoolresume, poss);
 
         pro.updateSchoolDetails(school, id);
     }
@@ -1753,7 +1761,7 @@ public class myLogics {
                 sch.setSchoolLocation(rs.getString("schoolLocation"));
                 sch.setSchoolVac(rs.getString("schoolVacation"));
                 sch.setSchoolResume(rs.getString("schoolResume"));
-                sch.setSchoolLogo(rs.getBytes("schoolLogo"));
+                sch.setPos(rs.getInt("pos"));
 
                 listSchool.add(sch);
             }
@@ -1770,10 +1778,10 @@ public class myLogics {
         return listSchool;
     }
 
-    public List<SchoolRemarks> findRemarksWithID(int id) {
+    public List<SchoolRemarks> findRemarksWithID(double lmak, double hmak, String remarks) {
         List<SchoolRemarks> listRemarks = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM SchoolDetails WHERE id='" + id + "'";
+            String sql = "SELECT * FROM SchoolDetails WHERE lmarks='" + lmak + "' and hmarks='"+ hmak +"' and grade='"+ remarks +"'";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
 
@@ -1953,7 +1961,7 @@ public class myLogics {
             for (Result res1 : result1) {
                 sub = res1.getSubject_id();
 
-                List<Result> subject1 = bmets.returnStudentSubject(cid, aid, yid, tid,sub);
+                List<Result> subject1 = bmets.returnStudentSubject(cid, aid, yid, tid, sub);
                 for (Result r : subject1) {
                     total1 = tot;
 
@@ -1974,9 +1982,9 @@ public class myLogics {
 
                         if (pos % 10 == 1 && pos != 11) {
                             rpos = pos + "st";
-                        } else if (pos % 10 == 2) {
+                        } else if (pos % 10 == 2 && pos != 12) {
                             rpos = pos + "nd";
-                        } else if (pos % 10 == 3) {
+                        } else if (pos % 10 == 3 && pos != 13) {
                             rpos = pos + "rd";
                         } else {
                             rpos = pos + "th";

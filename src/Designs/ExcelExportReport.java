@@ -93,7 +93,6 @@ public class ExcelExportReport extends java.awt.Dialog {
         cmd_class = new javax.swing.JComboBox<>();
         btn_Result = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        lbl_back = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         cmd_subject = new javax.swing.JComboBox<>();
 
@@ -170,15 +169,6 @@ public class ExcelExportReport extends java.awt.Dialog {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jLabel1.setText("Class");
 
-        lbl_back.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
-        lbl_back.setForeground(new java.awt.Color(0, 0, 204));
-        lbl_back.setText("Back");
-        lbl_back.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbl_backMouseClicked(evt);
-            }
-        });
-
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jLabel5.setText("Subject");
 
@@ -200,10 +190,7 @@ public class ExcelExportReport extends java.awt.Dialog {
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(lbl_back, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,8 +234,7 @@ public class ExcelExportReport extends java.awt.Dialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btn_Exams, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_Result, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_Assessment)
-                    .addComponent(lbl_back, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(btn_Assessment))
                 .addContainerGap())
         );
 
@@ -332,12 +318,6 @@ public class ExcelExportReport extends java.awt.Dialog {
         }
     }//GEN-LAST:event_btn_ResultActionPerformed
 
-    private void lbl_backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_backMouseClicked
-        Desktop dec = new Desktop();
-        dec.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_lbl_backMouseClicked
-
     private void cmd_subjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_subjectActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmd_subjectActionPerformed
@@ -377,6 +357,5 @@ public class ExcelExportReport extends java.awt.Dialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel lbl_back;
     // End of variables declaration//GEN-END:variables
 }
