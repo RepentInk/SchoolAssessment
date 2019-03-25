@@ -237,7 +237,7 @@ public class Receipt extends java.awt.Dialog {
             writer.write("<h2 style='text-align:center;margin-bottom:-30px; margin-top:-30px;'>" + schoolName.toUpperCase() + "</h2>"
                     + "<h4 style='text-align:center;margin-bottom:-30px; margin-top:-30px;'>" + address.toUpperCase() + " " + schoolLocation.toUpperCase() + "</h4>"
                     + "<h4 style='text-align:center;margin-bottom:-30px; margin-top:-30px;'>" + contact + "</h4>"
-                    + "<h4 style='text-align:center;margin-bottom:-30px; margin-top:-30px;'>END OF " + term.toUpperCase() + " " + academic + " EXAMINATION RESULT</h4><hr>"
+                    + "<h4 style='text-align:center;margin-bottom:-30px; margin-top:-30px;'>END OF " + term.toUpperCase() + " " + academic + " ASSESSMENT RESULT</h4><hr>"
                     + "<table><tbody>"
                     + "<tr>"
                     + "<td style='text-align:left; width:240px'><b>SUBJECT : </b>" + mets.capitalizer(subject) + "</td>"

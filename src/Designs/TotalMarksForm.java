@@ -201,6 +201,7 @@ public class TotalMarksForm extends java.awt.Dialog {
             }
         });
 
+        totalMarksTable.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         totalMarksTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
