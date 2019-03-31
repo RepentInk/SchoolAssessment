@@ -244,7 +244,7 @@ public class StudentForm extends javax.swing.JFrame {
                 pos = count;
             } else if (tot == total) {
                 pos = pos;
-                count = pos + 1;
+                //count = pos + 1;
             } else {
                 pos = count;
             }
@@ -294,7 +294,7 @@ public class StudentForm extends javax.swing.JFrame {
                     pos = count;
                 } else if (tot == total) {
                     pos = pos;
-                    count = pos + 1;
+                    //count = pos + 1;
                 } else {
                     pos = count;
                 }
