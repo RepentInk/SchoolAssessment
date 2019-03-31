@@ -1245,14 +1245,14 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="btn_Delete" alignment="0" max="32767" attributes="0"/>
-                              <Component id="btn_Save" alignment="0" max="32767" attributes="0"/>
-                              <Component id="btn_New" alignment="0" max="32767" attributes="0"/>
-                              <Component id="btn_Update" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="btn_Delete" alignment="0" min="-2" pref="83" max="-2" attributes="0"/>
+                              <Component id="btn_Save" alignment="0" min="-2" pref="83" max="-2" attributes="0"/>
+                              <Component id="btn_Update" alignment="0" min="-2" pref="83" max="-2" attributes="0"/>
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="lbl_Back" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                               </Group>
+                              <Component id="btn_New" alignment="0" min="-2" pref="83" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -1266,13 +1266,13 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btn_New" min="-2" pref="71" max="-2" attributes="0"/>
+                          <Component id="btn_New" min="-2" pref="83" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btn_Save" min="-2" pref="68" max="-2" attributes="0"/>
+                          <Component id="btn_Save" min="-2" pref="83" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btn_Update" min="-2" pref="80" max="-2" attributes="0"/>
+                          <Component id="btn_Update" min="-2" pref="83" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btn_Delete" min="-2" pref="68" max="-2" attributes="0"/>
+                          <Component id="btn_Delete" min="-2" pref="83" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
