@@ -588,7 +588,7 @@ public class AssessmentForm extends javax.swing.JFrame {
                     res = listResult.get(ex);
                     pro.saveResult(res);
                     progress_save.setValue(ex);
-                    progress_save.setMaximum(listResult.size());
+                    progress_save.setMaximum(listResult.size() + 1);
                     Thread.sleep(50);
                 } catch (InterruptedException ex1) {
                     Logger.getLogger(AssessmentForm.class.getName()).log(Level.SEVERE, null, ex1);
@@ -2414,12 +2414,27 @@ public class AssessmentForm extends javax.swing.JFrame {
     }//GEN-LAST:event_lbl_BackMouseClicked
 
     private void cmd_StuIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_StuIDActionPerformed
+        String id = cmd_StuID.getSelectedItem().toString();
+        terID = mylogics.termID(cmd_Term.getSelectedItem().toString());
+        acaID = mylogics.academicID(cmb_Academic.getSelectedItem().toString());
+        subjID = mylogics.subjectID(cmb_Subject.getSelectedItem().toString());
+        yearID = mylogics.yearID(cmd_Batch.getSelectedItem().toString());
+        clasID = mylogics.classID(cmd_Class.getSelectedItem().toString());
+
+        List<Result> result = mylogics.resultsListToPopulate(mylogics.studentID(id), terID, acaID, subjID, yearID, clasID);
+
         if (cmd_StuID.getSelectedIndex() <= 0) {
-        } else {
+            newRecords();
+        } else if (result.isEmpty()) {
+            newRecords();
             setStudentNameToCombo(cmd_fullname);
+        } else {
+            newRecords();
             resultConditionResult();
             examsConditionExams();
             quizConditionQuiz();
+            setStudentNameToCombo(cmd_fullname);
+
         }
     }//GEN-LAST:event_cmd_StuIDActionPerformed
 
@@ -2749,9 +2764,9 @@ public class AssessmentForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void cmd_searchStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_searchStudentActionPerformed
-     if(cmd_searchStudent.getSelectedIndex() > 0){
-           returnStudentResult(cmd_searchStudent);
-     }
+        if (cmd_searchStudent.getSelectedIndex() > 0) {
+            returnStudentResult(cmd_searchStudent);
+        }
     }//GEN-LAST:event_cmd_searchStudentActionPerformed
 
     private void btn_plusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_plusActionPerformed
@@ -2776,22 +2791,19 @@ public class AssessmentForm extends javax.swing.JFrame {
     }//GEN-LAST:event_cmd_searchStudentItemStateChanged
 
     private void cmd_searchStudentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmd_searchStudentMouseClicked
-//        if (cmd_searchStudent.getSelectedIndex() == 0) {
-//        } else {
-//            returnStudentResult(cmd_searchStudent);
-//        }
+
     }//GEN-LAST:event_cmd_searchStudentMouseClicked
 
     private void cmd_searchStudentMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmd_searchStudentMousePressed
-      
+
     }//GEN-LAST:event_cmd_searchStudentMousePressed
 
     private void cmd_searchStudentMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmd_searchStudentMouseReleased
-       
+
     }//GEN-LAST:event_cmd_searchStudentMouseReleased
 
     private void cmd_searchStudentMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmd_searchStudentMouseMoved
-       
+
     }//GEN-LAST:event_cmd_searchStudentMouseMoved
 
     private void cmd_searchStudentFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cmd_searchStudentFocusLost

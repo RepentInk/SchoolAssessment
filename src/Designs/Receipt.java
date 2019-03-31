@@ -147,7 +147,7 @@ public class Receipt extends java.awt.Dialog {
                     pos = count;
                 } else if (tot == total) {
                     pos = pos;
-                    count = pos + 1;
+                    //count = pos + 1;
                 } else {
                     pos = count;
                 }
