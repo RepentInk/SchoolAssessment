@@ -199,7 +199,7 @@ public class AssessmentForm extends javax.swing.JFrame {
     // Method to go next
     public void btnNext() {
         pos = cmd_StuID.getSelectedIndex();
-    
+
         List<Student> student = mylogics.findStudentInfoNextConcat(mylogics.yearID(cmd_Batch.getSelectedItem().toString()));
         if (pos < student.size()) {
             showNext(pos);
@@ -1325,7 +1325,6 @@ public class AssessmentForm extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         class_Table = new javax.swing.JTable();
         cmd_searchStudent = new javax.swing.JComboBox<>();
-        search_student_result = new javax.swing.JButton();
         manuBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menu_New = new javax.swing.JMenuItem();
@@ -1408,7 +1407,7 @@ public class AssessmentForm extends javax.swing.JFrame {
 
         btn_Show.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btn_Show.setForeground(new java.awt.Color(102, 0, 51));
-        btn_Show.setText("Show Assessment");
+        btn_Show.setText("View Assessment");
         btn_Show.setToolTipText("Click to Show list");
         btn_Show.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2159,17 +2158,40 @@ public class AssessmentForm extends javax.swing.JFrame {
 
         cmd_searchStudent.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cmd_searchStudent.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmd_searchStudent.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmd_searchStudentItemStateChanged(evt);
+            }
+        });
+        cmd_searchStudent.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                cmd_searchStudentMouseMoved(evt);
+            }
+        });
+        cmd_searchStudent.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cmd_searchStudentFocusLost(evt);
+            }
+        });
+        cmd_searchStudent.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cmd_searchStudentMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                cmd_searchStudentMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                cmd_searchStudentMouseReleased(evt);
+            }
+        });
         cmd_searchStudent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmd_searchStudentActionPerformed(evt);
             }
         });
-
-        search_student_result.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/search2.png"))); // NOI18N
-        search_student_result.setToolTipText("Click to search for result");
-        search_student_result.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                search_student_resultActionPerformed(evt);
+        cmd_searchStudent.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cmd_searchStudentKeyReleased(evt);
             }
         });
 
@@ -2185,10 +2207,8 @@ public class AssessmentForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(cmd_searchStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(search_student_result)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmd_searchStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btn_Refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lbl_Date, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2206,7 +2226,6 @@ public class AssessmentForm extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btn_Refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(cmd_searchStudent, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
-                            .addComponent(search_student_result, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lbl_Date, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lbl_Time, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -2730,12 +2749,10 @@ public class AssessmentForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void cmd_searchStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_searchStudentActionPerformed
-         
+     if(cmd_searchStudent.getSelectedIndex() > 0){
+           returnStudentResult(cmd_searchStudent);
+     }
     }//GEN-LAST:event_cmd_searchStudentActionPerformed
-
-    private void search_student_resultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_student_resultActionPerformed
-        returnStudentResult(cmd_searchStudent);
-    }//GEN-LAST:event_search_student_resultActionPerformed
 
     private void btn_plusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_plusActionPerformed
         if (cmd_Batch.getSelectedIndex() <= 0) {
@@ -2749,6 +2766,37 @@ public class AssessmentForm extends javax.swing.JFrame {
             btnNext();
         }
     }//GEN-LAST:event_btn_plusActionPerformed
+
+    private void cmd_searchStudentKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmd_searchStudentKeyReleased
+
+    }//GEN-LAST:event_cmd_searchStudentKeyReleased
+
+    private void cmd_searchStudentItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmd_searchStudentItemStateChanged
+
+    }//GEN-LAST:event_cmd_searchStudentItemStateChanged
+
+    private void cmd_searchStudentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmd_searchStudentMouseClicked
+//        if (cmd_searchStudent.getSelectedIndex() == 0) {
+//        } else {
+//            returnStudentResult(cmd_searchStudent);
+//        }
+    }//GEN-LAST:event_cmd_searchStudentMouseClicked
+
+    private void cmd_searchStudentMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmd_searchStudentMousePressed
+      
+    }//GEN-LAST:event_cmd_searchStudentMousePressed
+
+    private void cmd_searchStudentMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmd_searchStudentMouseReleased
+       
+    }//GEN-LAST:event_cmd_searchStudentMouseReleased
+
+    private void cmd_searchStudentMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmd_searchStudentMouseMoved
+       
+    }//GEN-LAST:event_cmd_searchStudentMouseMoved
+
+    private void cmd_searchStudentFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cmd_searchStudentFocusLost
+
+    }//GEN-LAST:event_cmd_searchStudentFocusLost
 
     /**
      * @param args the command line arguments
@@ -2885,7 +2933,6 @@ public class AssessmentForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem menu_Show;
     private javax.swing.JMenuItem menu_Update;
     private javax.swing.JProgressBar progress_save;
-    private javax.swing.JButton search_student_result;
     public static javax.swing.JRadioButton thirtypercent;
     private javax.swing.JTextField txt_CTest;
     private javax.swing.JTextField txt_EOBJ;

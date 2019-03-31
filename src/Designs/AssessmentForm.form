@@ -290,10 +290,8 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="cmd_searchStudent" min="-2" pref="191" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="search_student_result" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="cmd_searchStudent" min="-2" pref="246" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="btn_Refresh" min="-2" pref="65" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="lbl_Date" min="-2" pref="151" max="-2" attributes="0"/>
@@ -315,7 +313,6 @@
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="btn_Refresh" pref="0" max="32767" attributes="0"/>
                                   <Component id="cmd_searchStudent" pref="33" max="32767" attributes="0"/>
-                                  <Component id="search_student_result" alignment="1" max="32767" attributes="0"/>
                                   <Component id="lbl_Date" alignment="0" max="32767" attributes="0"/>
                                   <Component id="lbl_Time" alignment="0" max="32767" attributes="0"/>
                               </Group>
@@ -549,7 +546,7 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="33" green="0" red="66" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Show Assessment"/>
+                        <Property name="text" type="java.lang.String" value="View Assessment"/>
                         <Property name="toolTipText" type="java.lang.String" value="Click to Show list"/>
                       </Properties>
                       <Events>
@@ -1695,23 +1692,19 @@
                 </Property>
               </Properties>
               <Events>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmd_searchStudentItemStateChanged"/>
+                <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="cmd_searchStudentMouseMoved"/>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="cmd_searchStudentFocusLost"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cmd_searchStudentMouseClicked"/>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cmd_searchStudentMousePressed"/>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cmd_searchStudentMouseReleased"/>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmd_searchStudentActionPerformed"/>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="cmd_searchStudentKeyReleased"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
               </AuxValues>
-            </Component>
-            <Component class="javax.swing.JButton" name="search_student_result">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Icons/search2.png"/>
-                </Property>
-                <Property name="toolTipText" type="java.lang.String" value="Click to search for result"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="search_student_resultActionPerformed"/>
-              </Events>
             </Component>
           </SubComponents>
         </Container>
